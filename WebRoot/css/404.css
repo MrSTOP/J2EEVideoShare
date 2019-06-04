@@ -1,0 +1,10 @@
+.HeaderTop{
+    background: url(../resources/img/Board.png);
+    background-repeat: no-repeat;
+    height: 180px;
+}
+#Img404{
+    margin-top: 50px;
+    margin-bottom: 50px;
+    width: 465px;
+}
