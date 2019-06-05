@@ -58,7 +58,7 @@
     </div>
 </header>
 <div style="height: 60px"></div>
-<div style="display: flex;position: relative;height: 100vh;overflow: hidden;">
+<div style="display: flex;position: relative;height: 92vh;overflow: hidden;">
     <aside class="mdc-drawer">
         <div class="mdc-drawer__content">
             <nav class="mdc-list">
@@ -81,9 +81,6 @@
         <iframe src="registry.jsp" style="width: 100%" frameborder="0">
         </iframe>
 <%--    </article>--%>
-</div>
-    <div class="mdc-drawer-scrim"></div>
-    <div>Main Content</div>
 </div>
 </body>
 </html>
