@@ -1,6 +1,6 @@
 <%--
   Created by IntelliJ IDEA.
-  User: 严子超
+  User: 严子�?
   Date: 2019/6/5
   Time: 8:03
   To change this template use File | Settings | File Templates.
@@ -26,58 +26,66 @@
     <!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
-    <title>哔哩哔哩 (゜-゜)つロ 干杯~-bilibili</title>
+    <title>哔哩哔哩 (�?-�?)つロ 干杯~-bilibili</title>
     <link rel="shortcut icon" href="./resources/img/titleIcon.ico" />
     <link rel="stylesheet" type="text/css" href="./css/material-components-web.css" />
     <link rel="stylesheet" type="text/css" href="./css/material-icons.css" />
     <link rel="stylesheet" type="text/css" href="./css/CommonCSS.css" />
     <script src="./js/jquery-3.4.1.js"></script>
-    <script src="./js/index.js" type="text/javascript"></script>
-    <script src="./js/framework.js" type="text/javascript"></script>
 </head>
-
 <body>
-<div class="mdc-top-app-bar__row">
-    <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
-        <a href="index.jsp" class="material-icons mdc-top-app-bar__navigation-icon">home</a>
-    </section>
-    <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end">
-        <div class="mdc-text-field text-field mdc-text-field--outlined" style="border-radius: 50%">
-            <input type="text" id="text-field-shape-one" class="mdc-text-field__input">
-            <div class="mdc-notched-outline mdc-notched-outline--upgraded">
-                <div class="mdc-notched-outline__leading"></div>
-                <div class="mdc-notched-outline__notch" style="">
-                    <label class="mdc-floating-label" for="text-field-shape-one" style="">Standard</label>
+<header class="mdc-top-app-bar mdc-top-app-bar--dense" style="z-index: 7">
+
+    <div class="mdc-top-app-bar__row">
+        <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
+            <a href="index.jsp" class="material-icons mdc-top-app-bar__navigation-icon">home</a>
+        </section>
+        <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end">
+            <div class="mdc-text-field text-field mdc-text-field--outlined" style="border-radius: 50%">
+                <input type="text" id="text-field-shape-one" class="mdc-text-field__input">
+                <div class="mdc-notched-outline mdc-notched-outline--upgraded">
+                    <div class="mdc-notched-outline__leading"></div>
+                    <div class="mdc-notched-outline__notch" style="">
+                        <label class="mdc-floating-label" for="text-field-shape-one" style="">Standard</label>
+                    </div>
+                    <div class="mdc-notched-outline__trailing"></div>
                 </div>
-                <div class="mdc-notched-outline__trailing"></div>
             </div>
+            <button class="material-icons mdc-top-app-bar__action-item" id="Favorite" title="收藏�?">star</button>
+            <a href="./user/${userName}" class="mdc-top-app-bar__action-item" title="用户�?">${userName}NULL</a>
+            <a href="logout" class="material-icons mdc-top-app-bar__action-item" title="注销">logout</a>
+        </section>
+    </div>
+</header>
+<div style="height: 60px"></div>
+<div style="display: flex;position: relative;height: 100vh;overflow: hidden;">
+    <aside class="mdc-drawer">
+        <div class="mdc-drawer__content">
+            <nav class="mdc-list">
+                <a class="mdc-list-item mdc-list-item--activated" href="index.jsp" aria-current="page">
+                    <i class="material-icons mdc-list-item__graphic" aria-hidden="true">inbox</i>
+                    <span class="mdc-list-item__text">Inbox</span>
+                </a>
+                <a class="mdc-list-item" href="registry.jsp">
+                    <i class="material-icons mdc-list-item__graphic" aria-hidden="true">send</i>
+                    <span class="mdc-list-item__text">Outgoing</span>
+                </a>
+                <a class="mdc-list-item" href="#">
+                    <i class="material-icons mdc-list-item__graphic" aria-hidden="true">drafts</i>
+                    <span class="mdc-list-item__text">Drafts</span>
+                </a>
+            </nav>
         </div>
-        <button class="material-icons mdc-top-app-bar__action-item" id="Favorite" title="收藏夹">star</button>
-        <a href="./user/${userName}" class="mdc-top-app-bar__action-item" title="用户名">${userName}NULL</a>
-        <a href="logout" class="material-icons mdc-top-app-bar__action-item" title="注销">logout</a>
-    </section>
+    </aside>
+<%--    <article>--%>
+        <iframe src="registry.jsp" style="width: 100%" frameborder="0">
+        </iframe>
+<%--    </article>--%>
 </div>
-    <iframe id = "GET" scrolling="no"  width="48%" height="99%">
-        <aside class="mdc-drawer">
-            <div class="mdc-drawer__content">
-                <nav class="mdc-list">
-                    <a class="mdc-list-item mdc-list-item--activated" href="index.jsp" aria-current="page">
-                        <i class="material-icons mdc-list-item__graphic" aria-hidden="true">inbox</i>
-                        <span class="mdc-list-item__text">Inbox</span>
-                    </a>
-                    <a class="mdc-list-item" href="registry.jsp">
-                        <i class="material-icons mdc-list-item__graphic" aria-hidden="true">send</i>
-                        <span class="mdc-list-item__text">Outgoing</span>
-                    </a>
-                    <a class="mdc-list-item" href="#">
-                        <i class="material-icons mdc-list-item__graphic" aria-hidden="true">drafts</i>
-                        <span class="mdc-list-item__text">Drafts</span>
-                    </a>
-                </nav>
-            </div>
-        </aside>
-    </iframe>
-    <iframe src = "registry.jsp" scrolling="no" width="49%" height="99%"></iframe>
-    <div class="mdc-drawer-scrim"></div>
+
+
+
+</body>
+</div>
 </body>
 </html>
