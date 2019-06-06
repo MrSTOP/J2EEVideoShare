@@ -151,7 +151,18 @@ public class UserInfo {
         calendar.set(Integer.valueOf(times[0]),
                      Integer.valueOf(times[1]),
                      Integer.valueOf(times[2]),
-                     8, 0, 0);
+                     8, 0, 1);
         return new Timestamp(calendar.getTimeInMillis());
+    }
+
+    @Override
+    public String toString() {
+        return "UID: " + UID +
+                "UserName: " + userName +
+                "Email: " + email +
+                "Sex: " + sex +
+                "Birth: " + timestampToStr(birth) +
+                "RegDay: " + timestampToStr(regDay) +
+                "Coin: " + coin;
     }
 }
