@@ -11,7 +11,7 @@
  Target Server Version : 80015
  File Encoding         : 65001
 
- Date: 04/06/2019 21:17:44
+ Date: 06/06/2019 19:11:10
 */
 
 SET NAMES utf8mb4;
@@ -22,6 +22,7 @@ SET FOREIGN_KEY_CHECKS = 0;
 -- ----------------------------
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user`  (
+  `UID` int(255) NOT NULL AUTO_INCREMENT,
   `UserName` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `Password` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `Sex` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
@@ -30,7 +31,7 @@ CREATE TABLE `user`  (
   `RegDay` timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
   `LastLogin` timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
   `coin` int(11) NOT NULL DEFAULT 0,
-  PRIMARY KEY (`UserName`) USING BTREE
+  PRIMARY KEY (`UID`, `UserName`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
