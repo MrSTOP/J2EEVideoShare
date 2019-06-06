@@ -20,6 +20,10 @@ public class UserInfo {
         this.coin = coin;
     }
 
+    public UserInfo(String userName, String sex, String birth, String regDay, String lastLogin, int coin) {
+        this(userName, sex, strToTimestamp(birth), strToTimestamp(regDay), strToTimestamp(lastLogin), coin);
+    }
+
     public UserInfo() {
     }
 
@@ -95,15 +99,15 @@ public class UserInfo {
         this.coin = coin;
     }
 
-    private String timestampToStr(String timestamp) {
+    private static String timestampToStr(String timestamp) {
         return timestamp.split("\\s+")[0];
     }
 
-    private String timestampToStr(Timestamp timestamp) {
+    private static String timestampToStr(Timestamp timestamp) {
         return timestampToStr(timestamp.toString());
     }
 
-    private Timestamp strToTimestamp(String timestamp) {
+    private static Timestamp strToTimestamp(String timestamp) {
         String[] times = timestamp.split("-");
         Calendar calendar = Calendar.getInstance();
         calendar.set(Integer.valueOf(times[0]),
