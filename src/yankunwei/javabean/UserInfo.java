@@ -17,7 +17,7 @@ public class UserInfo {
         this(userName, sex, birth, regDay, lastLogin, coin);
         this.UID = UID;
     }
-    
+
     public UserInfo(String userName, String sex, Timestamp birth, Timestamp regDay, Timestamp lastLogin, int coin) {
         this.userName = userName;
         this.sex = sex;
@@ -38,6 +38,9 @@ public class UserInfo {
     public UserInfo() {
     }
 
+    public boolean isUIDExist() {
+        return UID > 0;
+    }
 
     public int getUID() {
         if (UID <= 1) {
