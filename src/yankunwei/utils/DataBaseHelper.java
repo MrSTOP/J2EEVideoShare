@@ -30,7 +30,8 @@ public class DataBaseHelper {
         if (dataBaseHelper == null) {
             try {
                 DataBaseHelper.dataBaseHelper = new DataBaseHelper();
-            } catch (IOException e) {
+                Class.forName(dataBaseHelper.DriverName);
+            } catch (IOException | ClassNotFoundException e) {
                 e.printStackTrace();
                 IllegalStateException illegalStateException = new IllegalStateException("DataBase Driver Initialize failed");
                 illegalStateException.addSuppressed(e);
@@ -40,14 +41,9 @@ public class DataBaseHelper {
         return dataBaseHelper;
     }
 
-    public Connection getConnection() {
+    public Connection getConnection() throws SQLException {
         Connection connection = null;
-        try {
-            Class.forName(DriverName);
-            connection = DriverManager.getConnection(DBURL);
-        } catch (ClassNotFoundException | SQLException e) {
-            e.printStackTrace();
-        }
+        connection = DriverManager.getConnection(DBURL);
         return connection;
     }
 
