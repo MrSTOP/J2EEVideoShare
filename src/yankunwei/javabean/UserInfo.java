@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 import java.util.Calendar;
 
 public class UserInfo {
+    private int UID = -1;
     private String userName;
     private String email;
     private String sex;
@@ -12,6 +13,11 @@ public class UserInfo {
     private Timestamp lastLogin;
     private int coin;
 
+    public UserInfo(int UID, String userName, String sex, Timestamp birth, Timestamp regDay, Timestamp lastLogin, int coin) {
+        this(userName, sex, birth, regDay, lastLogin, coin);
+        this.UID = UID;
+    }
+    
     public UserInfo(String userName, String sex, Timestamp birth, Timestamp regDay, Timestamp lastLogin, int coin) {
         this.userName = userName;
         this.sex = sex;
@@ -21,11 +27,30 @@ public class UserInfo {
         this.coin = coin;
     }
 
+    public UserInfo(int UID, String userName, String sex, String birth, String regDay, String lastLogin, int coin) {
+        this(UID, userName, sex, strToTimestamp(birth), strToTimestamp(regDay), strToTimestamp(lastLogin), coin);
+    }
+
     public UserInfo(String userName, String sex, String birth, String regDay, String lastLogin, int coin) {
         this(userName, sex, strToTimestamp(birth), strToTimestamp(regDay), strToTimestamp(lastLogin), coin);
     }
 
     public UserInfo() {
+    }
+
+
+    public int getUID() {
+        if (UID <= 1) {
+            throw new IllegalStateException("User UID does not exist");
+        }
+        return UID;
+    }
+
+    public void setUID(int UID) {
+        if (UID <= 0) {
+            throw new IllegalArgumentException("UID must not be less than 1");
+        }
+        this.UID = UID;
     }
 
     public String getUserName() {
