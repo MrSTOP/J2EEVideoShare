@@ -7,11 +7,17 @@ public interface IUserInfoDAO {
 
     boolean deleteUserInfo(UserInfo userInfo);
 
-    boolean deleteUserInfo(String userName);
+    boolean deleteUserInfo(int UID);
 
     boolean updateUserInfo(UserInfo userInfo);
 
     UserInfo getUserInfoByUserName(String userName);
 
-    List<UserInfo> getAllUserInfo(UserInfo userInfo);
+    void getUserInfoByUserName(String userName, UserInfo userInfo);
+
+    UserInfo getUserInfoByUID(int UID);
+
+    void getUserInfoByUID(int UID, UserInfo userInfo);
+
+    List<UserInfo> getAllUserInfo();
 }
