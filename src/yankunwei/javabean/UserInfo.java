@@ -158,11 +158,11 @@ public class UserInfo {
     @Override
     public String toString() {
         return "UID: " + UID +
-                "UserName: " + userName +
-                "Email: " + email +
-                "Sex: " + sex +
-                "Birth: " + timestampToStr(birth) +
-                "RegDay: " + timestampToStr(regDay) +
-                "Coin: " + coin;
+                " UserName: " + userName +
+                " Email: " + email +
+                " Sex: " + sex +
+                " Birth: " + timestampToStr(birth) +
+                " RegDay: " + timestampToStr(regDay) +
+                " Coin: " + coin;
     }
 }
