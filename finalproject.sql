@@ -11,7 +11,7 @@
  Target Server Version : 80015
  File Encoding         : 65001
 
- Date: 06/06/2019 19:11:10
+ Date: 06/06/2019 19:28:35
 */
 
 SET NAMES utf8mb4;
@@ -31,17 +31,20 @@ CREATE TABLE `user`  (
   `RegDay` timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
   `LastLogin` timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
   `coin` int(11) NOT NULL DEFAULT 0,
-  PRIMARY KEY (`UID`, `UserName`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+  PRIMARY KEY (`UID`, `UserName`) USING BTREE,
+  INDEX `UID`(`UID`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for watchhistory
 -- ----------------------------
 DROP TABLE IF EXISTS `watchhistory`;
 CREATE TABLE `watchhistory`  (
-  `UserName` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `VideoID` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `Date` datetime(0) NULL DEFAULT NULL
+  `UID` int(255) NOT NULL,
+  `VideoID` int(255) NULL DEFAULT NULL,
+  `Date` timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+  INDEX `UID`(`UID`) USING BTREE,
+  CONSTRAINT `watchhistory_ibfk_1` FOREIGN KEY (`UID`) REFERENCES `user` (`UID`) ON DELETE RESTRICT ON UPDATE RESTRICT
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 SET FOREIGN_KEY_CHECKS = 1;
