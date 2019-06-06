@@ -56,7 +56,7 @@
                 $("#GetEmailCAPTCHA").bind({
                     "click": function () {
                         $("#GetEmailCAPTCHA").attr("disabled", true);
-                        $.post("GetRegistryCAPTCHA", function (data, status) {
+                        $.post("GetRegistryCAPTCHA", "email=" + $("#email").val(), function (data, status) {
                             console.log("DATA: " + data + " STATUS: " + status);
                             if (status === "success") {
                                 var second = 60;
@@ -75,7 +75,11 @@
                             }
                         });
                     }
-                })
+                });
+                $("button[type=reset]").bind({"click": function () {
+                        $("input").focus();
+                        $("input").blur();
+                    }})
             });
         });
         $.func = {
@@ -260,6 +264,10 @@
                     <div class="mdc-notched-outline__trailing"></div>
                 </div>
             </div>
+        </div>
+        <div style="margin: 20px auto;width: 250px">
+            <button type="button" class="mdc-button mdc-button--unelevated" style="float: left;display: inline;">注册</button>
+            <button type="reset" class="mdc-button mdc-button--outlined" style="float: right;display: inline;">清空</button>
         </div>
     </form>
 <%--</article>--%>
