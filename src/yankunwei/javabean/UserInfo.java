@@ -13,13 +13,14 @@ public class UserInfo {
     private Timestamp lastLogin;
     private int coin;
 
-    public UserInfo(int UID, String userName, String sex, Timestamp birth, Timestamp regDay, Timestamp lastLogin, int coin) {
-        this(userName, sex, birth, regDay, lastLogin, coin);
+    public UserInfo(int UID, String userName, String email, String sex, Timestamp birth, Timestamp regDay, Timestamp lastLogin, int coin) {
+        this(userName, email, sex, birth, regDay, lastLogin, coin);
         this.UID = UID;
     }
 
-    public UserInfo(String userName, String sex, Timestamp birth, Timestamp regDay, Timestamp lastLogin, int coin) {
+    public UserInfo(String userName, String email, String sex, Timestamp birth, Timestamp regDay, Timestamp lastLogin, int coin) {
         this.userName = userName;
+        this.email = email;
         this.sex = sex;
         this.birth = birth;
         this.regDay = regDay;
@@ -27,12 +28,12 @@ public class UserInfo {
         this.coin = coin;
     }
 
-    public UserInfo(int UID, String userName, String sex, String birth, String regDay, String lastLogin, int coin) {
-        this(UID, userName, sex, strToTimestamp(birth), strToTimestamp(regDay), strToTimestamp(lastLogin), coin);
+    public UserInfo(int UID, String userName, String email, String sex, String birth, String regDay, String lastLogin, int coin) {
+        this(UID, userName, email, sex, strToTimestamp(birth), strToTimestamp(regDay), strToTimestamp(lastLogin), coin);
     }
 
-    public UserInfo(String userName, String sex, String birth, String regDay, String lastLogin, int coin) {
-        this(userName, sex, strToTimestamp(birth), strToTimestamp(regDay), strToTimestamp(lastLogin), coin);
+    public UserInfo(String userName, String email, String sex, String birth, String regDay, String lastLogin, int coin) {
+        this(userName, email , sex, strToTimestamp(birth), strToTimestamp(regDay), strToTimestamp(lastLogin), coin);
     }
 
     public UserInfo() {
