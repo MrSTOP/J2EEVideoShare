@@ -149,7 +149,7 @@ public class UserInfo {
         String[] times = timestamp.split("-");
         Calendar calendar = Calendar.getInstance();
         calendar.set(Integer.valueOf(times[0]),
-                     Integer.valueOf(times[1]),
+                     Integer.valueOf(times[1]) - 1,
                      Integer.valueOf(times[2]),
                      8, 0, 1);
         return new Timestamp(calendar.getTimeInMillis());
