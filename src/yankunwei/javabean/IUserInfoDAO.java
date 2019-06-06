@@ -9,7 +9,7 @@ public interface IUserInfoDAO {
 
     boolean deleteUserInfo(int UID);
 
-    boolean updateUserInfo(UserInfo userInfo);
+    boolean updateUserInfo(UserInfo userInfo, String passwordEncrypt);
 
     UserInfo getUserInfoByUserName(String userName);
 
