@@ -55,7 +55,9 @@
                 });
                 $("#CAPTCHA").bind({
                     "input blur propertychange": function () {
-                        $.func.CAPTCHARegCheck(textFields[2]);
+                        if ($.func.CAPTCHARegCheck(textFields[2])) {
+                            $.func.CAPTCHAExistCheck(textFields[2]);
+                        }
                     }
                 });
                 $("#Password").bind({
@@ -254,6 +256,31 @@
                     CAPTCHA.helperTextContent = "验证码应由6位数字组成";
                     return false;
                 }
+            },
+            CAPTCHAExistCheck: function (CAPTCHA) {
+                $.ajax({
+                    url: "CAPTCHACheck",
+                    data: "email=" + $("#Email").val() + "&CAPTCHA=" + $("#CAPTCHA").val(),
+                    success: function (data, status) {
+                        if (status === "success") {
+                            if (data === "ALLOW") {
+                                CAPTCHA.valid = true;
+                                CAPTCHA.helperTextContent = "验证码正确";
+                                $("#SubmitInfo").attr("disabled", false);
+                            } else {
+                                CAPTCHA.valid = false;
+                                CAPTCHA.label_.shake(true);
+                                CAPTCHA.helperTextContent = "验证码错误";
+                                $("#SubmitInfo").attr("disabled", true);
+                            }
+                        }
+                    },
+                    error: function () {
+                        CAPTCHA.valid = false;
+                        CAPTCHA.label_.shake(true);
+                        CAPTCHA.helperTextContent = "与服务器通信发生错误";
+                    }
+                })
             },
             passwordRegCheck: function (password) {
                 var reg = /[a-zA-Z0-9`~!@#$%^&*()_\-=+{}[\]\\|;:'",<.>/?]{6,16}/;
