@@ -19,5 +19,9 @@ public interface IUserInfoDAO {
 
     void getUserInfoByUID(int UID, UserInfo userInfo);
 
+    boolean isUserNameExist(String userName);
+
+    boolean isEmailExist(String email);
+
     List<UserInfo> getAllUserInfo();
 }
