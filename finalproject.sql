@@ -11,7 +11,7 @@
  Target Server Version : 80015
  File Encoding         : 65001
 
- Date: 06/06/2019 20:18:48
+ Date: 07/06/2019 14:11:45
 */
 
 SET NAMES utf8mb4;
@@ -32,7 +32,8 @@ CREATE TABLE `user`  (
   `LastLogin` timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
   `Coin` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`UID`, `UserName`) USING BTREE,
-  INDEX `UID`(`UID`) USING BTREE
+  INDEX `UID`(`UID`) USING BTREE,
+  UNIQUE INDEX `Email`(`Email`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
