@@ -4,6 +4,7 @@ $(function () {
         var selects = initMDCComponentAttachTo(".mdc-select", mdc.select.MDCSelect);
         var buttons = initMDCComponentClass(".mdc-button", mdc.ripple.MDCRipple);
         var dialogs = initMDCComponentClass(".mdc-dialog", mdc.dialog.MDCDialog);
+        dialogs[0].scrimClickAction = "";
         $.func.initHtmlConstValue();
         $("#UserName").bind({
             "input blur propertychange": function () {
