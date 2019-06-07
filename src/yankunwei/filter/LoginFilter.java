@@ -15,22 +15,22 @@ public class LoginFilter implements Filter {
     }
 
     public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws ServletException, IOException {
-        if (req instanceof HttpServletRequest) {
-            HttpServletRequest request = (HttpServletRequest) req;
-            if (request.getParameter("test") != null && request.getParameter("test").equals("true")) {
-                UserInfoDAO userInfoDAO = new UserInfoDAO();
-                UserInfo userInfo = new UserInfo();
-                userInfoDAO.getUserInfoByUID(4, userInfo);
-                request.getSession().setAttribute("user", userInfo);
-            }
-            if (request.getSession().getAttribute("user") == null &&
-                    request.getServletPath() != null &&
-                    !request.getServletPath().equals("/registry.jsp")) {
-                req.getRequestDispatcher("./login.jsp").forward(req, resp);
-            }
+        HttpServletRequest request = (HttpServletRequest) req;
+        if (request.getParameter("test") != null && request.getParameter("test").equals("true")) {
+            UserInfoDAO userInfoDAO = new UserInfoDAO();
+            UserInfo userInfo = new UserInfo();
+            userInfoDAO.getUserInfoByUID(4, userInfo);
+            request.getSession().setAttribute("user", userInfo);
+        }
+        String URL = request.getRequestURL().toString();
+        if (URL.contains("/css/") || URL.contains("/js/") || URL.contains("/resources/")) {
             chain.doFilter(req, resp);
+        } else if (request.getSession().getAttribute("user") == null &&
+                request.getServletPath() != null &&
+                !request.getServletPath().equals("/registry.jsp")) {
+            req.getRequestDispatcher("./login.jsp").forward(req, resp);
         } else {
-            throw new IllegalStateException("Filter's ServletRequest Cast Failed");
+            chain.doFilter(req, resp);
         }
     }
 
