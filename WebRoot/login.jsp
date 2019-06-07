@@ -22,6 +22,10 @@
     <meta http-equiv="expires" content="0">
     <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
     <meta http-equiv="description" content="This is my page">
+    <link rel="stylesheet" type="text/css" href="./css/material-components-web.css">
+    <link rel="stylesheet" type="text/css" href="./css/material-icons.css">
+    <link rel="stylesheet" type="text/css" href="./css/CommonCSS.css">
+    <link rel="stylesheet" type="text/css" href="./css/MDCHelperCSS.css">
     <script src="./js/jquery-3.4.1.js"></script>
     <script>
         $(document).ready(function () {
