@@ -199,6 +199,7 @@
             },
             userNameRegCheck: function (userName) {
                 var reg = /^[a-zA-Z0-9_\u4e00-\u9fa5]{1,20}$/;
+                $.func.spaceReplace($("#UserName")[0]);
                 var inputUserName = $("#UserName").val();
                 if (reg.test(inputUserName)) {
                     userName.valid = true;
@@ -247,6 +248,7 @@
             },
             emailRegCheck: function (email) {
                 var reg = /[0-9a-zA-Z]+@[0-9a-zA-Z]+\.[a-z]+/;
+                $.func.spaceReplace($("#Email")[0]);
                 var inputEmail = $("#Email").val();
                 if (reg.test(inputEmail)) {
                     email.valid = true;
@@ -289,6 +291,7 @@
             },
             CAPTCHARegCheck: function (CAPTCHA) {
                 var reg = /^[0-9]{6}$/;
+                $.func.spaceReplace($("#CAPTCHA")[0]);
                 var inputCAPTCHA = $("#CAPTCHA").val();
                 if (reg.test(inputCAPTCHA)) {
                     CAPTCHA.valid = true;
