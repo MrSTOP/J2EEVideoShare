@@ -163,7 +163,6 @@
                 });
                 $("#SubmitInfo").bind({
                     "click": function () {
-                        dialogs[0].open();
                         var msg = "";
                         if (!$.func.userNameRegCheck(textFields[0])) {
                             msg += "用户名不符合规则<br/>";
