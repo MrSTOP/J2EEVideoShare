@@ -14,7 +14,7 @@ public class CAPTCHACheck extends HttpServlet {
         String email = request.getParameter("email");
         String CAPTCHASubmit = request.getParameter("CAPTCHA");
         @SuppressWarnings("unchecked")
-        Map<String, String> CAPTCHAMap = (Map<String, String>) request.getServletContext().getAttribute("CAPTCHAMap");
+        Map<String, String> CAPTCHAMap = (Map<String, String>) this.getServletContext().getAttribute("CAPTCHAMap");
         if (CAPTCHAMap != null &&
                 CAPTCHAMap.get(email) != null &&
                 CAPTCHAMap.get(email).equals(CAPTCHASubmit)) {

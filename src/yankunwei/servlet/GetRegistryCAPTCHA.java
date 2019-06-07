@@ -41,12 +41,12 @@ public class GetRegistryCAPTCHA extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         @SuppressWarnings("unchecked")
-        Map<String, String> CAPTCHAMap = (Map<String, String>) request.getServletContext().getAttribute("CAPTCHAMap");
+        Map<String, String> CAPTCHAMap = (Map<String, String>) this.getServletContext().getAttribute("CAPTCHAMap");
         String registryEmailAddr = request.getParameter("email");
         String CAPTCHA = generateCAPTCHA();
         if (CAPTCHAMap == null) {
             CAPTCHAMap = new HashMap<>();
-            request.getServletContext().setAttribute("CAPTCHAMap", CAPTCHAMap);
+            this.getServletContext().setAttribute("CAPTCHAMap", CAPTCHAMap);
         }
         CAPTCHAMap.put(registryEmailAddr, CAPTCHA);
         response.setCharacterEncoding("UTF-8");
