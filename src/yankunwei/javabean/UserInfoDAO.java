@@ -169,7 +169,9 @@ public class UserInfoDAO implements IUserInfoDAO {
             preparedStatement = connection.prepareStatement(SQL);
             preparedStatement.setString(1, userName);
             resultSet = preparedStatement.executeQuery();
-            return resultSet.next();
+            System.out.println(preparedStatement.toString());
+            resultSet.next();
+            return resultSet.getInt(1) != 0;
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -185,11 +187,12 @@ public class UserInfoDAO implements IUserInfoDAO {
         ResultSet resultSet = null;
         try {
             connection = DataBaseHelper.getInstance().getConnection();
-            String SQL = "SELECT COUNT(*) FROM user WHERE Email";
+            String SQL = "SELECT COUNT(*) FROM user WHERE Email=?";
             preparedStatement = connection.prepareStatement(SQL);
             preparedStatement.setString(1, email);
             resultSet = preparedStatement.executeQuery();
-            return resultSet.next();
+            resultSet.next();
+            return resultSet.getInt(1) != 0;
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
