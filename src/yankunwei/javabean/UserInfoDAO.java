@@ -140,7 +140,7 @@ public class UserInfoDAO implements IUserInfoDAO {
             preparedStatement.setInt(1, UID);
             resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                userInfo.setUID(resultSet.getInt("UID"));
+                userInfo.setUID(UID);
                 userInfo.setUserName(resultSet.getString("UserName"));
                 userInfo.setSex(resultSet.getString("Sex"));
                 userInfo.setBirth(resultSet.getTimestamp("Birth"));
@@ -156,6 +156,49 @@ public class UserInfoDAO implements IUserInfoDAO {
         } finally {
             DataBaseHelper.getInstance().closeResource(resultSet, preparedStatement, connection);
         }
+    }
+
+    @Override
+    public boolean isUserNameExist(String userName) {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        try {
+            connection = DataBaseHelper.getInstance().getConnection();
+            String SQL = "SELECT COUNT(*) FROM user WHERE UserName=?";
+            preparedStatement = connection.prepareStatement(SQL);
+            preparedStatement.setString(1, userName);
+            resultSet = preparedStatement.executeQuery();
+            System.out.println(preparedStatement.toString());
+            resultSet.next();
+            return resultSet.getInt(1) != 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DataBaseHelper.getInstance().closeResource(resultSet, preparedStatement, connection);
+        }
+        return false;
+    }
+
+    @Override
+    public boolean isEmailExist(String email) {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        try {
+            connection = DataBaseHelper.getInstance().getConnection();
+            String SQL = "SELECT COUNT(*) FROM user WHERE Email=?";
+            preparedStatement = connection.prepareStatement(SQL);
+            preparedStatement.setString(1, email);
+            resultSet = preparedStatement.executeQuery();
+            resultSet.next();
+            return resultSet.getInt(1) != 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DataBaseHelper.getInstance().closeResource(resultSet, preparedStatement, connection);
+        }
+        return false;
     }
 
     @Override
