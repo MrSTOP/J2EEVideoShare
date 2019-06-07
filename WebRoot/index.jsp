@@ -16,8 +16,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       <link rel="stylesheet" type="text/css" href="./css/material-icons.css" />
       <link rel="stylesheet" type="text/css" href="./css/CommonCSS.css" />
       <script src="./js/jquery-3.4.1.js"></script>
-      <script src="./js/index.js" type="text/javascript"></script>
-      <script src="./js/framework.js" type="text/javascript"></script>
   </head>
 
   <body>
@@ -37,9 +35,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                       <div class="mdc-notched-outline__trailing"></div>
                   </div>
               </div>
-              <button class="material-icons mdc-top-app-bar__action-item" id="Favorite" title="收藏夹">star</button>
-              <a href="./user/${userName}" class="mdc-top-app-bar__action-item" title="用户名">${userName}NULL</a>
-              <a href="logout" class="material-icons mdc-top-app-bar__action-item" title="注销">logout</a>
+              <a href="#" class="material-icons mdc-top-app-bar__action-item" id="Favorite" title="收藏夹">star</a>
+              <a href="#" class="material-icons mdc-top-app-bar__action-item" id="UserSpace" title="个人空间">perm_identity</a>
+              <span title="用户名">${sessionScope.user.userName}</span>
+              <a href="Logout" class="material-icons mdc-top-app-bar__action-item" title="注销">logout</a>
           </section>
       </div>
   </header>
