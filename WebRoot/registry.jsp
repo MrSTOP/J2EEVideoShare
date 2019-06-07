@@ -92,25 +92,67 @@
                 });
                 $("#GetEmailCAPTCHA").bind({
                     "click": function () {
-                        $("#GetEmailCAPTCHA").attr("disabled", true);
-                        $.post("GetRegistryCAPTCHA", "email=" + $("#email").val(), function (data, status) {
-                            console.log("DATA: " + data + " STATUS: " + status);
-                            if (status === "success") {
-                                var second = 60;
-                                $("#GetEmailCAPTCHA").attr("disabled", true);
-                                var timer = setInterval(function () {
-                                    $("#GetEmailCAPTCHA").html(second + "秒后重发");
-                                    second--;
-                                    if (second <= 0) {
-                                        clearInterval(timer);
-                                        $("#GetEmailCAPTCHA").attr("disabled", false);
-                                        $("#GetEmailCAPTCHA").html("获取验证码");
+                        if (!$.func.emailRegCheck(textFields[1])) {
+                            $("#Email").focus();
+                            textFields[1].valid = false;
+                            textFields[1].helperTextContent = "请输入正确的电子邮件地址";
+                        } else {
+                            $.ajax({
+                                url: "UserExistCheck",
+                                data: "type=Email&email=" + $("#Email").val(),
+                                type: "post",
+                                success: function (data, status) {
+                                    if (status === "success") {
+                                        if (data === "ALLOW") {
+                                            textFields[1].valid = true;
+                                            textFields[1].helperTextContent = "电子邮件地址可以使用";
+                                            $("#GetEmailCAPTCHA").attr("disabled", true);
+                                            $.ajax({
+                                                url: "GetRegistryCAPTCHA",
+                                                data: "email=" + $("#Email").val(),
+                                                type: "post",
+                                                success: function (data, status) {
+                                                    if (status === "success") {
+                                                        var second = 60;
+                                                        $("#GetEmailCAPTCHA").attr("disabled", true);
+                                                        if (data !== "SUCCESS") {
+                                                            $("#GetEmailCAPTCHA").attr("disabled", false);
+                                                            $("#GetEmailCAPTCHA").html("获取验证码");
+                                                        } else {
+                                                            var timer = setInterval(function () {
+                                                                $("#GetEmailCAPTCHA").html(second + "秒后重发");
+                                                                second--;
+                                                                if (second <= 0) {
+                                                                    clearInterval(timer);
+                                                                    $("#GetEmailCAPTCHA").attr("disabled", false);
+                                                                    $("#GetEmailCAPTCHA").html("获取验证码");
+                                                                }
+                                                            }, 1000);
+                                                        }
+                                                    } else {
+                                                        $("#GetEmailCAPTCHA").attr("disabled", false);
+                                                    }
+                                                },
+                                                error: function () {
+                                                    textFields[2].valid = false;
+                                                    textFields[2].helperTextContent = "与服务器通信失败";
+                                                    $("#GetEmailCAPTCHA").attr("disabled", false);
+                                                }
+                                            });
+                                            $("#SubmitInfo").attr("disabled", false);
+                                        } else {
+                                            textFields[1].valid = false;
+                                            textFields[1].helperTextContent = "电子邮件地址已被使用";
+                                            $("#SubmitInfo").attr("disabled", true);
+                                        }
                                     }
-                                }, 1000);
-                            } else {
-                                $("#GetEmailCAPTCHA").attr("disabled", false);
-                            }
-                        });
+                                },
+                                error: function () {
+                                    email.valid = false;
+                                    email.helperTextContent = "与服务器通信发生错误";
+                                }
+                            });
+                        }
                     }
                 });
                 $("button[type=reset]").bind({
@@ -180,6 +222,7 @@
                 $.ajax({
                     url: "UserExistCheck",
                     data: "type=UserName&userName=" + inputUserName,
+                    type: "post",
                     success: function (data, status) {
                         if (status === "success") {
                             if (data === "ALLOW") {
@@ -220,22 +263,23 @@
                 var checkStatus = false;
                 $.ajax({
                     url: "UserExistCheck",
-                    data:"type=Email&email=" + $("#Email").val(),
+                    data: "type=Email&email=" + $("#Email").val(),
+                    type: "post",
                     success: function (data, status) {
-                    if (status === "success") {
-                        if (data === "ALLOW") {
-                            email.valid = true;
-                            email.helperTextContent = "电子邮件地址可以使用";
-                            checkStatus = true;
-                            $("#SubmitInfo").attr("disabled", false);
-                        } else {
-                            email.valid = false;
-                            email.helperTextContent = "电子邮件地址已被使用";
-                            checkStatus = false;
-                            $("#SubmitInfo").attr("disabled", true);
+                        if (status === "success") {
+                            if (data === "ALLOW") {
+                                email.valid = true;
+                                email.helperTextContent = "电子邮件地址可以使用";
+                                checkStatus = true;
+                                $("#SubmitInfo").attr("disabled", false);
+                            } else {
+                                email.valid = false;
+                                email.helperTextContent = "电子邮件地址已被使用";
+                                checkStatus = false;
+                                $("#SubmitInfo").attr("disabled", true);
+                            }
                         }
-                    }
-                },
+                    },
                     error: function () {
                         email.valid = false;
                         email.helperTextContent = "与服务器通信发生错误";
@@ -261,6 +305,7 @@
                 $.ajax({
                     url: "CAPTCHACheck",
                     data: "email=" + $("#Email").val() + "&CAPTCHA=" + $("#CAPTCHA").val(),
+                    type: "post",
                     success: function (data, status) {
                         if (status === "success") {
                             if (data === "ALLOW") {
