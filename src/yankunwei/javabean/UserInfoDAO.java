@@ -140,7 +140,7 @@ public class UserInfoDAO implements IUserInfoDAO {
             preparedStatement.setInt(1, UID);
             resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                userInfo.setUID(resultSet.getInt("UID"));
+                userInfo.setUID(UID);
                 userInfo.setUserName(resultSet.getString("UserName"));
                 userInfo.setSex(resultSet.getString("Sex"));
                 userInfo.setBirth(resultSet.getTimestamp("Birth"));
