@@ -27,11 +27,8 @@
     <script src="./js/jquery-3.4.1.js"></script>
     <script src="./js/material-components-web.js"></script>
     <script src="./js/MDCHelperJavaScript.js"></script>
+    <script src="./js/CONST_VALUE.js"></script>
     <script>
-        var PASSWORD_MIN_LENGTH = 6;
-        var PASSWORD_MAX_LENGTH = 16;
-        var USERNAME_MIN_LENGTH = 1;
-        var USERNAME_MAX_LENGTH = 20;
         $(function () {
             $(document).ready(function () {
                 var textFields = initMDCComponentAttachTo(".mdc-text-field", mdc.textField.MDCTextField);
