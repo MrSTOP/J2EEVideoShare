@@ -85,6 +85,96 @@ public class UserInfoDAO implements IUserInfoDAO {
     }
 
     @Override
+    public boolean updateUserInfo(UserInfo userInfo) {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        try {
+            connection = DataBaseHelper.getInstance().getConnection();
+            String SQL = "UPDATE user SET UserName=?, Sex=?, Birth=?, Email=?, RegDay=?, LastLogin=?, Coin=? WHERE UID=?";
+            preparedStatement = connection.prepareStatement(SQL);
+            preparedStatement.setString(1, userInfo.getUserName());
+            preparedStatement.setString(2, userInfo.getSex());
+            preparedStatement.setTimestamp(3, userInfo.getBirth());
+            preparedStatement.setString(4, userInfo.getEmail());
+            preparedStatement.setTimestamp(5, userInfo.getRegDay());
+            preparedStatement.setTimestamp(6, userInfo.getLastLogin());
+            preparedStatement.setInt(7, userInfo.getCoin());
+            return preparedStatement.executeUpdate() == 1;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DataBaseHelper.getInstance().closeResource(null, preparedStatement, connection);
+        }
+        return false;
+    }
+
+    @Override
+    public boolean loginCheckByUID(int UID, String passwordEncrypt) {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        try {
+            connection = DataBaseHelper.getInstance().getConnection();
+            String SQL = "SELECT COUNT(*) FROM user WHERE UID=? AND Password=?";
+            preparedStatement = connection.prepareStatement(SQL);
+            preparedStatement.setInt(1, UID);
+            preparedStatement.setString(2, passwordEncrypt);
+            resultSet = preparedStatement.executeQuery();
+            resultSet.next();
+            return resultSet.getInt(1) == 1;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DataBaseHelper.getInstance().closeResource(resultSet, preparedStatement, connection);
+        }
+        return false;
+    }
+
+    @Override
+    public boolean loginCheckByEmail(String email, String passwordEncrypt) {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        try {
+            connection = DataBaseHelper.getInstance().getConnection();
+            String SQL = "SELECT COUNT(*) FROM user WHERE Email=? AND Password=?";
+            preparedStatement = connection.prepareStatement(SQL);
+            preparedStatement.setString(1, email);
+            preparedStatement.setString(2, passwordEncrypt);
+            resultSet = preparedStatement.executeQuery();
+            resultSet.next();
+            return resultSet.getInt(1) == 1;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DataBaseHelper.getInstance().closeResource(resultSet, preparedStatement, connection);
+        }
+        return false;
+    }
+
+    @Override
+    public boolean loginCheckByUserName(String userName, String passwordEncrypt) {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        try {
+            connection = DataBaseHelper.getInstance().getConnection();
+            String SQL = "SELECT COUNT(*) FROM user WHERE UserName=? AND Password=?";
+            preparedStatement = connection.prepareStatement(SQL);
+            preparedStatement.setString(1, userName);
+            preparedStatement.setString(2, passwordEncrypt);
+            resultSet = preparedStatement.executeQuery();
+            resultSet.next();
+            return resultSet.getInt(1) == 1;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DataBaseHelper.getInstance().closeResource(resultSet, preparedStatement, connection);
+        }
+        return false;
+    }
+
+    @Override
     public UserInfo getUserInfoByUserName(String userName) {
         UserInfo userInfo = new UserInfo();
         this.getUserInfoByUserName(userName, userInfo);
