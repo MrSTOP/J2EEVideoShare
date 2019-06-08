@@ -5,7 +5,7 @@ $.func = {
         $("#USERNAME_MIN_LENGTH").html(USERNAME_MIN_LENGTH);
         $("#USERNAME_MAX_LENGTH").html(USERNAME_MAX_LENGTH);
     },
-    userNameRegCheck: function (userName) {
+    registry_userNameRegCheck: function (userName) {
         var reg = /^[a-zA-Z0-9_\u4e00-\u9fa5]{1,20}$/;
         $.func.spaceReplace($("#UserName")[0]);
         var inputUserName = $("#UserName").val();
@@ -25,7 +25,7 @@ $.func = {
             return false;
         }
     },
-    userNameExistCheck: function (userName) {
+    registry_userNameExistCheck: function (userName) {
         var inputUserName = $("#UserName").val();
         var checkStatus = false;
         $.ajax({
@@ -54,7 +54,7 @@ $.func = {
         });
         return checkStatus;
     },
-    emailRegCheck: function (email) {
+    registry_emailRegCheck: function (email) {
         var reg = /[0-9a-zA-Z]+@[0-9a-zA-Z]+\.[a-z]+/;
         $.func.spaceReplace($("#Email")[0]);
         var inputEmail = $("#Email").val();
@@ -69,7 +69,7 @@ $.func = {
             return false;
         }
     },
-    emailExistCheck: function (email) {
+    registry_emailExistCheck: function (email) {
         var checkStatus = false;
         $.ajax({
             url: "UserExistCheck",
@@ -97,7 +97,7 @@ $.func = {
         });
         return checkStatus;
     },
-    CAPTCHARegCheck: function (CAPTCHA) {
+    registry_CAPTCHARegCheck: function (CAPTCHA) {
         var reg = /^[0-9]{6}$/;
         $.func.spaceReplace($("#CAPTCHA")[0]);
         var inputCAPTCHA = $("#CAPTCHA").val();
@@ -112,7 +112,7 @@ $.func = {
             return false;
         }
     },
-    CAPTCHAExistCheck: function (CAPTCHA) {
+    registry_CAPTCHAExistCheck: function (CAPTCHA) {
         $.ajax({
             url: "CAPTCHACheck",
             data: "email=" + $("#Email").val() + "&CAPTCHA=" + $("#CAPTCHA").val(),
@@ -138,7 +138,7 @@ $.func = {
             }
         })
     },
-    passwordRegCheck: function (password) {
+    registry_passwordRegCheck: function (password) {
         var reg = /[a-zA-Z0-9`~!@#$%^&*()_\-=+{}[\]\\|;:'",<.>/?]{6,16}/;
         var inputPassword = $("#Password").val();
         if (reg.test(inputPassword)) {
@@ -157,7 +157,7 @@ $.func = {
             return false;
         }
     },
-    passwordRepeatCheck: function (passwordRep) {
+    registry_passwordRepeatCheck: function (passwordRep) {
         if ($("#Password").val() === $("#PasswordRepeat").val()) {
             passwordRep.valid = true;
             return true;
