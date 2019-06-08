@@ -175,6 +175,36 @@ public class UserInfoDAO implements IUserInfoDAO {
     }
 
     @Override
+    public boolean isPasswordRightByUID(int UID, String passwordEncrypt) {
+        return this.loginCheckByUID(UID, passwordEncrypt);
+    }
+
+    @Override
+    public boolean isPasswordRightByUserName(String userName, String passwordEncrypt) {
+        return this.loginCheckByUserName(userName, passwordEncrypt);
+    }
+
+    @Override
+    public boolean isPasswordRightByEmail(String email, String passwordEncrypt) {
+        return this.loginCheckByEmail(email, passwordEncrypt);
+    }
+
+    @Override
+    public boolean isPasswordRightByUserInfo(UserInfo userInfo, String passwordEncrypt) {
+        boolean rightByUID = false;
+        boolean rightByUserName = false;
+        boolean rightByEmail = false;
+        try {
+            rightByUID = this.isPasswordRightByUID(userInfo.getUID(), passwordEncrypt);
+        } catch (IllegalStateException e) {
+            e.printStackTrace();
+        }
+        rightByUserName = this.isPasswordRightByUserName(userInfo.getUserName(), passwordEncrypt);
+        rightByEmail = this.isPasswordRightByEmail(userInfo.getEmail(), passwordEncrypt);
+        return rightByUID || rightByUserName || rightByEmail;
+    }
+
+    @Override
     public UserInfo getUserInfoByUserName(String userName) {
         UserInfo userInfo = new UserInfo();
         this.getUserInfoByUserName(userName, userInfo);
