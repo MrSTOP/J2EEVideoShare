@@ -245,8 +245,7 @@
                 <div class="mdc-dialog__scrim"></div>
             </div>
             <button id="SubmitInfo" type="button" class="mdc-button mdc-button--unelevated" style="float: left;display: inline;">注册</button>
-            <button type="reset" class="mdc-button mdc-button--outlined" style="float: right;display: inline;">清空
-            </button>
+            <button type="reset" class="mdc-button mdc-button--outlined" style="float: right;display: inline;">清空</button>
         </div>
     </form>
 </article>
