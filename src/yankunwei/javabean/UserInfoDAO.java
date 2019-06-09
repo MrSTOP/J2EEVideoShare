@@ -207,13 +207,14 @@ public class UserInfoDAO implements IUserInfoDAO {
     @Override
     public boolean isPasswordRightByEmailOrUID(String emailOrUID, String passwordEncrypt) {
         boolean UID = false;
-        try {
-            UID = loginCheckByUID(Integer.valueOf(emailOrUID), passwordEncrypt);
-        } catch (NumberFormatException e) {
-            e.printStackTrace();
-        }
         boolean email = isPasswordRightByEmail(emailOrUID, passwordEncrypt);
-
+        if (!email) {
+            try {
+                UID = loginCheckByUID(Integer.valueOf(emailOrUID), passwordEncrypt);
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+            }
+        }
         return UID || email;
     }
 
