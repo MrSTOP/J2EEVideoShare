@@ -5,7 +5,7 @@ import java.util.Calendar;
 
 public class UserInfo {
 
-    public static final long DAY_AS_MILISECOND = 86400000L;
+    public static final long DAY_AS_MILLISECONDS = 86400000L;
 
     private int UID = -1;
     private String userName;
@@ -141,9 +141,10 @@ public class UserInfo {
     }
 
     public void updateCoin() {
-        if (System.currentTimeMillis() - this.lastLogin.getTime() >= DAY_AS_MILISECOND) {
+        if (System.currentTimeMillis() - this.lastLogin.getTime() >= DAY_AS_MILLISECONDS) {
             this.coin++;
         }
+        this.lastLogin.setTime(System.currentTimeMillis());
     }
 
     public void coinInc() {
