@@ -249,7 +249,7 @@ public class UserInfoDAO implements IUserInfoDAO {
         ResultSet resultSet = null;
         try {
             connection = DataBaseHelper.getInstance().getConnection();
-            String SQL = "SELECT UID, UserName, Sex, Birth, Email, RegDay, LastLogin, Coin FROM user WHERE Email";
+            String SQL = "SELECT UID, UserName, Sex, Birth, Email, RegDay, LastLogin, Coin FROM user WHERE Email=?";
             preparedStatement = connection.prepareStatement(SQL);
             preparedStatement.setString(1, email);
             resultSet = preparedStatement.executeQuery();
