@@ -171,7 +171,6 @@ $.func = {
     login_requestCAPTCHA: function () {
         $.ajax({
             url: "GetLoginCAPTCHA",
-            data: "test=true",
             type: "post",
             success: function (data, status) {
                 console.log("JSON: " + data);
