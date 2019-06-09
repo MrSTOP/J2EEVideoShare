@@ -66,7 +66,7 @@ public class VideoCommentInfoDAO implements IVideoCommentInfoDAO {
                 VideoCommentInfo videoCommentInfo = new VideoCommentInfo(
                         resultSet.getString("VideoID"),
                         resultSet.getInt("UID"),
-                        resultSet.getString("Comment")
+                        resultSet.getString("VideoComment")
                 );
                 UserInfo userInfo = new UserInfo();
                 userInfoDAO.getUserInfoByUID(videoCommentInfo.getUID(), userInfo);
@@ -97,7 +97,7 @@ public class VideoCommentInfoDAO implements IVideoCommentInfoDAO {
                 VideoCommentInfo videoCommentInfo = new VideoCommentInfo(
                         resultSet.getString("VideoID"),
                         resultSet.getInt("UID"),
-                        resultSet.getString("Comment")
+                        resultSet.getString("VideoComment")
                 );
                 UserInfo userInfo = new UserInfo();
                 userInfoDAO.getUserInfoByUID(videoCommentInfo.getUID(), userInfo);
