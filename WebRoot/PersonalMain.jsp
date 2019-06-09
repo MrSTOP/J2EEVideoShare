@@ -90,7 +90,7 @@
         </div>
     </aside>
     <%--    <article>--%>
-    <iframe src="PersonalInfo.jsp" style="width: 100%" frameborder="0">
+    <iframe src="Collection.jsp" style="width: 100%" frameborder="0">
     </iframe>
     <%--    </article>--%>
 </div>

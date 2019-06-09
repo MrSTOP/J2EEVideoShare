@@ -33,12 +33,15 @@
     <LINK REL="stylesheet" type="text/css" href="./css/MDCHelperCSS.css">
     <script src="js/material-components-web.js"></script>
     <script src="js/jquery-3.4.1.js"></script>
+    <script type="text/javascript" src="js/custom-function.js"></script>
+    <script type="text/javascript" src="js/CONST_VALUE.js"></script>
     <script src="js/MDCHelperJavaScript.js"></script>
     <script>
         $(function () {
             $(document).ready(function () {
-                var textFieldss = initMDCComponentAttachTo(".mdc-text-field mdc-text-field--outlined", mdc.textField.MDCTextField);
+                var textFieldss = initMDCComponentAttachTo(".mdc-text-field", mdc.textField.MDCTextField);
                 var selectss = initMDCComponentAttachTo(".mdc-select", mdc.select.MDCSelect);
+                $.func.initHtmlConstValue();
                 var i = 0;
                 switch (${sex}) {
                     case "secret":
@@ -74,11 +77,6 @@
                 </div>
                 <div class="mdc-notched-outline__trailing"></div>
             </div>
-        </div>
-        <div class="mdc-text-field-helper-line">
-            <p class="mdc-text-field-helper-text mdc-text-field-helper-text--persistent mdc-text-field-helper-text--validation-msg">
-                请输入密码，长度<span id="PASSWORD_MIN_LENGH"></span>-<span id="PASSWORD_MAX_LENGH"></span>个字符
-            </p>
         </div>
     </div>
 </div>

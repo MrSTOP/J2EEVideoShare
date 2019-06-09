@@ -53,8 +53,10 @@
 </script>
 <script src="./js/jquery-3.4.1.js"></script>
 <body>
-<div style="padding: 100px">
-<div class="mdc-layout-grid__cell" style="width: 500px; height: 500px">
+
+<div class="mdc-layout-grid">
+    <div class="mdc-layout-grid__inner">
+<div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6" >
     <div class="mdc-card demo-card">
         <div class="mdc-card__primary-action demo-card__primary-action" tabindex="0">
             <div class="mdc-card__media mdc-card__media--16-9 demo-card__media" style="background-image: url('https://material-components.github.io/material-components-web-catalog/static/media/photos/3x2/2.jpg');"></div>
@@ -74,8 +76,7 @@
         </div>
     </div>
 </div>
-
-<div class="mdc-layout-grid__cell"style="width: 500px; height: 500px">
+<div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6">
     <div class="mdc-card demo-card">
         <div class="mdc-card__primary-action demo-card__primary-action" tabindex="0">
             <div class="mdc-card__media mdc-card__media--16-9 demo-card__media" style="background-image: url('https://material-components.github.io/material-components-web-catalog/static/media/photos/3x2/2.jpg');"></div>
@@ -101,6 +102,7 @@
         </div>
     </div>
 </div>
+    </div>
 </div>
 </body>
 </html>
