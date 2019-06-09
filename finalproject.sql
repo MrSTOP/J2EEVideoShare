@@ -11,7 +11,7 @@
  Target Server Version : 80013
  File Encoding         : 65001
 
- Date: 09/06/2019 20:26:52
+ Date: 09/06/2019 21:05:18
 */
 
 SET NAMES utf8mb4;
@@ -60,6 +60,7 @@ DROP TABLE IF EXISTS `video`;
 CREATE TABLE `video`  (
   `VideoID` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `VideoName` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `Photoname` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`VideoID`) USING BTREE,
   INDEX `VideoID`(`VideoID`) USING BTREE,
   INDEX `VideoID_2`(`VideoID`) USING BTREE
