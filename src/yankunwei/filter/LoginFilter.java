@@ -23,15 +23,30 @@ public class LoginFilter implements Filter {
             request.getSession().setAttribute("user", userInfo);
         }
         String URL = request.getRequestURL().toString();
-        if (URL.contains("/css/") || URL.contains("/js/") || URL.contains("/resources/")) {
-            chain.doFilter(req, resp);
-        } else if (request.getSession().getAttribute("user") == null &&
-                request.getServletPath() != null &&
-                !request.getServletPath().equals("/registry.jsp")) {
-            req.getRequestDispatcher("./login.jsp").forward(req, resp);
+        if (request.getServletPath() != null &&
+                request.getServletPath().endsWith(".jsp") &&
+                request.getServletPath().endsWith("registry.jsp") &&
+                request.getServletPath().endsWith("registry.jsp")) {
+            request.getRequestDispatcher("./login.jsp").forward(req, resp);
         } else {
             chain.doFilter(req, resp);
         }
+//        if (request.getServletPath().equals("/GetLoginCAPTCHA") ||
+//                request.getServletPath().equals("/GetRegistryCAPTCHA") ||
+//                request.getServletPath().equals("/LoginCheck") ||
+//                request.getServletPath().equals("/Logout") ||
+//                request.getServletPath().equals("/RegistryCAPTCHACHECK") ||
+//                request.getServletPath().equals("/RegistryProcess")) {
+//            chain.doFilter(req, resp);
+//        } else if (URL.contains("/css/") || URL.contains("/js/") || URL.contains("/resources/")) {
+//            chain.doFilter(req, resp);
+//        } else if (request.getSession().getAttribute("user") == null &&
+//                request.getServletPath() != null &&
+//                !request.getServletPath().equals("/registry.jsp")) {
+//            req.getRequestDispatcher("./login.jsp").forward(req, resp);
+//        } else {
+//            chain.doFilter(req, resp);
+//        }
     }
 
     public void init(FilterConfig config) throws ServletException {
