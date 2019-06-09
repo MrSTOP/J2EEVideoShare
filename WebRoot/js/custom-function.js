@@ -168,6 +168,19 @@ $.func = {
             return false;
         }
     },
+    login_requestCAPTCHA: function () {
+        $.ajax({
+            url: "GetLoginCAPTCHA",
+            data: "test=true",
+            type: "post",
+            success: function (data, status) {
+                console.log("JSON: " + data);
+                var JSONData = JSON.parse(data);
+                $("#CAPTCHAImgForeground").attr("src", "./resources/img/CAPTCHA/" + JSONData.foreGround);
+                $("#CAPTCHAImgBackground").attr("src", "./resources/img/CAPTCHA/" + JSONData.backGround);
+            }
+        });
+    },
     spaceReplace: function (element) {
         element.value = element.value.replace(/\s+/g, '');
     }
