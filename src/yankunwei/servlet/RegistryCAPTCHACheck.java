@@ -8,8 +8,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Map;
 
-@WebServlet(name = "CAPTCHACheck", urlPatterns = "/CAPTCHACheck")
-public class CAPTCHACheck extends HttpServlet {
+@WebServlet(name = "RegistryCAPTCHACheck", urlPatterns = "/RegistryCAPTCHACheck")
+public class RegistryCAPTCHACheck extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String email = request.getParameter("email");
         String CAPTCHASubmit = request.getParameter("CAPTCHA");

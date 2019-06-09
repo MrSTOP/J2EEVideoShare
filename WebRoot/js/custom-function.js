@@ -114,7 +114,7 @@ $.func = {
     },
     registry_CAPTCHAExistCheck: function (CAPTCHA) {
         $.ajax({
-            url: "CAPTCHACheck",
+            url: "RegistryCAPTCHACheck",
             data: "email=" + $("#Email").val() + "&CAPTCHA=" + $("#CAPTCHA").val(),
             type: "post",
             success: function (data, status) {
