@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.logging.SimpleFormatter;
 
-@WebFilter(filterName = "LoginFilter", urlPatterns = "")
+@WebFilter(filterName = "LoginFilter", urlPatterns = "/*")
 public class LoginFilter implements Filter {
     public void destroy() {
     }
@@ -25,6 +25,7 @@ public class LoginFilter implements Filter {
             request.getSession().setAttribute(LoginCheck.SESSION_ATTR_USER_INFO, userInfo);
         }
         String URL = request.getRequestURL().toString();
+        System.out.println(URL);
         System.out.println(request.getServletPath());
         if (request.getServletPath() != null &&
                 request.getServletPath().endsWith(".jsp") &&
