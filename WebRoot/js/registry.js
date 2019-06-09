@@ -8,33 +8,33 @@ $(function () {
         $.func.initHtmlConstValue();
         $("#UserName").bind({
             "input blur propertychange": function () {
-                if ($.func.userNameRegCheck(textFields[0])) {
-                    $.func.userNameExistCheck(textFields[0]);
+                if ($.func.registry_userNameRegCheck(textFields[0])) {
+                    $.func.registry_userNameExistCheck(textFields[0]);
                 }
             }
         });
         $("#Email").bind({
             "input blur propertychange": function () {
-                if ($.func.emailRegCheck(textFields[1])) {
-                    $.func.emailExistCheck(textFields[1]);
+                if ($.func.registry_emailRegCheck(textFields[1])) {
+                    $.func.registry_emailExistCheck(textFields[1]);
                 }
             }
         });
         $("#CAPTCHA").bind({
             "input blur propertychange": function () {
-                if ($.func.CAPTCHARegCheck(textFields[2])) {
-                    $.func.CAPTCHAExistCheck(textFields[2]);
+                if ($.func.registry_CAPTCHARegCheck(textFields[2])) {
+                    $.func.registry_CAPTCHAExistCheck(textFields[2]);
                 }
             }
         });
         $("#Password").bind({
             "input blur propertychange": function () {
-                $.func.passwordRegCheck(textFields[3]);
+                $.func.registry_passwordRegCheck(textFields[3]);
             }
         });
         $("#PasswordRepeat").bind({
             "input blur propertychange": function () {
-                $.func.passwordRepeatCheck(textFields[4]);
+                $.func.registry_passwordRepeatCheck(textFields[4]);
             }
         });
         $("#birthDay").focus(function () {
@@ -59,7 +59,7 @@ $(function () {
         });
         $("#GetEmailCAPTCHA").bind({
             "click": function () {
-                if (!$.func.emailRegCheck(textFields[1])) {
+                if (!$.func.registry_emailRegCheck(textFields[1])) {
                     $("#Email").focus();
                     textFields[1].valid = false;
                     textFields[1].helperTextContent = "请输入正确的电子邮件地址";
@@ -131,19 +131,19 @@ $(function () {
         $("#SubmitInfo").bind({
             "click": function () {
                 var msg = "";
-                if (!$.func.userNameRegCheck(textFields[0])) {
+                if (!$.func.registry_userNameRegCheck(textFields[0])) {
                     msg += "用户名不符合规则<br/>";
                 }
-                if (!$.func.emailRegCheck(textFields[1])) {
+                if (!$.func.registry_emailRegCheck(textFields[1])) {
                     msg += "电子邮件地址不符合规则<br/>";
                 }
-                if (!$.func.CAPTCHARegCheck(textFields[2])) {
+                if (!$.func.registry_CAPTCHARegCheck(textFields[2])) {
                     msg += "验证码不符合要求<br/>";
                 }
-                if (!$.func.passwordRegCheck(textFields[3])) {
+                if (!$.func.registry_passwordRegCheck(textFields[3])) {
                     msg += "密码不符合要求<br/>";
                 }
-                if (!$.func.passwordRepeatCheck(textFields[4])) {
+                if (!$.func.registry_passwordRepeatCheck(textFields[4])) {
                     msg += "两次输入的密码不一致";
                 }
                 if (msg === "") {
