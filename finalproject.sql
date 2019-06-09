@@ -11,7 +11,7 @@
  Target Server Version : 80015
  File Encoding         : 65001
 
- Date: 09/06/2019 21:43:13
+ Date: 09/06/2019 21:48:55
 */
 
 SET NAMES utf8mb4;
@@ -76,7 +76,7 @@ DROP TABLE IF EXISTS `videocomment`;
 CREATE TABLE `videocomment`  (
   `VideoID` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `UID` int(11) NOT NULL,
-  `comment` longtext CHARACTER SET utf8 COLLATE utf8_general_ci NULL,
+  `Comment` longtext CHARACTER SET utf8 COLLATE utf8_general_ci NULL,
   PRIMARY KEY (`VideoID`, `UID`) USING BTREE,
   INDEX `UID`(`UID`) USING BTREE,
   CONSTRAINT `videocomment_ibfk_1` FOREIGN KEY (`VideoID`) REFERENCES `video` (`VideoID`) ON DELETE RESTRICT ON UPDATE RESTRICT,
