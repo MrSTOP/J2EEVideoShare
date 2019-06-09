@@ -32,7 +32,7 @@ public class RegistryProcess extends HttpServlet {
         UserInfoDAO userInfoDAO = new UserInfoDAO();
         if (userInfoDAO.addUserInfo(userInfo, passwordEncrypted)) {
             userInfoDAO.getUserInfoByUserName(userName, userInfo);
-            request.getSession().setAttribute("user", userInfo);
+            request.getSession().setAttribute(LoginCheck.SESSION_ATTR_USER_INFO, userInfo);
             request.getRequestDispatcher("/index.jsp").forward(request, response);
         } else {
             request.getRequestDispatcher("/registry.jsp").forward(request, response);

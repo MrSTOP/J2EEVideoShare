@@ -14,6 +14,7 @@ import java.util.Map;
 
 @WebServlet(name = "LoginCheck", urlPatterns = "/LoginCheck")
 public class LoginCheck extends HttpServlet {
+    public static final String SESSION_ATTR_USER_INFO = "user";
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String type = request.getParameter("type");
         String emailOrUID = request.getParameter("emailOrUID");
@@ -32,7 +33,7 @@ public class LoginCheck extends HttpServlet {
                     if (userInfoDAO.isPasswordRightByEmailOrUID(emailOrUID, passwordEncrypt)) {
                         UserInfo userInfo = new UserInfo();
                         userInfoDAO.getUserInfoByEmailOrUID(emailOrUID, userInfo);
-                        request.getSession().setAttribute("user", userInfo);
+                        request.getSession().setAttribute(SESSION_ATTR_USER_INFO, userInfo);
                         msg = "ALLOW";
                     } else {
                         msg = "DENY";

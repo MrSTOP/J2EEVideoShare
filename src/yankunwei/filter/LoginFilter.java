@@ -2,6 +2,7 @@ package yankunwei.filter;
 
 import yankunwei.javabean.UserInfo;
 import yankunwei.javabean.UserInfoDAO;
+import yankunwei.servlet.LoginCheck;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
@@ -20,8 +21,8 @@ public class LoginFilter implements Filter {
         if (request.getParameter("test") != null && request.getParameter("test").equals("true")) {
             UserInfoDAO userInfoDAO = new UserInfoDAO();
             UserInfo userInfo = new UserInfo();
-            userInfoDAO.getUserInfoByUID(4, userInfo);
-            request.getSession().setAttribute("user", userInfo);
+            userInfoDAO.getUserInfoByUID(3, userInfo);
+            request.getSession().setAttribute(LoginCheck.SESSION_ATTR_USER_INFO, userInfo);
         }
         String URL = request.getRequestURL().toString();
         System.out.println(request.getServletPath());

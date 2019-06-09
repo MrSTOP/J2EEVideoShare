@@ -10,7 +10,7 @@ import java.io.IOException;
 @WebServlet(name = "Logout", urlPatterns = "/Logout")
 public class Logout extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getSession().removeAttribute("user");
+        request.getSession().removeAttribute(LoginCheck.SESSION_ATTR_USER_INFO);
         request.getRequestDispatcher("/login.jsp").forward(request, response);
     }
 
