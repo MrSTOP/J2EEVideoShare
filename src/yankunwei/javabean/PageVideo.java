@@ -8,7 +8,12 @@ import java.util.List;
 public class PageVideo {
     private static int page = 0;
     private static int reqPage = 1;
-    public static List<String> getpages(int PageCount, int PageNo, int PageSize, File[] files){
+
+    public static int getPage() {
+        return page;
+    }
+
+    public static List<String> getpages(int PageNo, int PageSize, File[] files){
         List<String> fileNames = new ArrayList<>();
         if (files != null) {
             reqPage = PageNo;

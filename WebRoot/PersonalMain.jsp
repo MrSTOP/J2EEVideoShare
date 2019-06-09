@@ -70,7 +70,7 @@
                     <i class="material-icons mdc-list-item__graphic" aria-hidden="true">info</i>
                     <span class="mdc-list-item__text">个人信息</span>
                 </a>
-                <a class="mdc-list-item" href="registry.jsp">
+                <a class="mdc-list-item" href="Collectvideo">
                     <i class="material-icons mdc-list-item__graphic" aria-hidden="true">star</i>
                     <span class="mdc-list-item__text">收藏夹</span>
                 </a>
