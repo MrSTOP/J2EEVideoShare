@@ -137,6 +137,18 @@ public class UserInfo {
         this.coin = coin;
     }
 
+    public void coinInc() {
+        this.coin++;
+    }
+
+    public void coinDec() {
+        this.coin--;
+    }
+
+    public boolean hasCoin() {
+        return this.coin > 0;
+    }
+
     private static String timestampToStr(String timestamp) {
         return timestamp.split("\\s+")[0];
     }
