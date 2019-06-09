@@ -27,6 +27,8 @@ public interface IUserInfoDAO {
 
     boolean isPasswordRightByUserInfo(UserInfo userInfo, String passwordEncrypt);
 
+    boolean isPasswordRightByEmailOrUID(String emailOrUID, String passwordEncrypt);
+
     UserInfo getUserInfoByUserName(String userName);
 
     void getUserInfoByUserName(String userName, UserInfo userInfo);
