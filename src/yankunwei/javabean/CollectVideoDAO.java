@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Map;
 
 public class CollectVideoDAO implements ICollectVideoDAO{
 
@@ -64,7 +65,7 @@ public class CollectVideoDAO implements ICollectVideoDAO{
             while (resultSet.next())
             {
                 userCollectVideo.setUID(UID);
-                userCollectVideo.setVideoIDs(resultSet.getString("videoID"));
+                userCollectVideo.setVideos(resultSet.getString("videoID"),resultSet.getString("videoname"));
             }
             return userCollectVideo;
         }catch (SQLException e){
