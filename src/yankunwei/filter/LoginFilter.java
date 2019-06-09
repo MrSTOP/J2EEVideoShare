@@ -23,10 +23,12 @@ public class LoginFilter implements Filter {
             request.getSession().setAttribute("user", userInfo);
         }
         String URL = request.getRequestURL().toString();
+        System.out.println(request.getServletPath());
         if (request.getServletPath() != null &&
                 request.getServletPath().endsWith(".jsp") &&
-                request.getServletPath().endsWith("registry.jsp") &&
-                request.getServletPath().endsWith("registry.jsp")) {
+                !request.getServletPath().endsWith("registry.jsp") &&
+                !request.getServletPath().endsWith("registry.jsp")) {
+            System.out.println("BLOCK: " + request.getServletPath());
             request.getRequestDispatcher("./login.jsp").forward(req, resp);
         } else {
             chain.doFilter(req, resp);
