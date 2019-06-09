@@ -1,21 +1,35 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : MySQL
+ Source Server         : YZC
  Source Server Type    : MySQL
- Source Server Version : 80015
+ Source Server Version : 80013
  Source Host           : localhost:3306
  Source Schema         : finalproject
 
  Target Server Type    : MySQL
- Target Server Version : 80015
+ Target Server Version : 80013
  File Encoding         : 65001
 
- Date: 07/06/2019 14:11:45
+ Date: 09/06/2019 20:26:52
 */
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
+
+-- ----------------------------
+-- Table structure for collection
+-- ----------------------------
+DROP TABLE IF EXISTS `collection`;
+CREATE TABLE `collection`  (
+  `UID` int(255) NOT NULL,
+  `VideoID` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `videoname` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  INDEX `UID`(`UID`) USING BTREE,
+  INDEX `videoID`(`VideoID`) USING BTREE,
+  CONSTRAINT `collection_ibfk_1` FOREIGN KEY (`UID`) REFERENCES `user` (`uid`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `collection_ibfk_2` FOREIGN KEY (`VideoID`) REFERENCES `video` (`videoid`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for user
@@ -32,9 +46,24 @@ CREATE TABLE `user`  (
   `LastLogin` timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
   `Coin` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`UID`, `UserName`) USING BTREE,
+  UNIQUE INDEX `Email`(`Email`) USING BTREE,
   INDEX `UID`(`UID`) USING BTREE,
-  UNIQUE INDEX `Email`(`Email`) USING BTREE
+  INDEX `UID_2`(`UID`) USING BTREE,
+  INDEX `UID_3`(`UID`) USING BTREE,
+  INDEX `UID_4`(`UID`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for video
+-- ----------------------------
+DROP TABLE IF EXISTS `video`;
+CREATE TABLE `video`  (
+  `VideoID` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `VideoName` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`VideoID`) USING BTREE,
+  INDEX `VideoID`(`VideoID`) USING BTREE,
+  INDEX `VideoID_2`(`VideoID`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for watchhistory
@@ -45,7 +74,7 @@ CREATE TABLE `watchhistory`  (
   `VideoID` int(255) NULL DEFAULT NULL,
   `Date` timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
   INDEX `UID`(`UID`) USING BTREE,
-  CONSTRAINT `watchhistory_ibfk_1` FOREIGN KEY (`UID`) REFERENCES `user` (`UID`) ON DELETE RESTRICT ON UPDATE RESTRICT
+  CONSTRAINT `watchhistory_ibfk_1` FOREIGN KEY (`UID`) REFERENCES `user` (`uid`) ON DELETE RESTRICT ON UPDATE RESTRICT
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 SET FOREIGN_KEY_CHECKS = 1;
