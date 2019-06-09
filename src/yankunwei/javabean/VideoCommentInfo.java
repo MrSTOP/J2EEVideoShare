@@ -4,6 +4,7 @@ public class VideoCommentInfo {
     private String videoID;
     private int UID;
     private String videoComment;
+    private String userName;
 
     public VideoCommentInfo() {
 
@@ -37,5 +38,13 @@ public class VideoCommentInfo {
 
     public void setVideoComment(String videoComment) {
         this.videoComment = videoComment;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 }

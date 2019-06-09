@@ -55,6 +55,7 @@ public class VideoCommentInfoDAO implements IVideoCommentInfoDAO {
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         List<VideoCommentInfo> videoCommentInfos = new ArrayList<>();
+        UserInfoDAO userInfoDAO = new UserInfoDAO();
         try {
             connection = DataBaseHelper.getInstance().getConnection();
             String SQL = "SELECT * FROM videocomment WHERE VideoID=?";
@@ -67,6 +68,9 @@ public class VideoCommentInfoDAO implements IVideoCommentInfoDAO {
                         resultSet.getInt("UID"),
                         resultSet.getString("Comment")
                 );
+                UserInfo userInfo = new UserInfo();
+                userInfoDAO.getUserInfoByUID(videoCommentInfo.getUID(), userInfo);
+                videoCommentInfo.setUserName(userInfo.getUserName());
                 videoCommentInfos.add(videoCommentInfo);
             }
         } catch (SQLException e) {
@@ -83,6 +87,7 @@ public class VideoCommentInfoDAO implements IVideoCommentInfoDAO {
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         List<VideoCommentInfo> videoCommentInfos = new ArrayList<>();
+        UserInfoDAO userInfoDAO = new UserInfoDAO();
         try {
             connection = DataBaseHelper.getInstance().getConnection();
             String SQL = "SELECT * FROM videocomment";
@@ -94,6 +99,9 @@ public class VideoCommentInfoDAO implements IVideoCommentInfoDAO {
                         resultSet.getInt("UID"),
                         resultSet.getString("Comment")
                 );
+                UserInfo userInfo = new UserInfo();
+                userInfoDAO.getUserInfoByUID(videoCommentInfo.getUID(), userInfo);
+                videoCommentInfo.setUserName(userInfo.getUserName());
                 videoCommentInfos.add(videoCommentInfo);
             }
         } catch (SQLException e) {
