@@ -11,7 +11,7 @@
  Target Server Version : 80015
  File Encoding         : 65001
 
- Date: 09/06/2019 21:23:51
+ Date: 09/06/2019 21:34:24
 */
 
 SET NAMES utf8mb4;
@@ -67,6 +67,20 @@ CREATE TABLE `video`  (
   INDEX `VideoID_2`(`VideoID`) USING BTREE,
   INDEX `UID`(`UID`) USING BTREE,
   CONSTRAINT `video_ibfk_1` FOREIGN KEY (`UID`) REFERENCES `user` (`UID`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for videocomment
+-- ----------------------------
+DROP TABLE IF EXISTS `videocomment`;
+CREATE TABLE `videocomment`  (
+  `VideoID` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `UID` int(11) NOT NULL,
+  `comment` longtext CHARACTER SET utf8 COLLATE utf8_general_ci NULL,
+  INDEX `VideoID`(`VideoID`) USING BTREE,
+  INDEX `UID`(`UID`) USING BTREE,
+  CONSTRAINT `videocomment_ibfk_1` FOREIGN KEY (`VideoID`) REFERENCES `video` (`VideoID`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `videocomment_ibfk_2` FOREIGN KEY (`UID`) REFERENCES `user` (`UID`) ON DELETE RESTRICT ON UPDATE RESTRICT
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
