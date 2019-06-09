@@ -227,10 +227,9 @@ public class UserInfoDAO implements IUserInfoDAO {
 
     @Override
     public void getUserInfoByEmailOrUID(String emailOrUID, UserInfo userInfo) {
-        this.getUserInfoByEmail(emailOrUID, userInfo);
         try {
-            userInfo.getUID();
-        } catch (IllegalStateException e) {
+            this.getUserInfoByEmail(emailOrUID, userInfo);
+        } catch (IllegalArgumentException e) {
             this.getUserInfoByUID(Integer.valueOf(emailOrUID), userInfo);
         }
     }

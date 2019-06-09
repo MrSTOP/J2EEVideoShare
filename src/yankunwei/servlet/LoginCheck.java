@@ -30,12 +30,9 @@ public class LoginCheck extends HttpServlet {
                     msg = "CAPTCHA";
                 } else {
                     if (userInfoDAO.isPasswordRightByEmailOrUID(emailOrUID, passwordEncrypt)) {
-                        UserInfo userInfo = null;
+                        UserInfo userInfo = new UserInfo();
                         userInfoDAO.getUserInfoByEmailOrUID(emailOrUID, userInfo);
                         request.getSession().setAttribute("user", userInfo);
-                        if (emailOrUID.matches("^[0-9]+$")) {
-
-                        }
                         msg = "ALLOW";
                     } else {
                         msg = "DENY";
