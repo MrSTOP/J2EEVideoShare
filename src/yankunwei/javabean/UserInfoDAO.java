@@ -219,6 +219,60 @@ public class UserInfoDAO implements IUserInfoDAO {
     }
 
     @Override
+    public UserInfo getUserInfoByEmailOrUID(String emailOrUID) {
+        UserInfo userInfo = new UserInfo();
+        this.getUserInfoByEmailOrUID(emailOrUID, userInfo);
+        return userInfo;
+    }
+
+    @Override
+    public void getUserInfoByEmailOrUID(String emailOrUID, UserInfo userInfo) {
+        this.getUserInfoByEmail(emailOrUID, userInfo);
+        try {
+            userInfo.getUID();
+        } catch (IllegalStateException e) {
+            this.getUserInfoByUID(Integer.valueOf(emailOrUID), userInfo);
+        }
+    }
+
+    @Override
+    public UserInfo getUserInfoByEmail(String email) {
+        UserInfo userInfo = new UserInfo();
+        this.getUserInfoByEmail(email, userInfo);
+        return userInfo;
+    }
+
+    @Override
+    public void getUserInfoByEmail(String email, UserInfo userInfo) {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        try {
+            connection = DataBaseHelper.getInstance().getConnection();
+            String SQL = "SELECT UID, UserName, Sex, Birth, Email, RegDay, LastLogin, Coin FROM user WHERE Email";
+            preparedStatement = connection.prepareStatement(SQL);
+            preparedStatement.setString(1, email);
+            resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                userInfo.setUID(resultSet.getInt("UID"));
+                userInfo.setUserName(resultSet.getString("UserName"));
+                userInfo.setSex(resultSet.getString("Sex"));
+                userInfo.setBirth(resultSet.getTimestamp("Birth"));
+                userInfo.setEmail(resultSet.getString("Email"));
+                userInfo.setRegDay(resultSet.getTimestamp("RegDay"));
+                userInfo.setLastLogin(resultSet.getTimestamp("LastLogin"));
+                userInfo.setCoin(resultSet.getInt("Coin"));
+            } else {
+                throw new IllegalArgumentException("Email: " + email + " does not exist");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DataBaseHelper.getInstance().closeResource(resultSet, preparedStatement, connection);
+        }
+    }
+
+    @Override
     public UserInfo getUserInfoByUserName(String userName) {
         UserInfo userInfo = new UserInfo();
         this.getUserInfoByUserName(userName, userInfo);
