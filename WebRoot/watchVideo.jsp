@@ -102,6 +102,11 @@
                             })
                         }
                     })
+                    $("#GiveVideoCoin").bind({
+                        "click": function () {
+                            $.func.videoPage_giveVideoCoin();
+                        }
+                    })
                 });
             });
         </script>
@@ -170,7 +175,7 @@
                         <i class="material-icons mdc-icon-button__icon mdc-icon-button__icon--on">star</i>
                         <i class="material-icons mdc-icon-button__icon">star_border</i>
                     </button>
-                    <button class="mdc-icon-button material-icons mdc-card__action mdc-card__action--icon--unbounded" title="投币" data-mdc-ripple-is-unbounded="true">monetization_on</button>
+                    <button id="GiveVideoCoin" class="mdc-icon-button material-icons mdc-card__action mdc-card__action--icon--unbounded" title="投币" data-mdc-ripple-is-unbounded="true">monetization_on</button>
                     <span id="CoinCount" class="mdc-typography--body1">0</span>
                 </div>
             </div>

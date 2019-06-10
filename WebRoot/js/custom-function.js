@@ -247,6 +247,18 @@ $.func = {
     },
     videoPage_getVideoCoin: function () {
         $.ajax({
+            url: "GetVideoCoin",
+            data: "VideoID=" +$("#VideoID").val(),
+            success: function (data, status) {
+                if (status === "success") {
+                    var coinData = JSON.parse(data);
+                    $("#CoinCount").html(coinData.coin);
+                }
+            }
+        })
+    },
+    videoPage_giveVideoCoin: function () {
+        $.ajax({
             url: "GiveVideoCoin",
             data: "VideoID=" +$("#VideoID").val(),
             success: function (data, status) {

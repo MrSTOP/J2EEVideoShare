@@ -390,6 +390,92 @@ public class UserInfoDAO implements IUserInfoDAO {
     }
 
     @Override
+    public boolean giveVideoCoin(UserInfo userInfo, String videoID) {
+        return this.giveVideoCoin(userInfo.getUID(), videoID);
+    }
+
+    @Override
+    public boolean giveVideoCoin(int UID, String videoID) {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        try {
+            connection = DataBaseHelper.getInstance().getConnection();
+            connection.setAutoCommit(false);
+
+            //获取视频原有硬币数量
+            String SQL = "SELECT Coin FROM video WHERE VideoID=?";
+            preparedStatement = connection.prepareStatement(SQL);
+            preparedStatement.setString(1, videoID);
+            resultSet = preparedStatement.executeQuery();
+            resultSet.next();
+            int videoCoin = resultSet.getInt("Coin");
+            resultSet.close();
+            preparedStatement.close();
+            //获取视频原有硬币数量
+
+            //获取用户硬币数量
+            SQL = "SELECT Coin FROM user WHERE UID=?";
+            preparedStatement = connection.prepareStatement(SQL);
+            preparedStatement.setInt(1, UID);
+            resultSet = preparedStatement.executeQuery();
+            resultSet.next();
+            int userCoin = resultSet.getInt("Coin");
+            resultSet.close();
+            preparedStatement.close();
+            if (userCoin <= 0) {
+                throw new IllegalStateException("Insufficient number of coins");
+            }
+            //获取用户硬币数量
+
+            //计算新的硬币数量
+            userCoin--;
+            videoCoin++;
+            //计算新的硬币数量
+
+            //更新用户硬币数量
+            SQL = "UPDATE user SET Coin=? WHERE UID=?";
+            preparedStatement = connection.prepareStatement(SQL);
+            preparedStatement.setInt(1, userCoin);
+            preparedStatement.setInt(2, UID);
+            if (preparedStatement.executeUpdate() != 1) {
+                throw new IllegalStateException("Update user coin count failed");
+            }
+            preparedStatement.close();
+            //更新用户硬币数量
+
+            //更新用户硬币数量
+            SQL = "UPDATE video SET Coin=? WHERE VideoID=?";
+            preparedStatement = connection.prepareStatement(SQL);
+            preparedStatement.setInt(1, videoCoin);
+            preparedStatement.setString(2, videoID);
+            if (preparedStatement.executeUpdate() != 1) {
+                throw new IllegalStateException("Update video coin count failed");
+            }
+            //更新用户硬币数量
+            connection.commit();
+            return true;
+        } catch (SQLException | IllegalStateException e) {
+            e.printStackTrace();
+            try {
+                connection.rollback();
+                connection.commit();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        } finally {
+            try {
+                connection.setAutoCommit(true);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }finally {
+                DataBaseHelper.getInstance().closeResource(resultSet, preparedStatement, connection);
+            }
+        }
+        return false;
+    }
+
+    @Override
     public List<UserInfo> getAllUserInfo() {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
