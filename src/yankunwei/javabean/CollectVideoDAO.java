@@ -79,7 +79,7 @@ public class CollectVideoDAO implements ICollectVideoDAO{
     }
 
     @Override
-    public Boolean SelectVideo(String videoID,int UID) {
+    public boolean SelectVideo(String videoID,int UID) {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
