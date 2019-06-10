@@ -72,7 +72,7 @@
     </i>
     <span>修改密码</span>
 </div>
-<form method="post" action="ChangePassword">
+<form method="post" action="ChangePassword" style="text-align: center">
 <div class="MDCDivContainer">
     <div>
         <div style="width: 400px;" class="mdc-text-field mdc-text-field--outlined">
