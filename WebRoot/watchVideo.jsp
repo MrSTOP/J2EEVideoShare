@@ -38,11 +38,15 @@
         <script>
             var isFirst = true;
             var comment;
-
+            var isFavorite = false;
             $(function () {
                 $(document).ready(function () {
                     var commentEditor;
                     var dialogs = initMDCComponentClass(".mdc-dialog", mdc.dialog.MDCDialog);
+                    var iconButtonToggles = initMDCComponentAttachTo(".mdc-icon-button", mdc.iconButton.MDCIconButtonToggle);
+                    iconButtonToggles[0].listen("MDCIconButtonToggle:change", function () {
+                        iconButtonToggles[0].on = isFavorite;
+                    })
                     ClassicEditor.create(document.querySelector("#CommentEditor"))
                         .then(editor => {
                         console.log(editor);
@@ -51,6 +55,7 @@
                         commentEditor = editor;
                     }).catch(error => {console.error(error)});
                     $.func.videoPage_requestComment();
+                    $.func.videoPage_getVideoCoin();
                     $("#FirstPage").bind({
                         "click": function () {
                             $.func.videoPage_requestComment(this);
