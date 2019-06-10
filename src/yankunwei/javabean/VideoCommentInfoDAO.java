@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class VideoCommentInfoDAO implements IVideoCommentInfoDAO {
     @Override
@@ -16,11 +17,12 @@ public class VideoCommentInfoDAO implements IVideoCommentInfoDAO {
         PreparedStatement preparedStatement = null;
         try {
             connection = DataBaseHelper.getInstance().getConnection();
-            String SQL = "INSERT INTO videocomment(VideoID, UID, comment) values (?, ?, ?)";
+            String SQL = "INSERT INTO videocomment(VideoID, UID, VideoComment, UUID) values (?, ?, ?, ?)";
             preparedStatement = connection.prepareStatement(SQL);
             preparedStatement.setString(1, videoCommentInfo.getVideoID());
             preparedStatement.setInt(2, videoCommentInfo.getUID());
             preparedStatement.setString(3, videoCommentInfo.getVideoComment());
+            preparedStatement.setString(4, UUID.randomUUID().toString());
             return preparedStatement.executeUpdate() == 1;
         } catch (SQLException e) {
             e.printStackTrace();
