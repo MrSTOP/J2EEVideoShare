@@ -1,7 +1,6 @@
 package yankunwei.servlet;
 
-import yankunwei.javabean.VideoDAO;
-import yankunwei.javabean.VideoInfo;
+import yankunwei.javabean.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,9 +15,12 @@ public class VideoWatch extends HttpServlet {
         String videoID = request.getParameter("VideoID");
         VideoDAO videoDAO = new VideoDAO();
         VideoInfo videoInfo = videoDAO.SelectVideo(videoID);
+        IUserInfoDAO userInfoDAO = new UserInfoDAO();
+        int authorUID = videoInfo.getUID();
+        UserInfo authorInfo = userInfoDAO.getUserInfoByUID(authorUID);
         request.setAttribute("VideoID", videoInfo.getVideoID());
         request.setAttribute("VideoFileName", videoInfo.getVideoName());
-        request.setAttribute("VideoAuthor", videoInfo.getVideoName());
+        request.setAttribute("VideoAuthor", authorInfo.getUserName());
         request.getRequestDispatcher("watchVideo.jsp").forward(request, response);
     }
 

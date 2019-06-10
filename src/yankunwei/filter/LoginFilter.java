@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.logging.SimpleFormatter;
 
-@WebFilter(filterName = "LoginFilter", urlPatterns = "")
+@WebFilter(filterName = "LoginFilter", urlPatterns = "/*")
 public class LoginFilter implements Filter {
     public void destroy() {
     }

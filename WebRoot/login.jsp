@@ -131,8 +131,18 @@
                     <a href="index.jsp" class="material-icons mdc-top-app-bar__navigation-icon">home</a>
                 </section>
                 <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end">
-                    <a href="#" class="material-icons mdc-top-app-bar__action-item" id="Favorite" title="收藏夹">star</a>
-                    <a href="#" class="material-icons mdc-top-app-bar__action-item" id="UserSpace" title="个人空间">perm_identity</a>
+                    <div class="mdc-text-field text-field mdc-text-field--outlined" style="border-radius: 50%">
+                        <input type="text" id="text-field-shape-one" class="mdc-text-field__input">
+                        <div class="mdc-notched-outline mdc-notched-outline--upgraded">
+                            <div class="mdc-notched-outline__leading"></div>
+                            <div class="mdc-notched-outline__notch" style="">
+                                <label class="mdc-floating-label" for="text-field-shape-one" style="">Standard</label>
+                            </div>
+                            <div class="mdc-notched-outline__trailing"></div>
+                        </div>
+                    </div>
+                    <a href="./Collection.jsp" class="material-icons mdc-top-app-bar__action-item" id="Favorite" title="收藏夹">star</a>
+                    <a href="./PersonalMain.jsp" class="material-icons mdc-top-app-bar__action-item" id="UserSpace" title="个人空间">perm_identity</a>
                     <span title="用户名">${sessionScope.user.userName}</span>
                     <a href="Logout" class="material-icons mdc-top-app-bar__action-item" title="注销">logout</a>
                 </section>
