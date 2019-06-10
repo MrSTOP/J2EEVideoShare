@@ -33,6 +33,25 @@
 <link rel="stylesheet" type="text/css" href="./css/material-icons.css" />
 <link rel="stylesheet" type="text/css" href="./css/CommonCSS.css" />
 <script src="./js/jquery-3.4.1.js"></script>
+<script>
+    var Rightsrc = document.getElementById("rightPage");
+    Rightsrc.src = "PersonalInfo";
+    $("a").click(function(){
+            var id = ($(this).attr('id'));
+            switch (id) {
+                case "PInfo":
+                    Rightsrc.src = "PersonalInfo.jsp";
+                case "PCollect":
+                    Rightsrc.src = "Collectvideo";
+                case "PHistory":
+                    Rightsrc.src = "History";
+                case "PUpload":
+                    Rightsrc.src = "Upload";
+                default:
+                    Rightsrc.src = "changePwd.jsp";
+            }
+        }
+</script>
 <body>
 <header class="mdc-top-app-bar mdc-top-app-bar--dense" style="z-index: 7">
 
@@ -66,23 +85,23 @@
         </div>
         <div class="mdc-drawer__content">
             <nav class="mdc-list">
-                <a class="mdc-list-item mdc-list-item--activated" href="index.jsp" aria-current="page">
+                <a class="mdc-list-item mdc-list-item--activated" id="PInfo">
                     <i class="material-icons mdc-list-item__graphic" aria-hidden="true">info</i>
                     <span class="mdc-list-item__text">个人信息</span>
                 </a>
-                <a class="mdc-list-item" href="Collectvideo">
+                <a class="mdc-list-item"  id="PCollect">
                     <i class="material-icons mdc-list-item__graphic" aria-hidden="true">star</i>
                     <span class="mdc-list-item__text">收藏夹</span>
                 </a>
-                <a class="mdc-list-item" href="#">
+                <a class="mdc-list-item" href="#" id="PHistory">
                     <i class="material-icons mdc-list-item__graphic" aria-hidden="true">history</i>
                     <span class="mdc-list-item__text">历史记录</span>
                 </a>
-                <a class="mdc-list-item" href="#">
+                <a class="mdc-list-item" href="#" id="PUpload">
                     <i class="material-icons mdc-list-item__graphic" aria-hidden="true">backup</i>
                     <span class="mdc-list-item__text">上传视频</span>
                 </a>
-                <a class="mdc-list-item" href="#">
+                <a class="mdc-list-item" href="#" id="PCPwd">
                     <i class="material-icons mdc-list-item__graphic" aria-hidden="true">create</i>
                     <span class="mdc-list-item__text">修改密码</span>
                 </a>
@@ -90,7 +109,7 @@
         </div>
     </aside>
     <%--    <article>--%>
-    <iframe src="Collection.jsp" style="width: 100%" frameborder="0">
+    <iframe style="width: 100%" frameborder="0" id="rightPage">
     </iframe>
     <%--    </article>--%>
 </div>

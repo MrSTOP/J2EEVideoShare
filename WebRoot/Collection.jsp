@@ -75,7 +75,7 @@
         </c:forEach>
     </div>
 </div>
-这是第${requestScope.PageNo}页
+这是第${requestScope.PageNo}页,共有${requestScope.PageCount}页
 <c:if test="${requestScope.PageNo>1}">
     <a href="Collectvideo?page=1">第一页</a>
     <a href="Collectvideo?page=${requestScope.PageNo - 1}">上一页</a>

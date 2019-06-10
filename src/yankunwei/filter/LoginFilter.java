@@ -27,7 +27,8 @@ public class LoginFilter implements Filter {
         String URL = request.getRequestURL().toString();
         System.out.println(URL);
         System.out.println(request.getServletPath());
-        if (request.getServletPath() != null &&
+        if (request.getSession().getAttribute(LoginCheck.SESSION_ATTR_USER_INFO) == null &&
+                request.getServletPath() != null &&
                 request.getServletPath().endsWith(".jsp") &&
                 !request.getServletPath().endsWith("registry.jsp") &&
                 !request.getServletPath().endsWith("registry.jsp")) {

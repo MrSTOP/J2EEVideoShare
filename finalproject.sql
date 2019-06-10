@@ -1,17 +1,16 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : YZC
+ Source Server         : MySQL
  Source Server Type    : MySQL
- Source Server Version : 80013
+ Source Server Version : 80015
  Source Host           : localhost:3306
  Source Schema         : finalproject
 
  Target Server Type    : MySQL
- Target Server Version : 80013
+ Target Server Version : 80015
  File Encoding         : 65001
 
- Date: 09/06/2019 21:05:18
 */
 
 SET NAMES utf8mb4;
@@ -27,7 +26,7 @@ CREATE TABLE `collection`  (
   `videoname` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   INDEX `UID`(`UID`) USING BTREE,
   INDEX `videoID`(`VideoID`) USING BTREE,
-  CONSTRAINT `collection_ibfk_1` FOREIGN KEY (`UID`) REFERENCES `user` (`uid`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `collection_ibfk_1` FOREIGN KEY (`UID`) REFERENCES `user` (`UID`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `collection_ibfk_2` FOREIGN KEY (`VideoID`) REFERENCES `video` (`videoid`) ON DELETE RESTRICT ON UPDATE RESTRICT
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
@@ -63,7 +62,23 @@ CREATE TABLE `video`  (
   `Photoname` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`VideoID`) USING BTREE,
   INDEX `VideoID`(`VideoID`) USING BTREE,
-  INDEX `VideoID_2`(`VideoID`) USING BTREE
+  INDEX `VideoID_2`(`VideoID`) USING BTREE,
+  INDEX `UID`(`UID`) USING BTREE,
+  CONSTRAINT `video_ibfk_1` FOREIGN KEY (`UID`) REFERENCES `user` (`UID`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for videocomment
+-- ----------------------------
+DROP TABLE IF EXISTS `videocomment`;
+CREATE TABLE `videocomment`  (
+  `VideoID` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `UID` int(11) NOT NULL,
+  `comment` longtext CHARACTER SET utf8 COLLATE utf8_general_ci NULL,
+  PRIMARY KEY (`VideoID`, `UID`) USING BTREE,
+  INDEX `UID`(`UID`) USING BTREE,
+  CONSTRAINT `videocomment_ibfk_1` FOREIGN KEY (`VideoID`) REFERENCES `video` (`VideoID`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `videocomment_ibfk_2` FOREIGN KEY (`UID`) REFERENCES `user` (`UID`) ON DELETE RESTRICT ON UPDATE RESTRICT
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
@@ -75,7 +90,7 @@ CREATE TABLE `watchhistory`  (
   `VideoID` int(255) NULL DEFAULT NULL,
   `Date` timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
   INDEX `UID`(`UID`) USING BTREE,
-  CONSTRAINT `watchhistory_ibfk_1` FOREIGN KEY (`UID`) REFERENCES `user` (`uid`) ON DELETE RESTRICT ON UPDATE RESTRICT
+  CONSTRAINT `watchhistory_ibfk_1` FOREIGN KEY (`UID`) REFERENCES `user` (`UID`) ON DELETE RESTRICT ON UPDATE RESTRICT
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 SET FOREIGN_KEY_CHECKS = 1;

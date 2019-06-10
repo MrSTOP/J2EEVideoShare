@@ -99,6 +99,7 @@ public class UserInfoDAO implements IUserInfoDAO {
             preparedStatement.setTimestamp(5, userInfo.getRegDay());
             preparedStatement.setTimestamp(6, userInfo.getLastLogin());
             preparedStatement.setInt(7, userInfo.getCoin());
+            preparedStatement.setInt(8, userInfo.getUID());
             return preparedStatement.executeUpdate() == 1;
         } catch (SQLException e) {
             e.printStackTrace();

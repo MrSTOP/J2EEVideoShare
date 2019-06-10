@@ -4,6 +4,9 @@ import java.sql.Timestamp;
 import java.util.Calendar;
 
 public class UserInfo {
+
+    public static final long DAY_AS_MILLISECONDS = 86400000L;
+
     private int UID = -1;
     private String userName;
     private String email;
@@ -135,6 +138,25 @@ public class UserInfo {
 
     public void setCoin(int coin) {
         this.coin = coin;
+    }
+
+    public void updateCoin() {
+        if (System.currentTimeMillis() - this.lastLogin.getTime() >= DAY_AS_MILLISECONDS) {
+            this.coin++;
+        }
+        this.lastLogin.setTime(System.currentTimeMillis());
+    }
+
+    public void coinInc() {
+        this.coin++;
+    }
+
+    public void coinDec() {
+        this.coin--;
+    }
+
+    public boolean hasCoin() {
+        return this.coin > 0;
     }
 
     private static String timestampToStr(String timestamp) {
