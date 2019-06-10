@@ -30,19 +30,12 @@ public class ToWatchHistory extends HttpServlet {
             request.getRequestDispatcher("WatchHistory.jsp").forward(request,response);
         }
         else{
-            List<String> files1 = new ArrayList<>();
-            for(int i = 0; i < userHistoryinfoList.size(); i++)
-            {
-                files1.add(userHistoryinfoList.get(i).getVideoname());
-            }
-            String[] files = new String[files1.size()];
-            files1.toArray(files);
             String reqPageStr = request.getParameter("page");
             Integer pageNo = reqPageStr == null ? 1 : Integer.valueOf(reqPageStr);
-            List<String> filenames = PageVideo.getpages(pageNo, 12, files);
+            List<UserHistoryinfo> userHistoryinfoList1 = PageVideo.getpages(pageNo, 12, userHistoryinfoList);
             request.setAttribute("PageCount", PageVideo.getPage());
             request.setAttribute("PageNo",pageNo);
-            request.setAttribute("FileList",filenames);
+            request.setAttribute("FileList",userHistoryinfoList1);
             request.getRequestDispatcher("WatchHistory.jsp").forward(request, response);
         }
     }

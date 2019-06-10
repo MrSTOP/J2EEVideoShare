@@ -14,6 +14,7 @@ public class ChangePassword extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
             String password = request.getParameter("password");
             password = MD5Tool.MD5Encrypt(password);
+
             request.getRequestDispatcher("ChangePwd.jsp").forward(request,response);
     }
 

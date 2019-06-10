@@ -25,7 +25,7 @@ public class HistoryvideoDAO implements IHistoryvideoDAO{
                 updateHistory(userHistoryinfo);
             }
             else {
-                String sql = "insert into video values(?,?,?,?)";
+                String sql = "insert into watchhistory values(?,?,?,?)";
                 preparedStatement = connection.prepareStatement(sql);
                 preparedStatement.setInt(1, userHistoryinfo.getUID());
                 preparedStatement.setString(2, userHistoryinfo.getVideoID());
@@ -51,7 +51,7 @@ public class HistoryvideoDAO implements IHistoryvideoDAO{
         PreparedStatement preparedStatement = null;
         try {
             connection = DataBaseHelper.getInstance().getConnection();
-            String SQL = "UPDATE video SET LastDay =? WHERE VideoID=? and UID = ?";
+            String SQL = "UPDATE watchhistory SET LastDay =? WHERE VideoID=? and UID = ?";
             preparedStatement = connection.prepareStatement(SQL);
             preparedStatement.setTimestamp(1, userHistoryinfo.getDate());
             preparedStatement.setString(2, userHistoryinfo.getVideoID());
@@ -72,7 +72,7 @@ public class HistoryvideoDAO implements IHistoryvideoDAO{
         ResultSet resultSet = null;
         try{
             connection = DataBaseHelper.getInstance().getConnection();
-            String sql = "DELETE from video where VideoID = ? and UID = ?";
+            String sql = "DELETE from watchhistory where VideoID = ? and UID = ?";
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1,userHistoryinfo.getVideoID());
             preparedStatement.setInt(2,userHistoryinfo.getUID());
@@ -92,7 +92,7 @@ public class HistoryvideoDAO implements IHistoryvideoDAO{
         ResultSet resultSet = null;
         try{
             connection = DataBaseHelper.getInstance().getConnection();
-            String sql = "DELETE from video where UID = ?";
+            String sql = "DELETE from watchhistory where UID = ?";
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setInt(1,UID);
             return preparedStatement.executeUpdate() != 0;
@@ -111,7 +111,7 @@ public class HistoryvideoDAO implements IHistoryvideoDAO{
         ResultSet resultSet = null;
         try{
             connection = DataBaseHelper.getInstance().getConnection();
-            String sql = "SELECT *from video where VideoID = ? and UID = ?";
+            String sql = "SELECT *from watchhistory where VideoID = ? and UID = ?";
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1,userHistoryinfo.getVideoID());
             preparedStatement.setInt(1,userHistoryinfo.getUID());

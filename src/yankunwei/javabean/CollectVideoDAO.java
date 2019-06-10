@@ -6,6 +6,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public class CollectVideoDAO implements ICollectVideoDAO{
@@ -53,8 +55,8 @@ public class CollectVideoDAO implements ICollectVideoDAO{
     }
 
     @Override
-    public UserCollectVideo SelectAllVideoCollect(int UID) {
-        UserCollectVideo userCollectVideo = new UserCollectVideo();
+    public List<UserCollectVideo> SelectAllVideoCollect(int UID) {
+        List<UserCollectVideo> userCollectVideoList = new ArrayList<>();
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
@@ -66,10 +68,13 @@ public class CollectVideoDAO implements ICollectVideoDAO{
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next())
             {
+                UserCollectVideo userCollectVideo = new UserCollectVideo();
                 userCollectVideo.setUID(UID);
-                userCollectVideo.setVideos(resultSet.getString("videoID"),resultSet.getString("videoname"));
+                userCollectVideo.setVideoID(resultSet.getString("VideoID"));
+                userCollectVideo.setVideoName(resultSet.getString("VideoName"));
+                userCollectVideoList.add(userCollectVideo);
             }
-            return userCollectVideo;
+            return userCollectVideoList;
         }catch (SQLException e){
             System.out.println(e);
         }finally {
@@ -94,6 +99,25 @@ public class CollectVideoDAO implements ICollectVideoDAO{
             {
                 return true;
             }
+        }catch (SQLException e){
+            System.out.println(e);
+        }finally {
+            DataBaseHelper.getInstance().closeResource(resultSet,preparedStatement,connection);
+        }
+        return false;
+    }
+
+    @Override
+    public boolean deleteAllVideoCollect(int UID) {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        try{
+            connection = DataBaseHelper.getInstance().getConnection();
+            String sql = "DELETE from collection where uid = ? ";
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1,UID);
+            return preparedStatement.executeUpdate() != 0;
         }catch (SQLException e){
             System.out.println(e);
         }finally {

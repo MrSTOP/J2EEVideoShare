@@ -33,6 +33,8 @@
     <LINK REL="stylesheet" type="text/css" href="./css/MDCHelperCSS.css">
     <script src="js/material-components-web.js"></script>
     <script src="js/jquery-3.4.1.js"></script>
+    <script src="js/CONST_VALUE.js"></script>
+    <script src="js/custom-function.js"></script>
     <script type="text/javascript" src="js/custom-function.js"></script>
     <script type="text/javascript" src="js/CONST_VALUE.js"></script>
     <script src="js/MDCHelperJavaScript.js"></script>
@@ -42,20 +44,25 @@
                 var textFieldss = initMDCComponentAttachTo(".mdc-text-field", mdc.textField.MDCTextField);
                 var selectss = initMDCComponentAttachTo(".mdc-select", mdc.select.MDCSelect);
                 $.func.initHtmlConstValue();
-                var i = 0;
-                switch (${sex}) {
-                    case "secret":
-                        i = 0;break;
-                    case "man":
-                        i = 1;break;
-                    case  "woman":
-                        i = 2;break;
-                }
-                document.getElementById("sex")[i].selected = true;
+
+                $("#NowPassword").bind({
+                    "blur":function () {
+                        $.ajax({
+                            url:"CheckPWD",
+                            data:"PWD="+$("#NowPassword").val(),
+                            type:"post",
+                            success:function (data, status) {
+                                textFieldss[0].helperTextContent = data;
+                            },
+                            error:function () {
+                                textFieldss[0].valid = false;
+                            }
+                        })
+                    }
+                })
             })
         })
     </script>
-    <script src="./js/jquery-3.4.1.js"></script>
 </head>
 
 <body>
@@ -65,6 +72,7 @@
     </i>
     <span>修改密码</span>
 </div>
+<form method="post" action="ChangePassword">
 <div class="MDCDivContainer">
     <div>
         <div style="width: 400px;" class="mdc-text-field mdc-text-field--outlined">
@@ -77,6 +85,8 @@
                 </div>
                 <div class="mdc-notched-outline__trailing"></div>
             </div>
+        </div>
+        <div class="mdc-text-field-helper-line">
         </div>
     </div>
 </div>
@@ -118,5 +128,7 @@
         </div>
     </div>
 </div>
+    <input type="button"  class="demo-button mdc-button mdc-button--outlined mdc-ripple-upgraded" value="提交"style="width: 170px">
+</form>
 </body>
 </html>

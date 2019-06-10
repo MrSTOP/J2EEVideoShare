@@ -53,21 +53,36 @@
 </script>
 <script src="./js/jquery-3.4.1.js"></script>
 <body>
+<div style=" height: 50px; padding-left: 30px;border-bottom: 1px solid #ddd;">
+    <i class =“material-icons”>
+        view_headline
+    </i>
+    <span>收藏夹</span>
+    <div class="mdc-card__actions">
+        <div class="mdc-card__action-icons" style="text-align: right">
 
+        </div>
+    </div>
+    <button>
+</div>
 <div class="mdc-layout-grid">
     <div class="mdc-layout-grid__inner">
-        <c:forEach items="${requestScope.FileList}" var="fileName">
-            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3" >
+        <c:forEach items="${requestScope.CollectList}" var="videoList">
+            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3">
                 <div class="mdc-card demo-card" style="margin: 20px">
                     <div class="mdc-card__primary-action demo-card__primary-action" tabindex="0">
-                        <div class="mdc-card__media mdc-card__media--16-9 demo-card__media" style="background-image: url('https://material-components.github.io/material-components-web-catalog/static/media/photos/3x2/2.jpg');"></div>
+                        <div class="mdc-card__media mdc-card__media--16-9 demo-card__media"
+                             style="background-image: url('https://material-components.github.io/material-components-web-catalog/static/media/photos/3x2/2.jpg');"></div>
                         <div class="demo-card__primary">
-                            <h2 class="demo-card__title mdc-typography mdc-typography--headline6">${fileName}</h2>
+                            <h2 class="demo-card__title mdc-typography mdc-typography--headline6">${videoList.getVideoName()}</h2>
                         </div>
                     </div>
-                    <div class="mdc-card__actions" >
+                    <div class="mdc-card__actions">
                         <div class="mdc-card__action-icons">
-                            <button class="mdc-icon-button material-icons mdc-card__action mdc-card__action--icon--unbounded" title="Delete" data-mdc-ripple-is-unbounded="true" onclick="">delete</button>
+                            <button  class="mdc-icon-button material-icons mdc-card__action mdc-card__action--icon--unbounded"
+                                    title="Delete" data-mdc-ripple-is-unbounded="true"
+                                    onclick="window.location.href='DeleteCollect?VideoID=${videoList.getVideoID()}'">delete
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -75,14 +90,27 @@
         </c:forEach>
     </div>
 </div>
-这是第${requestScope.PageNo}页,共有${requestScope.PageCount}页
-<c:if test="${requestScope.PageNo>1}">
-    <a href="Collectvideo?page=1">第一页</a>
-    <a href="Collectvideo?page=${requestScope.PageNo - 1}">上一页</a>
-</c:if>
-<c:if test="${requestScope.PageNo != requestScope.PageCount}">
-    <a href="Collectvideo?page=${requestScope.PageNo + 1}">下一页</a>
-    <a href="Collectvideo?page=${requestScope.PageCount}">最后一页</a>
-</c:if>
+<div style="text-align: center;">
+    <c:if test="${requestScope.PageNo>1}">
+    <button onclick="window.location.href='Collectvideo?page=1'"
+            class="demo-button mdc-button mdc-button--dense mdc-button--outlined mdc-ripple-upgraded"
+            style="--mdc-ripple-fg-size:46px; --mdc-ripple-fg-scale:2.0517; --mdc-ripple-fg-translate-start:1.41248px, -7.59995px; --mdc-ripple-fg-translate-end:16.0375px, -7px;">
+        <span class="mdc-button__label">第一页</span></button>
+    <button onclick="window.location.href='Collectvideo?page=${requestScope.PageNo - 1}'"
+            class="demo-button mdc-button mdc-button--dense mdc-button--outlined mdc-ripple-upgraded"
+            style="--mdc-ripple-fg-size:46px; --mdc-ripple-fg-scale:2.0517; --mdc-ripple-fg-translate-start:1.41248px, -7.59995px; --mdc-ripple-fg-translate-end:16.0375px, -7px;">
+        <span class="mdc-button__label">上一页</span></button>
+    </c:if>
+    第${requestScope.PageNo}页,共有${requestScope.PageCount}页
+    <c:if test="${requestScope.PageNo != requestScope.PageCount}">
+    <button onclick="window.location.href='Collectvideo?page=${requestScope.PageNo + 1}'"
+            class="demo-button mdc-button mdc-button--dense mdc-button--outlined mdc-ripple-upgraded"
+            style="--mdc-ripple-fg-size:46px; --mdc-ripple-fg-scale:2.0517; --mdc-ripple-fg-translate-start:1.41248px, -7.59995px; --mdc-ripple-fg-translate-end:16.0375px, -7px;">
+        <span class="mdc-button__label">下一页</span></button>
+    <button onclick="window.location.href='Collectvideo?page=${requestScope.PageCount}'"
+            class="demo-button mdc-button mdc-button--dense mdc-button--outlined mdc-ripple-upgraded"
+            style="--mdc-ripple-fg-size:46px; --mdc-ripple-fg-scale:2.0517; --mdc-ripple-fg-translate-start:1.41248px, -7.59995px; --mdc-ripple-fg-translate-end:16.0375px, -7px;">
+        <span class="mdc-button__label">最后一页</span></button>
+    </c:if>
 </body>
 </html>

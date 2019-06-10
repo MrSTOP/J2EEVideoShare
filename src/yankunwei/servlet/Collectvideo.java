@@ -20,31 +20,23 @@ import java.util.Map;
 @WebServlet(name = "Collectvideo",urlPatterns = "/Collectvideo")
 public class Collectvideo extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-       // int uid = ((UserInfo)request.getSession().getAttribute("user")).getUID();
-        int uid = 3;
-        UserCollectVideo userCollectVide = null;
+        int uid = ((UserInfo)request.getSession().getAttribute("user")).getUID();
         CollectVideoDAO collectVideoDAO = new CollectVideoDAO();
-        userCollectVide = collectVideoDAO.SelectAllVideoCollect(uid);
+        List<UserCollectVideo> userCollectVide = collectVideoDAO.SelectAllVideoCollect(uid);
         if(userCollectVide == null)
         {
             request.getRequestDispatcher("Collection.jsp").forward(request,response);
         }
-        Iterator entries = userCollectVide.getVideos().entrySet().iterator();
-        List<String> files1 = new ArrayList<>();
-        while(entries.hasNext())
-        {
-            Map.Entry entry = (Map.Entry) entries.next();
-            files1.add((String) entry.getValue());
+        else {
+            List<UserCollectVideo> Listvideo = new ArrayList<>();
+            String reqPageStr = request.getParameter("page");
+            Integer pageNo = reqPageStr == null ? 1 : Integer.valueOf(reqPageStr);
+            Listvideo = PageVideo.getpages(pageNo, 12, userCollectVide);
+            request.setAttribute("PageCount", PageVideo.getPage());
+            request.setAttribute("PageNo", pageNo);
+            request.setAttribute("CollectList", Listvideo);
+            request.getRequestDispatcher("Collection.jsp").forward(request, response);
         }
-        String[] files = new String[files1.size()];
-        files1.toArray(files);
-        String reqPageStr = request.getParameter("page");
-        Integer pageNo = reqPageStr == null ? 1 : Integer.valueOf(reqPageStr);
-        List<String> filenames = PageVideo.getpages(pageNo, 12, files);
-        request.setAttribute("PageCount", PageVideo.getPage());
-        request.setAttribute("PageNo",pageNo);
-        request.setAttribute("FileList",filenames);
-        request.getRequestDispatcher("Collection.jsp").forward(request, response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

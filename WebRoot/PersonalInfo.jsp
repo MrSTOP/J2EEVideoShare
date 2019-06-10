@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8" %>
+<%@ page import="yankunwei.javabean.UserInfo" %>
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
@@ -46,24 +47,27 @@
 <script>
     $(function () {
         $(document).ready(function () {
+            <%request.setCharacterEncoding("UTF-8");%>
             var textFieldss = initMDCComponentAttachTo(".mdc-text-field", mdc.textField.MDCTextField);
             var selectss = initMDCComponentAttachTo(".mdc-select", mdc.select.MDCSelect);
             var i = 0;
-            switch (${sex}) {
-                case "secret":
+            switch ("${sessionScope.user.sex}") {
+                case "保密":
                     i = 0;break;
-                case "man":
+                case "男":
                     i = 1;break;
-                case  "woman":
+                case  "女":
                     i = 2;break;
             }
             document.getElementById("sex")[i].selected = true;
         })
     })
 </script>
-<script src="./js/jquery-3.4.1.js"></script>
 <body>
 <div>
+    <%session.setAttribute("YearStr", Integer.valueOf(((UserInfo)request.getSession().getAttribute("user")).getStrBirth().split("-")[0]));%>
+    <%session.setAttribute("MonthStr", Integer.valueOf(((UserInfo)request.getSession().getAttribute("user")).getStrBirth().split("-")[1]));%>
+    <%session.setAttribute("DayStr", Integer.valueOf(((UserInfo)request.getSession().getAttribute("user")).getStrBirth().split("-")[2]));%>
     <div style=" height: 50px; padding-left: 30px;border-bottom: 1px solid #ddd;">
         <i class =“material-icons”>
             view_headline
@@ -72,11 +76,12 @@
     </div>
     <div style="    padding: 20px 20px 0; position: relative;">
         <div>
+
             <form action="ToPersonalInfo" method="post" style="text-align: center">
                 <div class="MDCDivContainer">
                     <div style="width: 210px">
                         <div class="mdc-text-field">
-                            <input type="text" id="username" class="mdc-text-field__input" name="username" value="${UserName}">
+                            <input type="text" id="username" class="mdc-text-field__input" name="username" value="${sessionScope.user.userName}">
                             <label class="mdc-floating-label" for="username">用户名</label>
                             <div class="mdc-line-ripple"></div>
                         </div>
@@ -88,13 +93,12 @@
                 <div class="mdc-select mdc-ripple-upgraded" style="--mdc-ripple-fg-size:60px;width: 210px; --mdc-ripple-fg-scale:2.08852; --mdc-ripple-fg-translate-start:24.8px, -22.2px; --mdc-ripple-fg-translate-end:20.4px, -2px;">
                     <i class="mdc-select__dropdown-icon"></i>
                     <select id="sex" name = "sex" class="mdc-select__native-control">
-                        <option value="" disabled=""></option>
-                        <option value="secret">
+                        <option value="保密">
                             <font style="vertical-align: inherit;"><font style="vertical-align: inherit;">保密</font></font>
                         </option>
-                        <option value="man"><font style="vertical-align: inherit;"><font
+                        <option value="男"><font style="vertical-align: inherit;"><font
                                 style="vertical-align: inherit;">男</font></font></option>
-                        <option value="women"><font style="vertical-align: inherit;"><font
+                        <option value="女"><font style="vertical-align: inherit;"><font
                                 style="vertical-align: inherit;">女</font></font></option>
                     </select>
                     <label for="sex" class="mdc-floating-label mdc-floating-label--float-above"><font
@@ -104,7 +108,7 @@
                 <div class="MDCDivContainer">
                     <div style="width: 210px">
                         <div class="mdc-text-field">
-                            <input type="text" id="email" class="mdc-text-field__input" name="email" value="${Email}">
+                            <input type="text" id="email" class="mdc-text-field__input" name="email" value="${sessionScope.user.email}">
                             <label class="mdc-floating-label" for="email">电子邮件</label>
                             <div class="mdc-line-ripple"></div>
                         </div>
@@ -115,10 +119,17 @@
                 </div>
                 <div class="mdc-select mdc-ripple-upgraded" style="--mdc-ripple-fg-size:60px;width: 110px; --mdc-ripple-fg-scale:2.08852; --mdc-ripple-fg-translate-start:24.8px, -22.2px; --mdc-ripple-fg-translate-end:20.4px, -2px;">
                     <i class="mdc-select__dropdown-icon"></i>
-                    <select id="Year" class="mdc-select__native-control">
+                    <select id="Year" class="mdc-select__native-control" name="Year">
                         <option value="" disabled=""></option>
                         <c:forEach var="i" begin="1970" end="<%=Calendar.getInstance().get(Calendar.YEAR)%>" step="1">
-                            <option value="${i}" style="vertical-align: inherit;">${i}</option>
+                            <c:choose>
+                                <c:when test="${sessionScope.YearStr == i}">
+                                    <option value="${i}" style="vertical-align: inherit;" selected>${i}</option>
+                                </c:when>
+                                <c:otherwise>
+                                    <option value="${i}" style="vertical-align: inherit;">${i}</option>
+                                </c:otherwise>
+                            </c:choose>
                         </c:forEach>
                     </select>
                     <label for="Year" class="mdc-floating-label mdc-floating-label--float-above"><font
@@ -127,10 +138,17 @@
                 </div>
                 <div class="mdc-select mdc-ripple-upgraded" style="--mdc-ripple-fg-size:60px;width: 100px; --mdc-ripple-fg-scale:2.08852; --mdc-ripple-fg-translate-start:24.8px, -22.2px; --mdc-ripple-fg-translate-end:20.4px, -2px;">
                     <i class="mdc-select__dropdown-icon"></i>
-                    <select id="Month" class="mdc-select__native-control">
+                    <select id="Month" class="mdc-select__native-control" name="Month">
                         <option value="" disabled=""></option>
                         <c:forEach var="i" begin="1" end="12" step="1">
-                            <option value="${i}" style="vertical-align: inherit;">${i}</option>
+                            <c:choose>
+                                <c:when test="${sessionScope.MonthStr == i}">
+                                    <option value="${i}" style="vertical-align: inherit;" selected>${i}</option>
+                                </c:when>
+                                <c:otherwise>
+                                    <option value="${i}" style="vertical-align: inherit;">${i}</option>
+                                </c:otherwise>
+                            </c:choose>
                         </c:forEach>
                     </select>
                     <label for="Month" class="mdc-floating-label mdc-floating-label--float-above"><font
@@ -139,10 +157,17 @@
                 </div>
                 <div class="mdc-select mdc-ripple-upgraded" style="--mdc-ripple-fg-size:60px;width: 100px; --mdc-ripple-fg-scale:2.08852; --mdc-ripple-fg-translate-start:24.8px, -22.2px; --mdc-ripple-fg-translate-end:20.4px, -2px;">
                     <i class="mdc-select__dropdown-icon"></i>
-                    <select id="Day" class="mdc-select__native-control">
+                    <select id="Day" class="mdc-select__native-control" name = "Day">
                         <option value="" disabled=""></option>
                         <c:forEach var="i" begin="1" end="28" step="1">
-                            <option value="${i}" style="vertical-align: inherit;">${i}</option>
+                            <c:choose>
+                                <c:when test="${sessionScope.DayStr == i}">
+                                    <option value="${i}" style="vertical-align: inherit;" selected>${i}</option>
+                                </c:when>
+                                <c:otherwise>
+                                    <option value="${i}" style="vertical-align: inherit;">${i}</option>
+                                </c:otherwise>
+                            </c:choose>
                         </c:forEach>
                     </select>
                     <label for="Day" class="mdc-floating-label mdc-floating-label--float-above"><font
@@ -152,7 +177,7 @@
                 <div class="MDCDivContainer">
                     <div style="width: 210px">
                         <div class="mdc-text-field">
-                            <input type="text" id="regday" class="mdc-text-field__input" name="email" value="${Email}" readonly>
+                            <input type="text" id="regday" class="mdc-text-field__input" name="regday" value="${sessionScope.user.getStrRegDay()}" readonly>
                             <label class="mdc-floating-label" for="email">注册日期</label>
                             <div class="mdc-line-ripple"></div>
                         </div>
@@ -164,7 +189,7 @@
                 <div class="MDCDivContainer">
                     <div style="width: 210px">
                         <div class="mdc-text-field">
-                            <input type="text" id="coinCount" class="mdc-text-field__input" name="email" value="${Email}" readonly>
+                            <input type="text" id="coinCount" class="mdc-text-field__input" name="coinCount" value="${sessionScope.user.coin}" readonly>
                             <label class="mdc-floating-label" for="email">硬币数量</label>
                             <div class="mdc-line-ripple"></div>
                         </div>
@@ -173,7 +198,7 @@
                         </div>
                     </div>
                 </div>
-                <input type="button"  class="demo-button mdc-button mdc-button--outlined mdc-ripple-upgraded" value="提交"style="width: 170px">
+                <input type="submit"  class="demo-button mdc-button mdc-button--outlined mdc-ripple-upgraded" value="提交"style="width: 170px">
             </form>
         </div>
     </div>

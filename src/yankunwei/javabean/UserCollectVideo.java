@@ -7,8 +7,26 @@ import java.util.Map;
 
 public class UserCollectVideo {
     private int UID;
-    private Map<String,String> Videos = new HashMap<>();
+    private String VideoID;
+    private String VideoName;
     public UserCollectVideo(){}
+    public String getVideoID() {
+        return VideoID;
+    }
+
+    public void setVideoID(String videoID) {
+        VideoID = videoID;
+    }
+
+    public String getVideoName() {
+        return VideoName;
+    }
+
+    public void setVideoName(String videoName) {
+        VideoName = videoName;
+    }
+
+
     public int getUID() {
         return UID;
     }
@@ -16,12 +34,6 @@ public class UserCollectVideo {
     public void setUID(int UID) {
         this.UID = UID;
     }
-    public Map<String, String> getVideos() {
-        return Videos;
-    }
 
-    public void setVideos(String videoID, String videoname) {
-        Videos.put(videoID,videoname);
-    }
 
 }

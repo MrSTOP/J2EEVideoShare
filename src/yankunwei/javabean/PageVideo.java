@@ -13,21 +13,21 @@ public class PageVideo {
         return page;
     }
 
-    public static List<String> getpages(int PageNo, int PageSize, String[] filename){
-        List<String> fileNames = new ArrayList<>();
-        if (filename != null) {
+    public static <T> List<T> getpages(int PageNo, int PageSize, List<T> Videolist){
+        List<T> videolists = new ArrayList<>();
+        if (Videolist != null) {
             reqPage = PageNo;
-            page = filename.length / PageSize;
-            page += filename.length % PageSize == 0 ? 0 : 1;
+            page = Videolist.size() / PageSize;
+            page += Videolist.size() % PageSize == 0 ? 0 : 1;
             int arrayPage = reqPage - 1;
             for (int i = arrayPage * PageSize; i < arrayPage * PageSize + PageSize; i++) {
-                if (i < filename.length) {
-                    fileNames.add(filename[i]);
+                if (i < Videolist.size()) {
+                    videolists.add(Videolist.get(i));
                 } else {
                     break;
                 }
             }
         }
-        return fileNames;
+        return videolists;
     }
 }
