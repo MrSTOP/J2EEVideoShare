@@ -180,6 +180,71 @@ $.func = {
             }
         });
     },
+    videoPage_printComment: function (commentData) {
+        $("#VideoCommentMain").empty();
+        $("#LastPage").attr("disabled", commentData.currentPage === commentData.totalPage);
+        $("#NextPage").attr("disabled", commentData.currentPage === commentData.totalPage);
+        $("#FirstPage").attr("disabled", commentData.currentPage === 1);
+        $("#PrePage").attr("disabled", commentData.currentPage === 1);
+        for (var i = 0; i < commentData.count; i++) {
+            $("#VideoCommentTotalPage").html("共" + comment.totalPage + "页 第" + commentData.currentPage + "页");
+            $("#VideoCommentMain").append("<div class='mdc-card' style='width: 70%;margin: 40px auto;'>" +
+                "<div class='mdc-card__primary-action demo-card__primary-action' tabindex='0'>" +
+                "<div class='videoComment mdc-typography mdc-typography--body2'>" +
+                commentData.comment[i] +
+                "</div></div><div class='commentAuthor'>" +
+                "<h3 class='mdc-typography mdc-typography--subtitle2'>" +
+                commentData.userName[i] +
+                "</h3></div></div>");
+        }
+    },
+    videoPage_requestComment: function (element) {
+        if (isFirst) {
+            $.ajax({
+                url: "GetPagedVideoComment",
+                data: "VideoID=" + $("#VideoID").val() +
+                    "&reqPage=1",
+                type: "post",
+                success: function (data, status) {
+                    if (status === "success") {
+                        var commentDat = JSON.parse(data);
+                        comment = commentDat;
+                        $.func.videoPage_printComment(commentDat);
+                    }
+                }
+            });
+            isFirst = false;
+        } else {
+            var reqPage = 1;
+            switch ($(element).attr("id")) {
+                case "FirstPage":
+                    reqPage = 1;
+                    break;
+                case "PrePage":
+                    reqPage = comment.currentPage - 1;
+                    break;
+                case "NextPage":
+                    reqPage = comment.currentPage + 1;
+                    break;
+                case "LastPage":
+                    reqPage = comment.totalPage;
+            }
+            $.ajax({
+                url: "GetPagedVideoComment",
+                data: "VideoID=" + $("#VideoID").val() +
+                    "&reqPage=" + reqPage,
+                type: "post",
+                success: function (data, status) {
+                    console.log(data);
+                    if (status === "success") {
+                        var commentDat = JSON.parse(data);
+                        comment = commentDat;
+                        $.func.videoPage_printComment(commentDat);
+                    }
+                }
+            });
+        }
+    },
     spaceReplace: function (element) {
         element.value = element.value.replace(/\s+/g, '');
     }

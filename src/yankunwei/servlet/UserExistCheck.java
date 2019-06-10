@@ -1,5 +1,6 @@
 package yankunwei.servlet;
 
+import yankunwei.javabean.IUserInfoDAO;
 import yankunwei.javabean.UserInfoDAO;
 
 import javax.servlet.ServletException;
@@ -14,7 +15,7 @@ public class UserExistCheck extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String type = request.getParameter("type");
         String msg = "DENY";
-        UserInfoDAO userInfoDAO = new UserInfoDAO();
+        IUserInfoDAO userInfoDAO = new UserInfoDAO();
         switch (type) {
             case "UserName":
                 msg = userInfoDAO.isUserNameExist(request.getParameter("userName")) ?

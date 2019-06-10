@@ -1,5 +1,6 @@
 package yankunwei.servlet;
 
+import yankunwei.javabean.IUserInfoDAO;
 import yankunwei.javabean.UserInfo;
 import yankunwei.javabean.UserInfoDAO;
 import yankunwei.utils.MD5Tool;
@@ -29,7 +30,7 @@ public class RegistryProcess extends HttpServlet {
                 request.getParameter("birthDay");
         String today = new Timestamp(Calendar.getInstance().getTimeInMillis()).toString().split("\\s+")[0];
         UserInfo userInfo = new UserInfo(userName,email, sex, birth, today, today, 0);
-        UserInfoDAO userInfoDAO = new UserInfoDAO();
+        IUserInfoDAO userInfoDAO = new UserInfoDAO();
         if (userInfoDAO.addUserInfo(userInfo, passwordEncrypted)) {
             userInfoDAO.getUserInfoByUserName(userName, userInfo);
             request.getSession().setAttribute(LoginCheck.SESSION_ATTR_USER_INFO, userInfo);

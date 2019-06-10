@@ -31,81 +31,22 @@
         <link rel="stylesheet" type="text/css" href="./css/material-icons.css" />
         <link rel="stylesheet" type="text/css" href="./css/CommonCSS.css" />
         <script src="./js/jquery-3.4.1.js"></script>
+        <script src="./js/custom-function.js"></script>
         <script src="./js/material-components-web.js"></script>
         <script src="./js/MDCHelperJavaScript.js"></script>
         <script src="./js/ckeditor.js"></script>
         <script>
             var isFirst = true;
             var comment;
-            var requestComment = function (element) {
-                if (isFirst) {
-                    $.ajax({
-                        url: "GetPagedVideoComment",
-                        data: "VideoID=" + $("#VideoID").val() +
-                            "&reqPage=1",
-                        type: "post",
-                        success: function (data, status) {
-                            if (status === "success") {
-                                var commentDat = JSON.parse(data);
-                                comment = commentDat;
-                                printComment(commentDat);
-                            }
-                        }
-                    });
-                    isFirst = false;
-                } else {
-                    var reqPage = 1;
-                    switch ($(element).attr("id")) {
-                        case "FirstPage":
-                            reqPage = 1;
-                            break;
-                        case "PrePage":
-                            reqPage = comment.currentPage - 1;
-                            break;
-                        case "NextPage":
-                            reqPage = comment.currentPage + 1;
-                            break;
-                        case "LastPage":
-                            reqPage = comment.totalPage;
-                    }
-                    $.ajax({
-                        url: "GetPagedVideoComment",
-                        data: "VideoID=" + $("#VideoID").val() +
-                        "&reqPage=" + reqPage,
-                        type: "post",
-                        success: function (data, status) {
-                            console.log(data);
-                            if (status === "success") {
-                                var commentDat = JSON.parse(data);
-                                comment = commentDat;
-                                printComment(commentDat);
-                            }
-                        }
-                    });
-                }
-            };
-            var printComment = function (commentData) {
-                $("#VideoCommentMain").empty();
-                $("#LastPage").attr("disabled", commentData.currentPage === commentData.totalPage);
-                $("#NextPage").attr("disabled", commentData.currentPage === commentData.totalPage);
-                $("#FirstPage").attr("disabled", commentData.currentPage === 1);
-                $("#PrePage").attr("disabled", commentData.currentPage === 1);
-                for (var i = 0; i < commentData.count; i++) {
-                    $("#VideoCommentTotalPage").html("共" + comment.totalPage + "页 第" + commentData.currentPage + "页");
-                    $("#VideoCommentMain").append("<div class='mdc-card' style='width: 70%;margin: 40px auto;'>" +
-                        "<div class='mdc-card__primary-action demo-card__primary-action' tabindex='0'>" +
-                        "<div class='videoComment mdc-typography mdc-typography--body2'>" +
-                        commentData.comment[i] +
-                        "</div></div><div class='commentAuthor'>" +
-                        "<h3 class='mdc-typography mdc-typography--subtitle2'>" +
-                        commentData.userName[i] +
-                        "</h3></div></div>");
-                }
-            };
+            var isFavorite = false;
             $(function () {
                 $(document).ready(function () {
                     var commentEditor;
                     var dialogs = initMDCComponentClass(".mdc-dialog", mdc.dialog.MDCDialog);
+                    var iconButtonToggles = initMDCComponentAttachTo(".mdc-icon-button", mdc.iconButton.MDCIconButtonToggle);
+                    iconButtonToggles[0].listen("MDCIconButtonToggle:change", function () {
+                        iconButtonToggles[0].on = isFavorite;
+                    })
                     ClassicEditor.create(document.querySelector("#CommentEditor"))
                         .then(editor => {
                         console.log(editor);
@@ -113,25 +54,26 @@
                         $(".ck-editor").css("margin", "40px auto 40px");
                         commentEditor = editor;
                     }).catch(error => {console.error(error)});
-                    requestComment();
+                    $.func.videoPage_requestComment();
+                    $.func.videoPage_getVideoCoin();
                     $("#FirstPage").bind({
                         "click": function () {
-                            requestComment(this);
+                            $.func.videoPage_requestComment(this);
                         }
                     });
                     $("#PrePage").bind({
                         "click": function () {
-                            requestComment(this);
+                            $.func.videoPage_requestComment(this);
                         }
                     });
                     $("#NextPage").bind({
                         "click": function () {
-                            requestComment(this);
+                            $.func.videoPage_requestComment(this);
                         }
                     });
                     $("#LastPage").bind({
                         "click": function () {
-                            requestComment(this);
+                            $.func.videoPage_requestComment(this);
                         }
                     });
                     $("#SubmitComment").bind({
@@ -146,7 +88,7 @@
                                     $("#InfoTitle").html("成功");
                                     $("#Info").html("评论提交成功！");
                                     isFirst = true;
-                                    requestComment();
+                                    $.func.videoPage_requestComment();
                                     dialogs[0].open();
                                 },
                                 error: function () {
@@ -221,11 +163,12 @@
             </div>
             <div class="mdc-card__actions">
                 <div class="mdc-card__action-icons">
-                    <button class="mdc-icon-button mdc-card__action mdc-card__action--icon--unbounded" aria-pressed="false" aria-label="Add to favorites" title="Add to favorites">
-                        <i class="material-icons mdc-icon-button__icon mdc-icon-button__icon--on">favorite</i>
-                        <i class="material-icons mdc-icon-button__icon">favorite_border</i>
+                    <button id="VideoFavorite" class="mdc-icon-button mdc-card__action mdc-card__action--icon--unbounded" aria-pressed="false" aria-label="Add to favorites" title="收藏">
+                        <i class="material-icons mdc-icon-button__icon mdc-icon-button__icon--on">star</i>
+                        <i class="material-icons mdc-icon-button__icon">star_border</i>
                     </button>
-                    <button class="mdc-icon-button material-icons mdc-card__action mdc-card__action--icon--unbounded" title="投币" data-mdc-ripple-is-unbounded="true">attach_money</button>
+                    <button class="mdc-icon-button material-icons mdc-card__action mdc-card__action--icon--unbounded" title="投币" data-mdc-ripple-is-unbounded="true">monetization_on</button>
+                    <span id="CoinCount" class="mdc-typography--body1">0</span>
                 </div>
             </div>
         </div>

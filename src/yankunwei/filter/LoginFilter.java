@@ -1,5 +1,6 @@
 package yankunwei.filter;
 
+import yankunwei.javabean.IUserInfoDAO;
 import yankunwei.javabean.UserInfo;
 import yankunwei.javabean.UserInfoDAO;
 import yankunwei.servlet.LoginCheck;
@@ -20,7 +21,7 @@ public class LoginFilter implements Filter {
         resp.setCharacterEncoding("UTF-8");
         HttpServletRequest request = (HttpServletRequest) req;
         if (request.getParameter("test") != null && request.getParameter("test").equals("true")) {
-            UserInfoDAO userInfoDAO = new UserInfoDAO();
+            IUserInfoDAO userInfoDAO = new UserInfoDAO();
             UserInfo userInfo = new UserInfo();
             userInfoDAO.getUserInfoByUID(3, userInfo);
             request.getSession().setAttribute(LoginCheck.SESSION_ATTR_USER_INFO, userInfo);
