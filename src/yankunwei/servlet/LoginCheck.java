@@ -1,5 +1,6 @@
 package yankunwei.servlet;
 
+import yankunwei.javabean.IUserInfoDAO;
 import yankunwei.javabean.UserInfo;
 import yankunwei.javabean.UserInfoDAO;
 import yankunwei.utils.MD5Tool;
@@ -18,7 +19,7 @@ public class LoginCheck extends HttpServlet {
         String type = request.getParameter("type");
         String emailOrUID = request.getParameter("emailOrUID");
         String passwordEncrypt;
-        UserInfoDAO userInfoDAO = new UserInfoDAO();
+        IUserInfoDAO userInfoDAO = new UserInfoDAO();
         String s = request.getParameter("position");
         int pos = Integer.valueOf(request.getParameter("position"));
         int loginCAPTCHA = (int) request.getSession().getAttribute(GetLoginCAPTCHA.LOGIN_CAPTCHA_ATTR_NAME);

@@ -57,7 +57,7 @@ public class VideoCommentInfoDAO implements IVideoCommentInfoDAO {
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         List<VideoCommentInfo> videoCommentInfos = new ArrayList<>();
-        UserInfoDAO userInfoDAO = new UserInfoDAO();
+        IUserInfoDAO userInfoDAO = new UserInfoDAO();
         try {
             connection = DataBaseHelper.getInstance().getConnection();
             String SQL = "SELECT * FROM videocomment WHERE VideoID=?";
