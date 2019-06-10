@@ -13,16 +13,16 @@ public class PageVideo {
         return page;
     }
 
-    public static List<String> getpages(int PageNo, int PageSize, File[] files){
+    public static List<String> getpages(int PageNo, int PageSize, String[] filename){
         List<String> fileNames = new ArrayList<>();
-        if (files != null) {
+        if (filename != null) {
             reqPage = PageNo;
-            page = files.length / PageSize;
-            page += files.length % PageSize == 0 ? 0 : 1;
+            page = filename.length / PageSize;
+            page += filename.length % PageSize == 0 ? 0 : 1;
             int arrayPage = reqPage - 1;
             for (int i = arrayPage * PageSize; i < arrayPage * PageSize + PageSize; i++) {
-                if (i < files.length) {
-                    fileNames.add(files[i].getName());
+                if (i < filename.length) {
+                    fileNames.add(filename[i]);
                 } else {
                     break;
                 }

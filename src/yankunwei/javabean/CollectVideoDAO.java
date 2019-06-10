@@ -17,6 +17,7 @@ public class CollectVideoDAO implements ICollectVideoDAO{
         ResultSet resultSet = null;
         try{
             connection = DataBaseHelper.getInstance().getConnection();
+            if(SelectVideo(videoID,UID)) return false;
             String sql = "insert into collection values(?,?,?)";
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setInt(1,UID);
@@ -75,5 +76,29 @@ public class CollectVideoDAO implements ICollectVideoDAO{
             DataBaseHelper.getInstance().closeResource(resultSet,preparedStatement,connection);
         }
         return null;
+    }
+
+    @Override
+    public Boolean SelectVideo(String videoID,int UID) {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        try{
+            connection = DataBaseHelper.getInstance().getConnection();
+            String sql = "SELECT *from collection where VideoID = ? and UID = ?";
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1,videoID);
+            preparedStatement.setInt(2,UID);
+            resultSet = preparedStatement.executeQuery();
+            if (resultSet.next())
+            {
+                return true;
+            }
+        }catch (SQLException e){
+            System.out.println(e);
+        }finally {
+            DataBaseHelper.getInstance().closeResource(resultSet,preparedStatement,connection);
+        }
+        return false;
     }
 }

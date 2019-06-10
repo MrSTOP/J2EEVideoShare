@@ -89,11 +89,11 @@
                     <i class="material-icons mdc-list-item__graphic" aria-hidden="true">info</i>
                     <span class="mdc-list-item__text">个人信息</span>
                 </a>
-                <a class="mdc-list-item"  id="PCollect">
-                    <i class="material-icons mdc-list-item__graphic" aria-hidden="true">star</i>
+                <a class="mdc-list-item"  id="PCollect" href="Collectvideo">
+                    <i class="material-icons mdc-list-item__graphic"  aria-hidden="true">star</i>
                     <span class="mdc-list-item__text">收藏夹</span>
                 </a>
-                <a class="mdc-list-item" href="#" id="PHistory">
+                <a class="mdc-list-item" href="ToWatchHistory" id="PHistory">
                     <i class="material-icons mdc-list-item__graphic" aria-hidden="true">history</i>
                     <span class="mdc-list-item__text">历史记录</span>
                 </a>

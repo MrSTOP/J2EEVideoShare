@@ -20,7 +20,8 @@ import java.util.Map;
 @WebServlet(name = "Collectvideo",urlPatterns = "/Collectvideo")
 public class Collectvideo extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int uid = ((UserInfo)request.getSession().getAttribute("user")).getUID();
+       // int uid = ((UserInfo)request.getSession().getAttribute("user")).getUID();
+        int uid = 3;
         UserCollectVideo userCollectVide = null;
         CollectVideoDAO collectVideoDAO = new CollectVideoDAO();
         userCollectVide = collectVideoDAO.SelectAllVideoCollect(uid);
@@ -29,15 +30,13 @@ public class Collectvideo extends HttpServlet {
             request.getRequestDispatcher("Collection.jsp").forward(request,response);
         }
         Iterator entries = userCollectVide.getVideos().entrySet().iterator();
-        List<File> files1 = new ArrayList<>();
+        List<String> files1 = new ArrayList<>();
         while(entries.hasNext())
         {
             Map.Entry entry = (Map.Entry) entries.next();
-            String fileDir = request.getServletContext().getRealPath("") + "\\resources\\vides\\"+entry.getValue();
-            File file = new File(fileDir);
-            files1.add(file);
+            files1.add((String) entry.getValue());
         }
-        File[] files = new File[files1.size()];
+        String[] files = new String[files1.size()];
         files1.toArray(files);
         String reqPageStr = request.getParameter("page");
         Integer pageNo = reqPageStr == null ? 1 : Integer.valueOf(reqPageStr);
