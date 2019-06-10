@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Map;
 
 @WebServlet(name = "LoginCheck", urlPatterns = "/LoginCheck")
 public class LoginCheck extends HttpServlet {
@@ -33,6 +32,8 @@ public class LoginCheck extends HttpServlet {
                     if (userInfoDAO.isPasswordRightByEmailOrUID(emailOrUID, passwordEncrypt)) {
                         UserInfo userInfo = new UserInfo();
                         userInfoDAO.getUserInfoByEmailOrUID(emailOrUID, userInfo);
+                        userInfo.updateCoin();
+                        userInfoDAO.updateUserInfo(userInfo);
                         request.getSession().setAttribute(SESSION_ATTR_USER_INFO, userInfo);
                         msg = "ALLOW";
                     } else {

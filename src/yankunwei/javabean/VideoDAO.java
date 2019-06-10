@@ -12,23 +12,25 @@ import java.util.List;
 public class VideoDAO implements IVideoDAO{
 
     @Override
-    public String addVideo(String videoID, String videoname) {
+    public String addVideo(VideoInfo vInfo) {
         String info = null;
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         try{
             connection = DataBaseHelper.getInstance().getConnection();
-            VideoInfo videoInfo = SelectVideo(videoID);
-            if(videoInfo == null)
+            VideoInfo videoInfo = SelectVideo(vInfo.getVideoID());
+            if(videoInfo != null)
             {
                 info = "已存在该视频";
             }
             else {
-                String sql = "insert into video values(?,?)";
+                String sql = "insert into video(VideoID, VideoName, UID, Coin) values(?,?, ?, ?)";
                 preparedStatement = connection.prepareStatement(sql);
-                preparedStatement.setString(1, videoID);
-                preparedStatement.setString(2, videoname);
+                preparedStatement.setString(1, vInfo.getVideoID());
+                preparedStatement.setString(2, vInfo.getVideoName());
+                preparedStatement.setInt(3, vInfo.getUID());
+                preparedStatement.setInt(4, vInfo.getCoin());
                 if (preparedStatement.executeUpdate() != 0) {
                     info = "添加成功";
                 } else {
@@ -97,6 +99,8 @@ public class VideoDAO implements IVideoDAO{
                 VideoInfo videoInfo = new VideoInfo();
                 videoInfo.setVideoID(resultSet.getString("VideoID"));
                 videoInfo.setVideoName(resultSet.getString("VideoName"));
+                videoInfo.setUID(resultSet.getInt("UID"));
+                videoInfo.setCoin(resultSet.getInt("Coin"));
                 videoInfoList.add(videoInfo);
             }
             return videoInfoList;
@@ -124,6 +128,8 @@ public class VideoDAO implements IVideoDAO{
                 VideoInfo videoInfo = new VideoInfo();
                 videoInfo.setVideoID(resultSet.getString("VideoID"));
                 videoInfo.setVideoName(resultSet.getString("VideoName"));
+                videoInfo.setUID(resultSet.getInt("UID"));
+                videoInfo.setCoin(resultSet.getInt("Coin"));
                 return videoInfo;
             }
         }catch (SQLException e){
@@ -133,4 +139,26 @@ public class VideoDAO implements IVideoDAO{
         }
         return null;
     }
+
+    public boolean updateVideoInfo(VideoInfo videoInfo) {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        try {
+            connection = DataBaseHelper.getInstance().getConnection();
+            String SQL = "UPDATE video SET VideoName=?, VideoID=?, UID=?, Coin=? WHERE VideoID=?";
+            preparedStatement = connection.prepareStatement(SQL);
+            preparedStatement.setString(1, videoInfo.getVideoName());
+            preparedStatement.setString(2, videoInfo.getVideoID());
+            preparedStatement.setInt(3, videoInfo.getUID());
+            preparedStatement.setInt(4, videoInfo.getCoin());
+            preparedStatement.setString(4, videoInfo.getVideoID());
+            return preparedStatement.executeUpdate() == 1;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DataBaseHelper.getInstance().closeResource(null, preparedStatement, connection);
+        }
+        return false;
+    }
+
 }
