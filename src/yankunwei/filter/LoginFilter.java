@@ -29,7 +29,7 @@ public class LoginFilter implements Filter {
         String URL = request.getRequestURL().toString();
         System.out.println(URL);
         System.out.println(request.getServletPath());
-        if (request.getServletPath() != null && request.getServletPath().equals("/ServletIndex")) {
+        if (request.getServletPath() != null && request.getServletPath().equals("/index.jsp")) {
             request.getRequestDispatcher("ServletIndex").forward(req, resp);
         }
         if (request.getSession().getAttribute(LoginCheck.SESSION_ATTR_USER_INFO) == null &&
