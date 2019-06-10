@@ -35,8 +35,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                       <div class="mdc-notched-outline__trailing"></div>
                   </div>
               </div>
-              <a href="#" class="material-icons mdc-top-app-bar__action-item" id="Favorite" title="收藏夹">star</a>
-              <a href="#" class="material-icons mdc-top-app-bar__action-item" id="UserSpace" title="个人空间">perm_identity</a>
+              <a href="./Collection.jsp" class="material-icons mdc-top-app-bar__action-item" id="Favorite" title="收藏夹">star</a>
+              <a href="./PersonalMain.jsp" class="material-icons mdc-top-app-bar__action-item" id="UserSpace" title="个人空间">perm_identity</a>
               <span title="用户名">${sessionScope.user.userName}</span>
               <a href="Logout" class="material-icons mdc-top-app-bar__action-item" title="注销">logout</a>
           </section>
