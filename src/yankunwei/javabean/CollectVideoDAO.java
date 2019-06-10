@@ -11,16 +11,17 @@ import java.util.Map;
 public class CollectVideoDAO implements ICollectVideoDAO{
 
     @Override
-    public boolean addVideoCollect(int UID,String videoID) {
+    public boolean addVideoCollect(int UID,String videoID, String videoname) {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         try{
             connection = DataBaseHelper.getInstance().getConnection();
-            String sql = "insert into collection values(?,?)";
+            String sql = "insert into collection values(?,?,?)";
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setInt(1,UID);
             preparedStatement.setString(2,videoID);
+            preparedStatement.setString(3,videoname);
             return preparedStatement.executeUpdate() == 1;
         }catch (SQLException e){
             System.out.println(e);
