@@ -35,97 +35,11 @@
         <script src="./js/material-components-web.js"></script>
         <script src="./js/MDCHelperJavaScript.js"></script>
         <script src="./js/ckeditor.js"></script>
-        <script>
-            var isFirst = true;
-            var comment;
-            var isFavorite = false;
-            $(function () {
-                $(document).ready(function () {
-                    var commentEditor;
-                    var dialogs = initMDCComponentClass(".mdc-dialog", mdc.dialog.MDCDialog);
-                    var iconButtonToggles = initMDCComponentAttachTo(".mdc-icon-button", mdc.iconButton.MDCIconButtonToggle);
-                    iconButtonToggles[0].listen("MDCIconButtonToggle:change", function () {
-                        $.func.videoPage_changeFavorite(iconButtonToggles[0]);
-                        iconButtonToggles[0].on = isFavorite;
-                    });
-                    $.func.videoPage_isFavorite(iconButtonToggles[0]);
-                    // $.func.videoPage_isFavorite(iconButtonToggles[0]);
-                    ClassicEditor.create(document.querySelector("#CommentEditor"))
-                        .then(editor => {
-                        console.log(editor);
-                        $(".ck-editor").css("width", "70%");
-                        $(".ck-editor").css("margin", "40px auto 40px");
-                        commentEditor = editor;
-                    }).catch(error => {console.error(error)});
-                    $.func.videoPage_requestComment();
-                    $.func.videoPage_getVideoCoin();
-                    $("#FirstPage").bind({
-                        "click": function () {
-                            $.func.videoPage_requestComment(this);
-                        }
-                    });
-                    $("#PrePage").bind({
-                        "click": function () {
-                            $.func.videoPage_requestComment(this);
-                        }
-                    });
-                    $("#NextPage").bind({
-                        "click": function () {
-                            $.func.videoPage_requestComment(this);
-                        }
-                    });
-                    $("#LastPage").bind({
-                        "click": function () {
-                            $.func.videoPage_requestComment(this);
-                        }
-                    });
-                    $("#SubmitComment").bind({
-                        "click": function () {
-                            $.ajax({
-                                url: "AddNewVideoComment",
-                                data: "VideoID=" + $("#VideoID").val() +
-                                "&comment=" + commentEditor.getData(),
-                                type: "post",
-                                success: function () {
-                                    commentEditor.setData("");
-                                    $("#InfoTitle").html("成功");
-                                    $("#Info").html("评论提交成功！");
-                                    isFirst = true;
-                                    $.func.videoPage_requestComment();
-                                    dialogs[0].open();
-                                },
-                                error: function () {
-                                    $("#InfoTitle").html("失败");
-                                    $("#Info").html("评论提交失败！");
-                                    dialogs[0].open();
-                                }
-                            })
-                        }
-                    })
-                    $("#GiveVideoCoin").bind({
-                        "click": function () {
-                            $.func.videoPage_giveVideoCoin();
-                        }
-                    })
-                });
-            });
-        </script>
+        <script src="./js/watchVideo.js"></script>
         <style type="text/css">
             .videoTitle{
                 text-align: left;
                 padding: 2%;
-            }
-            .videoIntroduction{
-                text-align: left;
-                padding: 0 2% 1%;
-            }
-            .commentAuthor {
-                text-align: right;
-                padding: 2%;
-            }
-            .videoComment{
-                text-align: left;
-                padding: 3% 2%;
             }
         </style>
     </head>
@@ -147,8 +61,8 @@
                             <div class="mdc-notched-outline__trailing"></div>
                         </div>
                     </div>
-                    <a href="#" class="material-icons mdc-top-app-bar__action-item" id="Favorite" title="收藏夹">star</a>
-                    <a href="#" class="material-icons mdc-top-app-bar__action-item" id="UserSpace" title="个人空间">perm_identity</a>
+                    <a href="./Collection.jsp" class="material-icons mdc-top-app-bar__action-item" id="Favorite" title="收藏夹">star</a>
+                    <a href="./PersonalMain.jsp" class="material-icons mdc-top-app-bar__action-item" id="UserSpace" title="个人空间">perm_identity</a>
                     <span title="用户名">${sessionScope.user.userName}</span>
                     <a href="Logout" class="material-icons mdc-top-app-bar__action-item" title="注销">logout</a>
                 </section>
