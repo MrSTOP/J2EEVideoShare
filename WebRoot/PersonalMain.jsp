@@ -53,8 +53,8 @@
         }
 </script>
 <body>
-<header class="mdc-top-app-bar mdc-top-app-bar--dense" style="z-index: 7">
 
+<header class=" mdc-top-app-bar mdc-top-app-bar--dense">
     <div class="mdc-top-app-bar__row">
         <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
             <a href="index.jsp" class="material-icons mdc-top-app-bar__navigation-icon">home</a>
@@ -70,9 +70,10 @@
                     <div class="mdc-notched-outline__trailing"></div>
                 </div>
             </div>
-            <button class="material-icons mdc-top-app-bar__action-item" id="Favorite" title="收藏夹">star</button>
-            <a href="./user/${userName}" class="mdc-top-app-bar__action-item" title="用户名">${userName}NULL</a>
-            <a href="logout" class="material-icons mdc-top-app-bar__action-item" title="注销">logout</a>
+            <a href="#" class="material-icons mdc-top-app-bar__action-item" id="Favorite" title="收藏夹">star</a>
+            <a href="#" class="material-icons mdc-top-app-bar__action-item" id="UserSpace" title="个人空间">perm_identity</a>
+            <span title="用户名">${sessionScope.user.userName}</span>
+            <a href="Logout" class="material-icons mdc-top-app-bar__action-item" title="注销">logout</a>
         </section>
     </div>
 </header>
