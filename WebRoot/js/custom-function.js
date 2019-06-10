@@ -245,6 +245,46 @@ $.func = {
             });
         }
     },
+    videoPage_getVideoCoin: function () {
+        $.ajax({
+            url: "GiveVideoCoin",
+            data: "VideoID=" +$("#VideoID").val(),
+            success: function (data, status) {
+                if (status === "success") {
+                    var coinData = JSON.parse(data);
+                    $("#CoinCount").html(coinData.coin);
+                }
+            }
+        })
+    },
+    videoPage_isFavorite: function (iconButtonToggle) {
+        $.ajax({
+            url: "GetIsFavorite",
+            data: "VideoID=" + $("#VideoID").val(),
+            type: "post",
+            success: function (data, status) {
+                if (status === "success") {
+                    var favoriteData = JSON.parse(data);
+                    isFavorite = favoriteData.favorite;
+                    iconButtonToggle.on = isFavorite;
+                }
+            }
+        });
+    },
+    videoPage_changeFavorite: function(iconButtonToggle) {
+        $.ajax({
+            url: "ChangeFavorite",
+            data: "VideoID=" + $("#VideoID").val(),
+            type: "post",
+            success: function (data, status) {
+                if (status === "success") {
+                    var favoriteData = JSON.parse(data);
+                    isFavorite = favoriteData.favorite;
+                    iconButtonToggle.on = isFavorite;
+                }
+            }
+        });
+    },
     spaceReplace: function (element) {
         element.value = element.value.replace(/\s+/g, '');
     }

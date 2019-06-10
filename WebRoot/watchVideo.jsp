@@ -45,8 +45,11 @@
                     var dialogs = initMDCComponentClass(".mdc-dialog", mdc.dialog.MDCDialog);
                     var iconButtonToggles = initMDCComponentAttachTo(".mdc-icon-button", mdc.iconButton.MDCIconButtonToggle);
                     iconButtonToggles[0].listen("MDCIconButtonToggle:change", function () {
+                        $.func.videoPage_changeFavorite(iconButtonToggles[0]);
                         iconButtonToggles[0].on = isFavorite;
-                    })
+                    });
+                    $.func.videoPage_isFavorite(iconButtonToggles[0]);
+                    // $.func.videoPage_isFavorite(iconButtonToggles[0]);
                     ClassicEditor.create(document.querySelector("#CommentEditor"))
                         .then(editor => {
                         console.log(editor);
