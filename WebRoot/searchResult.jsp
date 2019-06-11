@@ -102,7 +102,7 @@
                                     <a href="VideoWatch?VideoID=${requestScope.searchResult.get(i).getVideoID()}">
                                         <div class="mdc-card__primary-action demo-card__primary-action" tabindex="0">
                                             <div class="mdc-card__media mdc-card__media--16-9 demo-card__media"
-                                                 style="background-image: url('${requestScope.imgURLs.get(i)}');"></div>
+                                                 style="background-image: url('./resources/img/covers/${requestScope.imgURLs.get(i)}');"></div>
                                             <div class="demo-card__primary">
                                                 <h2 class="demo-card__title mdc-typography mdc-typography--headline6" style="margin-left: 10px">${requestScope.searchResult.get(i).getVideoName()}</h2>
                                             </div>
