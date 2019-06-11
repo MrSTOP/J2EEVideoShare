@@ -168,6 +168,7 @@ public class UserInfo {
     }
 
     private static Timestamp strToTimestamp(String timestamp) {
+        timestamp = timestamp.split("\\s+")[0];
         String[] times = timestamp.split("-");
         Calendar calendar = Calendar.getInstance();
         calendar.set(Integer.valueOf(times[0]),
