@@ -42,18 +42,28 @@
                 var id = ($(this).attr('id'));
                 switch (id) {
                     case "PInfo":
+                        $("a").removeClass("mdc-list-item--activated");
+                        $("#PInfo").addClass("mdc-list-item--activated");
                         Rightsrc.src = "PersonalInfo.jsp";
                         break;
                     case "PCollect":
+                        $("a").removeClass("mdc-list-item--activated");
+                        $("#PCollect").addClass("mdc-list-item--activated");
                         Rightsrc.src = "Collectvideo";
                         break;
                     case "PHistory":
-                        Rightsrc.src = "History";
+                        $("a").removeClass("mdc-list-item--activated");
+                        $("#PHistory").addClass("mdc-list-item--activated");
+                        Rightsrc.src = "ToWatchHistory";
                         break;
                     case "PUpload":
-                        Rightsrc.src = "Upload";
+                        $("a").removeClass("mdc-list-item--activated");
+                        $("#PUpload").addClass("mdc-list-item--activated");
+                        Rightsrc.src = "uploadVideo.jsp";
                         break;
                     default:
+                        $("a").removeClass("mdc-list-item--activated");
+                        $("#PCPwd").addClass("mdc-list-item--activated");
                         Rightsrc.src = "changePwd.jsp";
                 }
             }})

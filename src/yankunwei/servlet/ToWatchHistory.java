@@ -25,15 +25,27 @@ public class ToWatchHistory extends HttpServlet {
         List<UserHistoryinfo> userHistoryinfoList = new ArrayList<>();
         HistoryvideoDAO  historyvideoDAO = new HistoryvideoDAO();
         userHistoryinfoList = historyvideoDAO.selectAllHistory(UID);
+        List<UserHistoryinfo> userHistoryinfoList1 = new ArrayList<>();
         if (userHistoryinfoList == null)
         {
+            request.setAttribute("PageCount",1);
+            request.setAttribute("PageNo",1);
+            request.setAttribute("FileList",userHistoryinfoList1);
             request.getRequestDispatcher("WatchHistory.jsp").forward(request,response);
         }
         else{
             String reqPageStr = request.getParameter("page");
+            int PageSize = 9;
+            int pageCount = userHistoryinfoList.size()/PageSize;
+            pageCount += userHistoryinfoList.size() % PageSize == 0 ? 0 : 1;
+            for(int i =0;i < userHistoryinfoList.size();i++)
+            {
+                String videoName = userHistoryinfoList.get(i).getVideoname().substring(0,userHistoryinfoList.get(i).getVideoname().lastIndexOf('.'));
+                userHistoryinfoList.get(i).setVideoname(videoName);
+            }
             Integer pageNo = reqPageStr == null ? 1 : Integer.valueOf(reqPageStr);
-            List<UserHistoryinfo> userHistoryinfoList1 = PageVideo.getpages(pageNo, 12, userHistoryinfoList);
-            request.setAttribute("PageCount", PageVideo.getPage());
+            userHistoryinfoList1 = PageVideo.getpages(pageNo, PageSize, userHistoryinfoList);
+            request.setAttribute("PageCount", pageCount);
             request.setAttribute("PageNo",pageNo);
             request.setAttribute("FileList",userHistoryinfoList1);
             request.getRequestDispatcher("WatchHistory.jsp").forward(request, response);

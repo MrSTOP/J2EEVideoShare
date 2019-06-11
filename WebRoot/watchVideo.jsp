@@ -84,7 +84,7 @@
             <div class="mdc-card__primary-action demo-card__primary-action" tabindex="0">
                 <div class="mdc-card__media">
                     <video width="100%" controls>
-                        <source src="./resources/video/${requestScope.VideoFileName}" type="video/mp4"/>
+                        <source src="./resources/videos/${requestScope.VideoFileName}" type="video/mp4"/>
                     </video>
                 </div>
                 <div class="videoTitle">

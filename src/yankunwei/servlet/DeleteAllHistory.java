@@ -23,7 +23,7 @@ public class DeleteAllHistory extends HttpServlet {
         else {
             info = "删除失败";
         }
-        request.getRequestDispatcher("WatchHistory.jsp").forward(request,response);
+        request.getRequestDispatcher("ToWatchHist").forward(request,response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
