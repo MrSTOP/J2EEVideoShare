@@ -126,7 +126,7 @@ public class UserInfoDAO implements IUserInfoDAO {
                 userInfo.setSex(resultSet.getString("Sex"));
                 userInfo.setBirth(resultSet.getTimestamp("Birth"));
                 userInfo.setEmail(resultSet.getString("Email"));
-                userInfo.setRegDay(resultSet.getString("RegDay"));
+                userInfo.setRegDay(resultSet.getTimestamp("RegDay"));
                 userInfo.setLastLogin(resultSet.getTimestamp("LastLogin"));
                 userInfo.setCoin(resultSet.getInt("Coin"));
             } else {
