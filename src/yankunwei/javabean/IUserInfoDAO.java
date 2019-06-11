@@ -49,9 +49,9 @@ public interface IUserInfoDAO {
 
     boolean isEmailExist(String email);
 
-    boolean giveVideoCoin(UserInfo userInfo, String videoID);
+    boolean giveVideoCoin(UserInfo giver, String videoID, UserInfo receiver);
 
-    boolean giveVideoCoin(int UID, String videoID);
+    boolean giveVideoCoin(int giverUID, String videoID, int receiverUID);
 
     List<UserInfo> getAllUserInfo();
 }

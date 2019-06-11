@@ -390,34 +390,24 @@ public class UserInfoDAO implements IUserInfoDAO {
     }
 
     @Override
-    public boolean giveVideoCoin(UserInfo userInfo, String videoID) {
-        return this.giveVideoCoin(userInfo.getUID(), videoID);
+    public boolean giveVideoCoin(UserInfo giver, String videoID, UserInfo receiver) {
+        return this.giveVideoCoin(giver.getUID(), videoID, receiver.getUID());
     }
 
     @Override
-    public boolean giveVideoCoin(int UID, String videoID) {
+    public boolean giveVideoCoin(int giverUID, String videoID, int receiverUID) {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
+        String SQL = null;
         try {
             connection = DataBaseHelper.getInstance().getConnection();
             connection.setAutoCommit(false);
 
-            //获取视频原有硬币数量
-            String SQL = "SELECT Coin FROM video WHERE VideoID=?";
-            preparedStatement = connection.prepareStatement(SQL);
-            preparedStatement.setString(1, videoID);
-            resultSet = preparedStatement.executeQuery();
-            resultSet.next();
-            int videoCoin = resultSet.getInt("Coin");
-            resultSet.close();
-            preparedStatement.close();
-            //获取视频原有硬币数量
-
             //获取用户硬币数量
             SQL = "SELECT Coin FROM user WHERE UID=?";
             preparedStatement = connection.prepareStatement(SQL);
-            preparedStatement.setInt(1, UID);
+            preparedStatement.setInt(1, giverUID);
             resultSet = preparedStatement.executeQuery();
             resultSet.next();
             int userCoin = resultSet.getInt("Coin");
@@ -428,44 +418,52 @@ public class UserInfoDAO implements IUserInfoDAO {
             }
             //获取用户硬币数量
 
-            //计算新的硬币数量
-            userCoin--;
-            videoCoin++;
-            //计算新的硬币数量
-
-            //更新用户硬币数量
-            SQL = "UPDATE user SET Coin=? WHERE UID=?";
+            //更新投币者硬币数量
+            SQL = "UPDATE user SET Coin=Coin-1 WHERE UID=?";
             preparedStatement = connection.prepareStatement(SQL);
-            preparedStatement.setInt(1, userCoin);
-            preparedStatement.setInt(2, UID);
+            preparedStatement.setInt(1, giverUID);
             if (preparedStatement.executeUpdate() != 1) {
-                throw new IllegalStateException("Update user coin count failed");
+                throw new IllegalStateException("Update user coin count failed.(UID: " + giverUID + ")");
             }
             preparedStatement.close();
-            //更新用户硬币数量
+            //更新投币者硬币数量
 
-            //更新用户硬币数量
-            SQL = "UPDATE video SET Coin=? WHERE VideoID=?";
+            //更新视频硬币数量
+            SQL = "UPDATE video SET Coin=Coin+1 WHERE VideoID=?";
             preparedStatement = connection.prepareStatement(SQL);
-            preparedStatement.setInt(1, videoCoin);
-            preparedStatement.setString(2, videoID);
+            preparedStatement.setString(1, videoID);
             if (preparedStatement.executeUpdate() != 1) {
-                throw new IllegalStateException("Update video coin count failed");
+                throw new IllegalStateException("Update video coin count failed.(VideoID: " + videoID + ")");
             }
-            //更新用户硬币数量
+            preparedStatement.close();
+            //更新视频硬币数量
+
+            //更新UP主硬币数量
+            SQL = "UPDATE user SET Coin=Coin+1 WHERE UID=?";
+            preparedStatement = connection.prepareStatement(SQL);
+            preparedStatement.setInt(1, receiverUID);
+            if (preparedStatement.executeUpdate() != 1) {
+                throw new IllegalStateException("Update UP coin count failed.(UID: " + receiverUID +"");
+            }
+            preparedStatement.close();
+            //更新UP主硬币数量
             connection.commit();
             return true;
         } catch (SQLException | IllegalStateException e) {
             e.printStackTrace();
             try {
-                connection.rollback();
+                if (connection != null) {
+                    connection.rollback();
+                }
                 connection.commit();
             } catch (SQLException ex) {
                 ex.printStackTrace();
             }
         } finally {
             try {
-                connection.setAutoCommit(true);
+                if (connection != null) {
+                    connection.setAutoCommit(true);
+                }
             } catch (SQLException e) {
                 e.printStackTrace();
             }finally {
