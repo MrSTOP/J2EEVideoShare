@@ -44,7 +44,16 @@
                 var textFieldss = initMDCComponentAttachTo(".mdc-text-field", mdc.textField.MDCTextField);
                 var selectss = initMDCComponentAttachTo(".mdc-select", mdc.select.MDCSelect);
                 $.func.initHtmlConstValue();
-
+                $("#Password").bind({
+                    "blur": function () {
+                        $.func.registry_passwordRegCheck(textFieldss[1]);
+                    }
+                });
+                $("#PasswordRepeat").bind({
+                    "blur": function () {
+                        $.func.registry_passwordRepeatCheck(textFieldss[2]);
+                    }
+                });
                 $("#NowPassword").bind({
                     "blur":function () {
                         $.ajax({
@@ -52,7 +61,18 @@
                             data:"PWD="+$("#NowPassword").val(),
                             type:"post",
                             success:function (data, status) {
-                                textFieldss[0].helperTextContent = data;
+                                if(data !== "")
+                                {
+                                    textFieldss[0].valid = false;
+                                    textFieldss[0].helperTextContent = data;
+                                    $('input[type=button]').attr("disabled",true);
+                                }
+                                else{
+                                    textFieldss[0].valid = true;
+                                    textFieldss[0].helperTextContent = "";
+                                    $('input[type=button]').attr("disabled",false);
+                                }
+                                console.log("SU");
                             },
                             error:function () {
                                 textFieldss[0].valid = false;
@@ -87,6 +107,8 @@
             </div>
         </div>
         <div class="mdc-text-field-helper-line">
+            <p class="mdc-text-field-helper-text mdc-text-field-helper-text--persistent mdc-text-field-helper-text--validation-msg">
+            </p>
         </div>
     </div>
 </div>

@@ -34,23 +34,32 @@
 <link rel="stylesheet" type="text/css" href="./css/CommonCSS.css" />
 <script src="./js/jquery-3.4.1.js"></script>
 <script>
-    var Rightsrc = document.getElementById("rightPage");
-    Rightsrc.src = "PersonalInfo";
-    $("a").click(function(){
-            var id = ($(this).attr('id'));
-            switch (id) {
-                case "PInfo":
-                    Rightsrc.src = "PersonalInfo.jsp";
-                case "PCollect":
-                    Rightsrc.src = "Collectvideo";
-                case "PHistory":
-                    Rightsrc.src = "History";
-                case "PUpload":
-                    Rightsrc.src = "Upload";
-                default:
-                    Rightsrc.src = "changePwd.jsp";
-            }
-        }
+    $(function () {
+        $(document).ready(function () {
+            var Rightsrc = document.getElementById("rightPage");
+            Rightsrc.src = "PersonalInfo.jsp";
+            $("a").bind({"click": function(){
+                var id = ($(this).attr('id'));
+                switch (id) {
+                    case "PInfo":
+                        Rightsrc.src = "PersonalInfo.jsp";
+                        break;
+                    case "PCollect":
+                        Rightsrc.src = "Collectvideo";
+                        break;
+                    case "PHistory":
+                        Rightsrc.src = "History";
+                        break;
+                    case "PUpload":
+                        Rightsrc.src = "Upload";
+                        break;
+                    default:
+                        Rightsrc.src = "changePwd.jsp";
+                }
+            }})
+        })
+    })
+
 </script>
 <body>
 
@@ -90,19 +99,19 @@
                     <i class="material-icons mdc-list-item__graphic" aria-hidden="true">info</i>
                     <span class="mdc-list-item__text">个人信息</span>
                 </a>
-                <a class="mdc-list-item"  id="PCollect" href="Collectvideo">
+                <a class="mdc-list-item"  id="PCollect">
                     <i class="material-icons mdc-list-item__graphic"  aria-hidden="true">star</i>
                     <span class="mdc-list-item__text">收藏夹</span>
                 </a>
-                <a class="mdc-list-item" href="ToWatchHistory" id="PHistory">
+                <a class="mdc-list-item"  id="PHistory">
                     <i class="material-icons mdc-list-item__graphic" aria-hidden="true">history</i>
                     <span class="mdc-list-item__text">历史记录</span>
                 </a>
-                <a class="mdc-list-item" href="#" id="PUpload">
+                <a class="mdc-list-item"  id="PUpload">
                     <i class="material-icons mdc-list-item__graphic" aria-hidden="true">backup</i>
                     <span class="mdc-list-item__text">上传视频</span>
                 </a>
-                <a class="mdc-list-item" href="#" id="PCPwd">
+                <a class="mdc-list-item"  id="PCPwd">
                     <i class="material-icons mdc-list-item__graphic" aria-hidden="true">create</i>
                     <span class="mdc-list-item__text">修改密码</span>
                 </a>
@@ -110,7 +119,7 @@
         </div>
     </aside>
     <%--    <article>--%>
-    <iframe style="width: 100%" frameborder="0" id="rightPage">
+    <iframe style="width: 100%" frameborder="0" id="rightPage" src="">
     </iframe>
     <%--    </article>--%>
 </div>
