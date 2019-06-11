@@ -193,7 +193,7 @@ $.func = {
                 "<div class='videoComment mdc-typography mdc-typography--body2'>" +
                 commentData.comment[i] +
                 "</div></div><div class='commentAuthor'>" +
-                "<h3 class='mdc-typography mdc-typography--subtitle2'>" +
+                "<h3 class='mdc-typography mdc-typography--subtitle2' style='text-align: right;padding-right: 30px'>" +
                 commentData.userName[i] +
                 "</h3></div></div>");
         }
