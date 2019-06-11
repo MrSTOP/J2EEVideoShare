@@ -32,11 +32,14 @@
 <link rel="stylesheet" type="text/css" href="./css/material-components-web.css" />
 <link rel="stylesheet" type="text/css" href="./css/material-icons.css" />
 <link rel="stylesheet" type="text/css" href="./css/CommonCSS.css" />
+<script src="./js/material-components-web.js"></script>
 <script src="./js/jquery-3.4.1.js"></script>
+<script src="./js/SearchBar.js"></script>
 <script>
     $(function () {
         $(document).ready(function () {
             var Rightsrc = document.getElementById("rightPage");
+            SearchBarInit();
             Rightsrc.src = "PersonalInfo.jsp";
             $("a").bind({"click": function(){
                 var id = ($(this).attr('id'));
@@ -79,18 +82,28 @@
             <a href="index.jsp" class="material-icons mdc-top-app-bar__navigation-icon">home</a>
         </section>
         <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end">
-            <div class="mdc-text-field text-field mdc-text-field--outlined" style="border-radius: 50%">
-                <input type="text" id="text-field-shape-one" class="mdc-text-field__input">
-                <div class="mdc-notched-outline mdc-notched-outline--upgraded">
-                    <div class="mdc-notched-outline__leading"></div>
-                    <div class="mdc-notched-outline__notch" style="">
-                        <label class="mdc-floating-label" for="text-field-shape-one" style="">Standard</label>
+            <div style="position: relative">
+                <button id="Search" class="mdc-top-app-bar__action-item material-icons">search</button>
+                <div id="SearchBar" style="display: none">
+                    <div class="mdc-text-field mdc-text-field--outlined">
+                        <input type="text" id="SearchText" class="mdc-text-field__input">
+                        <div class="mdc-notched-outline mdc-notched-outline--upgraded">
+                            <div class="mdc-notched-outline__leading"></div>
+                            <div class="mdc-notched-outline__notch">
+                                <label class="mdc-floating-label" for="SearchText">搜索</label>
+                            </div>
+                            <div class="mdc-notched-outline__trailing"></div>
+                        </div>
                     </div>
-                    <div class="mdc-notched-outline__trailing"></div>
+                    <button id="SearchButton" class="demo-button mdc-button mdc-button--outlined mdc-ripple-upgraded">
+                        <i class="material-icons mdc-button__icon">search</i>
+                        <span class="mdc-button__label">搜索</span>
+                    </button>
                 </div>
             </div>
             <a href="./Collection.jsp" class="material-icons mdc-top-app-bar__action-item" id="Favorite" title="收藏夹">star</a>
-            <a href="./PersonalMain.jsp" class="material-icons mdc-top-app-bar__action-item" id="UserSpace" title="个人空间">perm_identity</a>
+            <a href="./PersonalMain.jsp" class="material-icons mdc-top-app-bar__action-item" id="UserSpace"
+               title="个人空间">perm_identity</a>
             <span title="用户名">${sessionScope.user.userName}</span>
             <a href="Logout" class="material-icons mdc-top-app-bar__action-item" title="注销">logout</a>
         </section>
