@@ -15,6 +15,7 @@ import java.util.List;
 public class ServletIndex extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         VideoDAO videoDAO = new VideoDAO();
+
         List<VideoInfo> videoList = videoDAO.SelectVideos();
         List<VideoInfo> Listvideo = new ArrayList<>();
         List<String> url = new ArrayList<>();
@@ -39,7 +40,7 @@ public class ServletIndex extends HttpServlet {
             {
                 String videoName = Listvideo.get(i).getVideoName().substring(0,Listvideo.get(i).getVideoName().lastIndexOf('.'));
                 Listvideo.get(i).setVideoName(videoName);
-                url.add("./resources/img/cover/"+ videoName);
+                url.add("./resources/img/covers/"+ videoName+".jpg");
             }
             request.setAttribute("PageCount",pageCount);
             request.setAttribute("PageNo", pageNo);

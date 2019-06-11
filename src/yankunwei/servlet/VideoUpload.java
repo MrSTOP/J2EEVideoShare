@@ -3,6 +3,9 @@ package yankunwei.servlet;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import com.oreilly.servlet.multipart.FileRenamePolicy;
+import yankunwei.javabean.UserInfo;
+import yankunwei.javabean.VideoDAO;
+import yankunwei.javabean.VideoInfo;
 import yankunwei.utils.FFMPEGTool;
 
 import javax.servlet.ServletException;
@@ -14,6 +17,7 @@ import java.io.File;
 import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.Enumeration;
+import java.util.UUID;
 
 @WebServlet(name = "VideoUpload", urlPatterns = "/VideoUpload")
 public class VideoUpload extends HttpServlet {
@@ -21,6 +25,12 @@ public class VideoUpload extends HttpServlet {
         String IP = request.getRemoteAddr();
         String saveDir = this.getServletContext().getRealPath("") + "\\resources\\videos";
         File saveDirectory = new File(saveDir);
+       int UID = ((UserInfo)request.getSession().getAttribute("user")).getUID();
+        VideoDAO videoDAO = new VideoDAO();
+        VideoInfo videoInfo = new VideoInfo();
+        videoInfo.setVideoID(UUID.randomUUID().toString());
+        videoInfo.setUID(UID);
+        videoInfo.setCoin(0);
         if (!saveDirectory.exists()) {
             saveDirectory.mkdir();
         }
@@ -38,6 +48,8 @@ public class VideoUpload extends HttpServlet {
                 serverFile.delete();
             }
             file.renameTo(serverFile);
+            videoInfo.setVideoName(fileName);
+            videoDAO.addVideo(videoInfo);
             fileName = fileName.substring(0,fileName.lastIndexOf("."));
             String photoDir = this.getServletContext().getRealPath("") + "\\resources\\img\\covers\\"+fileName+".jpg";
             FFMPEGTool.getInstance().screenImageRandom(serverFile.getPath(),photoDir);
