@@ -16,17 +16,11 @@
 <head>
     <base href="<%=basePath%>">
 
-    <title>My JSP 'Collection.jsp' starting page</title>
-
-    <meta http-equiv="pragma" content="no-cache">
-    <meta http-equiv="cache-control" content="no-cache">
-    <meta http-equiv="expires" content="0">
-    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-    <meta http-equiv="description" content="This is my page">
+    <title>哔哩哔哩 (゜-゜)つロ 干杯~-bilibili</title>
+    <link rel="shortcut icon" href="./resources/img/titleIcon.ico"/>
     <!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
-    <title>哔哩哔哩 (゜-゜)つロ 干杯~-bilibili</title>
 
 </head>    <link rel="shortcut icon" href="./resources/img/titleIcon.ico" />
 <link rel="stylesheet" type="text/css" href="./css/material-components-web.css" />
