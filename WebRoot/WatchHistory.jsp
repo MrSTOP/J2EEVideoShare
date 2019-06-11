@@ -41,11 +41,30 @@
     </style>
 </head>
 <body>
-<div style=" height: 60px; padding-left: 30px;border-bottom: 1px solid #ddd; position: relative">
+<div style=" height: 45px; padding-left: 30px;border-bottom: 1px solid #ddd; position: relative; ">
+    <div style="margin-top: 20px">
     <i class=“material-icons”>view_headline</i>
     <span style="white-space: nowrap">历史记录</span>
     <button class="demo-button mdc-button mdc-button--unelevated demo-button-shaped mdc-ripple-upgraded" style="float: right">
         <i class="material-icons mdc-button__icon">delete</i><span class="mdc-button__label">清空</span></button>
+    </div>
+</div>
+<div style="text-align: center;">
+    <button onclick="window.location.href='ServletIndex?page=1'"
+            class="demo-button mdc-button mdc-button--dense mdc-button--outlined mdc-ripple-upgraded"${requestScope.PageNo>1?null:"disabled"}>
+        <span class="mdc-button__label">第一页</span></button>
+    <button onclick="window.location.href='ServletIndex?page=${requestScope.PageNo - 1}'"
+            class="demo-button mdc-button mdc-button--dense mdc-button--outlined mdc-ripple-upgraded"
+    ${requestScope.PageNo>1?null:"disabled"}>
+        <span class="mdc-button__label">上一页</span></button>
+    第${requestScope.PageNo}页,共有${requestScope.PageCount}页
+    <button onclick="window.location.href='ServletIndex?page=${requestScope.PageNo + 1}'"
+            class="demo-button mdc-button mdc-button--dense mdc-button--outlined mdc-ripple-upgraded"${requestScope.PageNo != requestScope.PageCount?null:"disabled"}>
+        <span class="mdc-button__label">下一页</span></button>
+    <button onclick="window.location.href='ServletIndex?page=${requestScope.PageCount}'"
+            class="demo-button mdc-button mdc-button--dense mdc-button--outlined mdc-ripple-upgraded"
+    ${requestScope.PageNo != requestScope.PageCount?null:"disabled"}>
+        <span class="mdc-button__label">最后一页</span></button>
 </div>
 <div class="mdc-layout-grid">
     <div class="mdc-layout-grid__inner">

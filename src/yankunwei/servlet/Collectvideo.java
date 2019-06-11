@@ -33,9 +33,17 @@ public class Collectvideo extends HttpServlet {
         }
         else {
             String reqPageStr = request.getParameter("page");
+            for(int i =0;i < userCollectVide.size();i++)
+            {
+                String videoName = userCollectVide.get(i).getVideoName().substring(0,userCollectVide.get(i).getVideoName().lastIndexOf('.'));
+                userCollectVide.get(i).setVideoName(videoName);
+            }
+            int PageSize = 12;
+            int pageCount = userCollectVide.size()/PageSize;
+            pageCount += userCollectVide.size() % PageSize == 0 ? 0 : 1;
             Integer pageNo = reqPageStr == null ? 1 : Integer.valueOf(reqPageStr);
-            Listvideo = PageVideo.getpages(pageNo, 12, userCollectVide);
-            request.setAttribute("PageCount", PageVideo.getPage());
+            Listvideo = PageVideo.getpages(pageNo, PageSize, userCollectVide);
+            request.setAttribute("PageCount",pageCount);
             request.setAttribute("PageNo", pageNo);
             request.setAttribute("CollectList", Listvideo);
             request.getRequestDispatcher("Collection.jsp").forward(request, response);

@@ -45,27 +45,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </header>
   <div style="height: 80px"></div>
   <div style="text-align: center;">
-      <c:if test="${requestScope.PageNo>1}">
           <button onclick="window.location.href='ServletIndex?page=1'"
-                  class="demo-button mdc-button mdc-button--dense mdc-button--outlined mdc-ripple-upgraded"
-                  style="--mdc-ripple-fg-size:46px; --mdc-ripple-fg-scale:2.0517; --mdc-ripple-fg-translate-start:1.41248px, -7.59995px; --mdc-ripple-fg-translate-end:16.0375px, -7px;">
+                  class="demo-button mdc-button mdc-button--dense mdc-button--outlined mdc-ripple-upgraded"${requestScope.PageNo>1?null:"disabled"}>
               <span class="mdc-button__label">第一页</span></button>
           <button onclick="window.location.href='ServletIndex?page=${requestScope.PageNo - 1}'"
                   class="demo-button mdc-button mdc-button--dense mdc-button--outlined mdc-ripple-upgraded"
-                  style="--mdc-ripple-fg-size:46px; --mdc-ripple-fg-scale:2.0517; --mdc-ripple-fg-translate-start:1.41248px, -7.59995px; --mdc-ripple-fg-translate-end:16.0375px, -7px;">
+          ${requestScope.PageNo>1?null:"disabled"}>
               <span class="mdc-button__label">上一页</span></button>
-      </c:if>
       第${requestScope.PageNo}页,共有${requestScope.PageCount}页
-      <c:if test="${requestScope.PageNo != requestScope.PageCount}">
           <button onclick="window.location.href='ServletIndex?page=${requestScope.PageNo + 1}'"
-                  class="demo-button mdc-button mdc-button--dense mdc-button--outlined mdc-ripple-upgraded"
-                  style="--mdc-ripple-fg-size:46px; --mdc-ripple-fg-scale:2.0517; --mdc-ripple-fg-translate-start:1.41248px, -7.59995px; --mdc-ripple-fg-translate-end:16.0375px, -7px;">
+                  class="demo-button mdc-button mdc-button--dense mdc-button--outlined mdc-ripple-upgraded"${requestScope.PageNo != requestScope.PageCount?null:"disabled"}>
               <span class="mdc-button__label">下一页</span></button>
           <button onclick="window.location.href='ServletIndex?page=${requestScope.PageCount}'"
                   class="demo-button mdc-button mdc-button--dense mdc-button--outlined mdc-ripple-upgraded"
-                  style="--mdc-ripple-fg-size:46px; --mdc-ripple-fg-scale:2.0517; --mdc-ripple-fg-translate-start:1.41248px, -7.59995px; --mdc-ripple-fg-translate-end:16.0375px, -7px;">
+          ${requestScope.PageNo != requestScope.PageCount?null:"disabled"}>
               <span class="mdc-button__label">最后一页</span></button>
-      </c:if>
   </div>
   <article>
       <div class="mdc-layout-grid">

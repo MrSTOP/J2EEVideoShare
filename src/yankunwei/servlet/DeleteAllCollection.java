@@ -23,7 +23,7 @@ public class DeleteAllCollection extends HttpServlet {
         else {
             info = "删除失败";
         }
-        request.getRequestDispatcher("Collection.jsp").forward(request,response);
+        request.getRequestDispatcher("Collectvideo").forward(request,response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

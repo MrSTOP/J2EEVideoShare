@@ -30,14 +30,17 @@ public class ServletIndex extends HttpServlet {
         else {
             String reqPageStr = request.getParameter("page");
             Integer pageNo = reqPageStr == null ? 1 : Integer.valueOf(reqPageStr);
-            Listvideo = PageVideo.getpages(pageNo, 12, videoList);
+            int PageSize = 12;
+            int pageCount = videoList.size()/PageSize;
+            pageCount += videoList.size() % PageSize == 0 ? 0 : 1;
+            Listvideo = PageVideo.getpages(pageNo, PageSize, videoList);
             for(int i =0;i < Listvideo.size();i++)
             {
                 String videoName = Listvideo.get(i).getVideoName().substring(0,Listvideo.get(i).getVideoName().lastIndexOf('.'));
                 Listvideo.get(i).setVideoName(videoName);
                 url.add("./resources/img/cover/"+ videoName);
             }
-            request.setAttribute("PageCount", PageVideo.getPage());
+            request.setAttribute("PageCount",pageCount);
             request.setAttribute("PageNo", pageNo);
             request.setAttribute("VideoList", Listvideo);
             request.setAttribute("URLS",url);

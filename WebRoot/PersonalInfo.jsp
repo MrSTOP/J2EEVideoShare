@@ -68,15 +68,13 @@
     <%session.setAttribute("YearStr", Integer.valueOf(((UserInfo)request.getSession().getAttribute("user")).getStrBirth().split("-")[0]));%>
     <%session.setAttribute("MonthStr", Integer.valueOf(((UserInfo)request.getSession().getAttribute("user")).getStrBirth().split("-")[1]));%>
     <%session.setAttribute("DayStr", Integer.valueOf(((UserInfo)request.getSession().getAttribute("user")).getStrBirth().split("-")[2]));%>
-    <div style=" height: 50px; padding-left: 30px;border-bottom: 1px solid #ddd;">
-        <span class="mdc-typography--body1" style="display: flex;margin-top: 10px">
-
-        <i class="material-icons">view_headline</i>个人信息
+    <div style=" height: 45px; padding-left: 30px;border-bottom: 1px solid #ddd;">
+        <span class="mdc-typography--body1" style="display: flex;margin-top: 10px;font-size: 20px">
+            <i class="material-icons">view_headline</i>个人信息
         </span>
     </div>
     <div style="    padding: 20px 20px 0; position: relative;">
         <div>
-
             <form action="ToPersonalInfo" method="post" style="text-align: center">
                 <div class="MDCDivContainer">
                     <div style="width: 210px">
