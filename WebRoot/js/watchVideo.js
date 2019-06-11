@@ -6,6 +6,7 @@ $(function () {
         var commentEditor;
         var dialogs = initMDCComponentClass(".mdc-dialog", mdc.dialog.MDCDialog);
         var iconButtonToggles = initMDCComponentAttachTo(".mdc-icon-button", mdc.iconButton.MDCIconButtonToggle);
+        SearchBarInit();
         iconButtonToggles[0].listen("MDCIconButtonToggle:change", function () {
             $.func.videoPage_changeFavorite(iconButtonToggles[0]);
             iconButtonToggles[0].on = isFavorite;

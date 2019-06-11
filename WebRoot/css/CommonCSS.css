@@ -4,3 +4,9 @@ body{
 header{
     margin-bottom: 10px;
 }
+#SearchBar{
+    position: absolute;
+    bottom: -70px;
+    right: -50px;
+    width: 300px;
+}
