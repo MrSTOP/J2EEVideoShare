@@ -35,6 +35,7 @@ public class LoginFilter implements Filter {
             userInfoDAO.freshUserInfo(userInfo);
             request.getSession().setAttribute(LoginCheck.SESSION_ATTR_USER_INFO, userInfo);
         }
+        request.getHeader("Referer");
         if (request.getSession().getAttribute(LoginCheck.SESSION_ATTR_USER_INFO) == null &&
                 request.getServletPath() != null &&
                 request.getServletPath().endsWith(".jsp") &&

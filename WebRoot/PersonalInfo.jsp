@@ -107,7 +107,7 @@
                 <div class="MDCDivContainer">
                     <div style="width: 210px">
                         <div class="mdc-text-field">
-                            <input type="text" id="email" class="mdc-text-field__input" name="email" value="${sessionScope.user.email}">
+                            <input type="text" readonly id="email" class="mdc-text-field__input" name="email" value="${sessionScope.user.email}">
                             <label class="mdc-floating-label" for="email">电子邮件</label>
                             <div class="mdc-line-ripple"></div>
                         </div>

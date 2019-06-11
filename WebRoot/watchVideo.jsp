@@ -17,12 +17,8 @@
     <head>
         <base href="<%=basePath%>">
 
-        <title>watchVideo.jsp</title>
-        <meta http-equiv="pragma" content="no-cache">
-        <meta http-equiv="cache-control" content="no-cache">
-        <meta http-equiv="expires" content="0">
-        <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-        <meta http-equiv="description" content="This is my page">
+        <title>哔哩哔哩 (゜-゜)つロ 干杯~-bilibili</title>
+        <link rel="shortcut icon" href="./resources/img/titleIcon.ico"/>
         <!--
         <link rel="stylesheet" type="text/css" href="styles.css">
         -->
@@ -104,6 +100,11 @@
                 </div>
             </div>
         </div>
+        <div style='width: 70%;margin: 40px auto;'>
+            <div class='videoComment mdc-typography mdc-typography--headline2'>
+                评论区
+            </div>
+        </div>
         <input id="VideoID" type="text" hidden value="${requestScope.VideoID}">
         <textarea name="comment" id="CommentEditor" style="width: 70%;margin: auto"></textarea>
         <div style="width: 70%;height: 50px;margin: 50px auto;margin-top: 0;position: relative">
@@ -126,7 +127,7 @@
         </div>
         <div id="VideoComment">
             <div id="VideoCommentMain"></div>
-            <div>
+            <div style="margin-bottom: 80px">
                 <button id="FirstPage" class="mdc-button mdc-button--outlined">第一页</button>
                 <button id="PrePage" class="mdc-button mdc-button--outlined">上一页</button>
                 <span id="VideoCommentTotalPage">共页</span>

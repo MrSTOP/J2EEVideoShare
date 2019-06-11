@@ -14,14 +14,10 @@ import java.io.IOException;
 public class DeleteAllCollection extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int uid = ((UserInfo)request.getSession().getAttribute("user")).getUID();
-        String info = "";
         CollectVideoDAO collectVideoDAO = new CollectVideoDAO();
         if(collectVideoDAO.deleteAllVideoCollect(uid))
         {
-            info = "删除成功";
-        }
-        else {
-            info = "删除失败";
+            request.setAttribute("info",true);
         }
         request.getRequestDispatcher("Collectvideo").forward(request,response);
     }

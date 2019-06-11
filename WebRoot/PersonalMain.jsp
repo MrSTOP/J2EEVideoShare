@@ -106,8 +106,8 @@
 <div style="display: flex;position: relative;height: 91vh;overflow: hidden;">
     <aside class="mdc-drawer">
         <div class="mdc-drawer__header">
-            <h3 class="mdc-drawer__title">Mail</h3>
-            <h6 class="mdc-drawer__subtitle">email@material.io</h6>
+            <h3 class="mdc-drawer__title">${sessionScope.user.userName}</h3>
+            <h6 class="mdc-drawer__subtitle">${sessionScope.user.email}</h6>
         </div>
         <div class="mdc-drawer__content">
             <nav class="mdc-list">

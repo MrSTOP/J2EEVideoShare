@@ -14,16 +14,12 @@ import java.io.IOException;
 public class DeleteAllHistory extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int uid = ((UserInfo)request.getSession().getAttribute("user")).getUID();
-        String info = "";
         HistoryvideoDAO historyvideoDAO = new HistoryvideoDAO();
         if(historyvideoDAO.deleteAll(uid))
         {
-            info = "删除成功";
+           request.setAttribute("info",true);
         }
-        else {
-            info = "删除失败";
-        }
-        request.getRequestDispatcher("ToWatchHist").forward(request,response);
+        request.getRequestDispatcher("ToWatchHistory").forward(request,response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

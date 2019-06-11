@@ -149,7 +149,7 @@
         </div>
     </div>
 </div>
-    <input type="button"  class="demo-button mdc-button mdc-button--outlined mdc-ripple-upgraded" value="提交" style="width: 170px">
+    <input type="submit"  class="demo-button mdc-button mdc-button--outlined mdc-ripple-upgraded" value="提交" style="width: 170px">
 </form>
 </body>
 </html>

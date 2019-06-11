@@ -48,10 +48,12 @@
         $(document).ready(function () {
             var textFieldss = initMDCComponentAttachTo(".mdc-text-field", mdc.textField.MDCTextField);
             var selectss = initMDCComponentAttachTo(".mdc-select", mdc.select.MDCSelect);
+            if(${requestScope.info} != null)
+            alert("删除成功");
         })
     })
 </script>
-<body>
+<body style="text-align: center">
 <div style=" height: 45px; padding-left: 30px;border-bottom: 1px solid #ddd; position: relative;">
     <button class="demo-button mdc-button mdc-button--unelevated demo-button-shaped mdc-ripple-upgraded" style="float:right;font-size: 20px" onclick="window.location.href='DeleteAllCollection'">
         <i class="material-icons mdc-button__icon">delete</i><span class="mdc-button__label">清空</span></button>
@@ -62,6 +64,10 @@
 
     </div>
 </div>
+<c:if test="${requestScope.CollectList.size() ==0||requestScope.CollectList == null}">
+    <h2 style="margin: 100px">无收藏内容</h2>
+</c:if>
+ <c:if test="${requestScope.CollectList.size() !=0}">
 <div style="text-align: center;">
     <button onclick="window.location.href='Collectvideo?page=1'"
             class="demo-button mdc-button mdc-button--dense mdc-button--outlined mdc-ripple-upgraded"${requestScope.PageNo>1?null:"disabled"}>
@@ -81,7 +87,7 @@
 </div>
 <div class="mdc-layout-grid">
     <div class="mdc-layout-grid__inner">
-        <c:if test="${requestScope.CollectList.size() !=0}">
+
             <c:forEach items="${requestScope.CollectList}" var="videoList">
                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3">
                     <div class="mdc-card demo-card" style="margin: 20px">

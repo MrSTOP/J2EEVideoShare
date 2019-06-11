@@ -20,7 +20,7 @@ public class ChangePassword extends HttpServlet {
         UserInfoDAO userInfoDAO = new UserInfoDAO();
         userInfoDAO.updateUserInfo(userInfo,password);
         request.setAttribute("INFO","修改成功");
-            request.getRequestDispatcher("ChangePwd.jsp").forward(request,response);
+            request.getRequestDispatcher("changePwd.jsp").forward(request,response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

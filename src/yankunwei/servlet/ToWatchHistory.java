@@ -20,8 +20,7 @@ import java.util.Map;
 @WebServlet(name = "ToWatchHistory", urlPatterns = "/ToWatchHistory")
 public class ToWatchHistory extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-       // int UID = ((UserInfo)request.getSession().getAttribute("user")).getUID();
-        int UID = 3;
+        int UID = ((UserInfo)request.getSession().getAttribute("user")).getUID();
         List<UserHistoryinfo> userHistoryinfoList = new ArrayList<>();
         HistoryvideoDAO  historyvideoDAO = new HistoryvideoDAO();
         userHistoryinfoList = historyvideoDAO.selectAllHistory(UID);

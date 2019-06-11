@@ -13,36 +13,56 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
+
+
 <head>
+    <base href="<%=basePath%>">
+
+    <title>哔哩哔哩 (゜-゜)つロ 干杯~-bilibili</title>
     <link rel="shortcut icon" href="./resources/img/titleIcon.ico"/>
     <link rel="stylesheet" type="text/css" href="./css/material-components-web.css"/>
     <link rel="stylesheet" type="text/css" href="./css/material-icons.css"/>
     <link rel="stylesheet" type="text/css" href="./css/CommonCSS.css"/>
-    <LINK REL="stylesheet" type="text/css" href="./css/MDCHelperCSS.css">
-    <script src="js/material-components-web.js"></script>
-    <script src="js/jquery-3.4.1.js"></script>
-    <script src="js/MDCHelperJavaScript.js"></script>
+    <link rel="stylesheet" type="text/css" href="./css/MDCHelperCSS.css"/>
+    <script src="./js/jquery-3.4.1.js"></script>
+    <script src="./js/material-components-web.js"></script>
+    <script src="./js/MDCHelperJavaScript.js"></script>
+    <script src="./js/custom-function.js"></script>
     <script>
         $(function () {
             $(document).ready(function () {
                 var textFieldss = initMDCComponentAttachTo(".mdc-text-field", mdc.textField.MDCTextField);
                 var selectss = initMDCComponentAttachTo(".mdc-select", mdc.select.MDCSelect);
+                var dialog = new mdc.dialog.MDCDialog($("#Dialog")[0]);
+                if (${requestScope.info != null}) {
+                    dialog.open();
+                }
             })
         })
     </script>
-    <script src="./js/jquery-3.4.1.js"></script>
-    <style type="text/css">
-        .footer {
-            margin-top: -50px;
-            height: 50px;
-            background-color: #eee;
-            z-index: 9999;
-        }
-    </style>
+    <!--
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    -->
 </head>
-<body>
+<body style="text-align: center">
+
+<div id="Dialog" class="mdc-dialog" role="alertdialog" aria-modal="true" aria-labelledby="my-dialog-title"
+     aria-describedby="my-dialog-content">
+    <div class="mdc-dialog__container">
+        <div class="mdc-dialog__surface">
+            <h2 class="mdc-dialog__title" id="Info">删除成功</h2>
+            <footer class="mdc-dialog__actions">
+                <button type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="ok">
+                    <span class="mdc-button__label">确定</span>
+                </button>
+            </footer>
+        </div>
+    </div>
+    <div class="mdc-dialog__scrim"></div>
+</div>
 <div style=" height: 45px; padding-left: 30px;border-bottom: 1px solid #ddd; position: relative; ">
-    <button class="demo-button mdc-button mdc-button--unelevated demo-button-shaped mdc-ripple-upgraded" style="float: right;font-size: 20px" onclick="window.location.href='DeleteAllHistory'">
+    <button class="demo-button mdc-button mdc-button--unelevated demo-button-shaped mdc-ripple-upgraded"
+            style="float: right;font-size: 20px" onclick="window.location.href='DeleteAllHistory'">
         <i class="material-icons mdc-button__icon">delete</i><span class="mdc-button__label">清空</span></button>
     <div style="margin-top: 10px">
               <span class="mdc-typography--body1" style="display: flex;font-size: 20px">
@@ -51,51 +71,54 @@
 
     </div>
 </div>
-<div style="text-align: center;">
-    <button onclick="window.location.href='ToWatchHistory?page=1'"
-            class="demo-button mdc-button mdc-button--dense mdc-button--outlined mdc-ripple-upgraded"${requestScope.PageNo>1?null:"disabled"}>
-        <span class="mdc-button__label">第一页</span></button>
-    <button onclick="window.location.href='ToWatchHistory?page=${requestScope.PageNo - 1}'"
-            class="demo-button mdc-button mdc-button--dense mdc-button--outlined mdc-ripple-upgraded"
-    ${requestScope.PageNo>1?null:"disabled"}>
-        <span class="mdc-button__label">上一页</span></button>
-    第${requestScope.PageNo}页,共有${requestScope.PageCount}页
-    <button onclick="window.location.href='ToWatchHistory?page=${requestScope.PageNo + 1}'"
-            class="demo-button mdc-button mdc-button--dense mdc-button--outlined mdc-ripple-upgraded"${requestScope.PageNo < requestScope.PageCount?null:"disabled"}>
-        <span class="mdc-button__label">下一页</span></button>
-    <button onclick="window.location.href='ToWatchHistory?page=${requestScope.PageCount}'"
-            class="demo-button mdc-button mdc-button--dense mdc-button--outlined mdc-ripple-upgraded"
-    ${requestScope.PageNo < requestScope.PageCount?null:"disabled"}>
-        <span class="mdc-button__label">最后一页</span></button>
-</div>
-<div class="mdc-layout-grid">
-    <div class="mdc-layout-grid__inner">
-        <c:if test="${requestScope.FileList.size()!=0}">
-        <c:forEach items="${requestScope.FileList}" var="fileName">
-            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3">
-                <div class="mdc-card demo-card" style="margin: 20px">
-                    <div class="mdc-card__primary-action demo-card__primary-action" tabindex="0">
-                        <div class="mdc-card__media mdc-card__media--16-9 demo-card__media"
-                             style="background-image: url('https://material-components.github.io/material-components-web-catalog/static/media/photos/3x2/2.jpg');"></div>
-                        <div class="demo-card__primary">
-                            <h2 class="demo-card__title mdc-typography mdc-typography--headline6">${fileName.getVideoname()}</h2>
+<c:if test="${requestScope.FileList.size() ==0||requestScope.FileList == null}">
+    <h2 style="margin: 100px">无浏览记录</h2>
+</c:if>
+<c:if test="${requestScope.FileList.size()!=0}">
+    <div style="text-align: center;">
+        <button onclick="window.location.href='ToWatchHistory?page=1'"
+                class="demo-button mdc-button mdc-button--dense mdc-button--outlined mdc-ripple-upgraded"${requestScope.PageNo>1?null:"disabled"}>
+            <span class="mdc-button__label">第一页</span></button>
+        <button onclick="window.location.href='ToWatchHistory?page=${requestScope.PageNo - 1}'"
+                class="demo-button mdc-button mdc-button--dense mdc-button--outlined mdc-ripple-upgraded"
+            ${requestScope.PageNo>1?null:"disabled"}>
+            <span class="mdc-button__label">上一页</span></button>
+        第${requestScope.PageNo}页,共有${requestScope.PageCount}页
+        <button onclick="window.location.href='ToWatchHistory?page=${requestScope.PageNo + 1}'"
+                class="demo-button mdc-button mdc-button--dense mdc-button--outlined mdc-ripple-upgraded"${requestScope.PageNo < requestScope.PageCount?null:"disabled"}>
+            <span class="mdc-button__label">下一页</span></button>
+        <button onclick="window.location.href='ToWatchHistory?page=${requestScope.PageCount}'"
+                class="demo-button mdc-button mdc-button--dense mdc-button--outlined mdc-ripple-upgraded"
+            ${requestScope.PageNo < requestScope.PageCount?null:"disabled"}>
+            <span class="mdc-button__label">最后一页</span></button>
+    </div>
+    <div class="mdc-layout-grid">
+        <div class="mdc-layout-grid__inner">
+
+            <c:forEach items="${requestScope.FileList}" var="fileName">
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3">
+                    <div class="mdc-card demo-card" style="margin: 20px">
+                        <div class="mdc-card__primary-action demo-card__primary-action" tabindex="0">
+                            <div class="mdc-card__media mdc-card__media--16-9 demo-card__media"
+                                 style="background-image: url('https://material-components.github.io/material-components-web-catalog/static/media/photos/3x2/2.jpg');"></div>
+                            <div class="demo-card__primary">
+                                <h2 class="demo-card__title mdc-typography mdc-typography--headline6">${fileName.getVideoname()}</h2>
+                            </div>
                         </div>
-                    </div>
-                    <div class="mdc-card__actions">
-                        <div class="mdc-card__action-icons">
-                            <button class="mdc-icon-button material-icons mdc-card__action mdc-card__action--icon--unbounded"
-                                    title="Delete" data-mdc-ripple-is-unbounded="true"
-                                    onclick="window.location.href='DeleteHistory?VideoID=${fileName.getVideoID()}'">
-                                delete
-                            </button>
+                        <div class="mdc-card__actions">
+                            <div class="mdc-card__action-icons">
+                                <button class="mdc-icon-button material-icons mdc-card__action mdc-card__action--icon--unbounded"
+                                        title="Delete" data-mdc-ripple-is-unbounded="true"
+                                        onclick="window.location.href='DeleteHistory?VideoID=${fileName.getVideoID()}'">
+                                    delete
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </c:forEach>
-        </c:if>
+            </c:forEach>
+        </div>
     </div>
-</div>
-
+</c:if>
 </body>
 </html>

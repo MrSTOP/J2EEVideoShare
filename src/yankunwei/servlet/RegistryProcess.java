@@ -34,7 +34,7 @@ public class RegistryProcess extends HttpServlet {
         if (userInfoDAO.addUserInfo(userInfo, passwordEncrypted)) {
             userInfoDAO.getUserInfoByUserName(userName, userInfo);
             request.getSession().setAttribute(LoginCheck.SESSION_ATTR_USER_INFO, userInfo);
-            request.getRequestDispatcher("/index.jsp").forward(request, response);
+            request.getRequestDispatcher("ServletIndex").forward(request, response);
         } else {
             request.getRequestDispatcher("/registry.jsp").forward(request, response);
         }

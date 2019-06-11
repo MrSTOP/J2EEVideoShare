@@ -13,14 +13,11 @@ import java.io.IOException;
 @WebServlet(name = "DeleteCollect",urlPatterns = "/DeleteCollect")
 public class DeleteCollect extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int UID = 3;
-        //  int UID = ((UserInfo)request.getSession().getAttribute("user")).getUID();
+         int UID = ((UserInfo)request.getSession().getAttribute("user")).getUID();
         String videoID = request.getParameter("VideoID");
-        String info = null;
         CollectVideoDAO collectVideoDAO = new CollectVideoDAO();
         if(collectVideoDAO.deleteVideoCollect(UID,videoID))
-            info = "删除成功";
-        request.setAttribute("info",info);
+        request.setAttribute("info",true);
         request.getRequestDispatcher("Collectvideo").forward(request,response);
     }
 
