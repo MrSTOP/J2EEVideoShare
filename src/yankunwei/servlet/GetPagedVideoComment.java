@@ -2,6 +2,7 @@ package yankunwei.servlet;
 
 import yankunwei.javabean.VideoCommentInfo;
 import yankunwei.javabean.VideoCommentInfoDAO;
+import yankunwei.utils.CommentListToJSON;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -35,33 +36,11 @@ public class GetPagedVideoComment extends HttpServlet {
         request.setAttribute("reqPage", reqPage);
         request.setAttribute("pageCount", totalPage);
         request.setAttribute("VideoCommentList", videoCommentInfoList);
-        response.getWriter().write(videoCommentListToJSON(videoCommentInfoList, reqPage, totalPage));
-        System.out.println(videoCommentListToJSON(videoCommentInfoList, reqPage, totalPage));
+        response.getWriter().write(CommentListToJSON.videoCommentListToJSON(videoCommentInfoList, reqPage, totalPage));
+//        System.out.println(videoCommentListToJSON(videoCommentInfoList, reqPage, totalPage));
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         this.doPost(request, response);
-    }
-
-    private String videoCommentListToJSON(List<VideoCommentInfo> videoCommentInfoList,int currentPage,int totalPage) {
-        StringBuilder builder = new StringBuilder("{\"count\":");
-        builder.append(videoCommentInfoList.size());
-        builder.append(", \"currentPage\":");
-        builder.append(currentPage);
-        builder.append(", \"totalPage\":");
-        builder.append(totalPage);
-        builder.append(", \"comment\":[");
-        for (VideoCommentInfo videoCommentInfo : videoCommentInfoList) {
-            builder.append("\"").append(videoCommentInfo.getVideoComment()).append("\",");
-        }
-        builder.deleteCharAt(builder.length() - 1);
-        builder.append("],");
-        builder.append("\"userName\":[");
-        for (VideoCommentInfo videoCommentInfo: videoCommentInfoList) {
-            builder.append("\"").append(videoCommentInfo.getUserName()).append("\",");
-        }
-        builder.deleteCharAt(builder.length() - 1);
-        builder.append("]}");
-        return builder.toString();
     }
 }
