@@ -31,29 +31,12 @@
         var a = 0;
         $(function () {
             $(document).ready(function () {
+                var dialog = new mdc.dialog.MDCDialog($("#UploadDialog")[0]);
+                var success = ${requestScope.Info == null ? false : requestScope.Info == true};
+                if (success) {
+                    dialog.open();
+                }
                 progress = initMDCComponentAttachTo(".mdc-linear-progress", mdc.linearProgress.MDCLinearProgress);
-                $("#VideoUpload").bind({
-                    "input blur propertychange": function () {
-                        //preLook($(this).prop('files')[0]);
-                    }
-                });
-                $("#Upload").bind({
-                    "click": function () {
-                        upload();
-                    }
-                });
-                $("#Up").bind({
-                    "click": function () {
-                        a += 0.1;
-                        progress[0].progress = a;
-                    }
-                })
-                $("#Down").bind({
-                    "click": function () {
-                        a -= 0.1;
-                        progress[0].progress = a;
-                    }
-                })
             });
         });
 
@@ -75,43 +58,6 @@
                 }
             }
         }
-
-        function upload() {
-            //创建FormData对象，初始化为form表单中的数据。需要添加其他数据可使用formData.append("property", "value");
-            var formData = new FormData($('form')[0]);
-
-            //ajax异步上传
-            $.ajax({
-                url: "VideoUpload",
-                type: "POST",
-                data: formData,
-                xhr: function () { //获取ajaxSettings中的xhr对象，为它的upload属性绑定progress事件的处理函数
-                    myXhr = $.ajaxSettings.xhr();
-                    if (myXhr.upload) { //检查upload属性是否存在
-                        //绑定progress事件的回调函数
-                        myXhr.upload.addEventListener('progress', progressHandlingFunction, false);
-                    }
-                    return myXhr; //xhr对象返回给jQuery使用
-                },
-                success: function (result) {
-                    $("#result").html(result.data);
-                },
-                contentType: false, //必须false才会自动加上正确的Content-Type
-                processData: false  //必须false才会避开jQuery对 formdata 的默认处理
-            });
-        }
-
-        //上传进度回调函数：
-        function progressHandlingFunction(e) {
-            console.log("Process");
-            if (e.lengthComputable) {
-                progress[0].progress = e.loaded / e.total;
-                console.log("PRE: " + e.loaded / e.total);
-                $('progress').attr({value: e.loaded, max: e.total}); //更新数据到进度条
-                var percent = e.loaded / e.total * 100;
-                $('#progress').html(e.loaded + "/" + e.total + " bytes. " + percent.toFixed(2) + "%");
-            }
-        }
     </script>
     <!--
     <link rel="stylesheet" type="text/css" href="styles.css">
@@ -123,6 +69,19 @@
         <span class="mdc-typography--body1" style="display: flex;margin-top: 10px;font-size: 20px">
         <i class="material-icons">view_headline</i>上传视频
         </span>
+</div>
+<div id="UploadDialog" class="mdc-dialog" role="alertdialog" aria-modal="true" aria-labelledby="my-dialog-title" aria-describedby="my-dialog-content">
+    <div class="mdc-dialog__container">
+        <div class="mdc-dialog__surface">
+            <h2 class="mdc-dialog__title" id="Info">视频上传成功</h2>
+            <footer class="mdc-dialog__actions">
+                <button type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="ok">
+                    <span class="mdc-button__label">确定</span>
+                </button>
+            </footer>
+        </div>
+    </div>
+    <div class="mdc-dialog__scrim"></div>
 </div>
 <form action="VideoUpload" method="post" enctype="multipart/form-data">
     <div class="MDCDivContainer">
@@ -146,6 +105,8 @@
             </div>
         </div>
     </div>
+
+    <button type="submit" class="mdc-button mdc-button--unelevated">UP</button>
 </form>
 <div style="width: 60%;margin: 30px auto">
     <div class="hero-linear-progress-indicator">

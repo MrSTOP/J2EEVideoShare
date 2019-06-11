@@ -33,21 +33,20 @@ public class VideoUpload extends HttpServlet {
         System.out.println(file.getName());
         if (file != null) {
             String fileName = file.getName();
-            File serverFile = new File(saveDir + "\\" + fileName + System.currentTimeMillis());
+            File serverFile = new File(saveDir + "\\" +System.currentTimeMillis() + "-" + fileName);
             if (serverFile.exists()) {
                 serverFile.delete();
             }
             file.renameTo(serverFile);
-            String info = "文件上传成功！文件名为" + IP + "-" + fileName;
             fileName = fileName.substring(0,fileName.lastIndexOf("."));
             String photoDir = this.getServletContext().getRealPath("") + "\\resources\\img\\covers\\"+fileName+".jpg";
             FFMPEGTool.getInstance().screenImageRandom(serverFile.getPath(),photoDir);
-           // request.setAttribute("Info", info);
+            request.setAttribute("Info", true);
             System.out.println("FILE NOT NULL");
+            request.getRequestDispatcher("uploadVideo.jsp").forward(request,response);
         }
 
     }
-
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         this.doPost(request, response);
     }
