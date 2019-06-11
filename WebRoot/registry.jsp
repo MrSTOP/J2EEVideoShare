@@ -225,7 +225,7 @@
                 </div>
             </div>
         </div>
-        <div style="margin: 20px auto 90px;width: 250px">
+        <div style="margin: 20px auto 100px;width: 250px">
             <div class="mdc-dialog"
                  role="alertdialog"
                  aria-modal="true"
@@ -244,8 +244,13 @@
                 </div>
                 <div class="mdc-dialog__scrim"></div>
             </div>
-            <button id="SubmitInfo" type="button" class="mdc-button mdc-button--unelevated" style="float: left;display: inline;">注册</button>
-            <button type="reset" class="mdc-button mdc-button--outlined" style="float: right;display: inline;">清空</button>
+            <div style="width: 250px;height: 40px;margin-bottom: 10px;">
+                <a href="./login.jsp" class="mdc-button mdc-button--unelevated" style="float: left;">登录</a>
+                <button type="reset" class="mdc-button mdc-button--outlined" style="float: right">清空</button>
+            </div>
+            <div>
+                <button id="SubmitInfo" type="button" class="mdc-button mdc-button--raised" style="width: 250px">注册</button>
+            </div>
         </div>
     </form>
 </article>
