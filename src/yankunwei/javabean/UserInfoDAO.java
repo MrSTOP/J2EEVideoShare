@@ -110,6 +110,37 @@ public class UserInfoDAO implements IUserInfoDAO {
     }
 
     @Override
+    public boolean freshUserInfo(UserInfo userInfo) {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        try {
+            connection = DataBaseHelper.getInstance().getConnection();
+            String SQL = "SELECT UID, UserName, Sex, Birth, Email, RegDay, LastLogin, Coin FROM user WHERE UID=?";
+            preparedStatement = connection.prepareStatement(SQL);
+            preparedStatement.setInt(1, userInfo.getUID());
+            resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                userInfo.setUID(resultSet.getInt("UID"));
+                userInfo.setUserName(resultSet.getString("UserName"));
+                userInfo.setSex(resultSet.getString("Sex"));
+                userInfo.setBirth(resultSet.getTimestamp("Birth"));
+                userInfo.setEmail(resultSet.getString("Email"));
+                userInfo.setRegDay(resultSet.getString("RegDay"));
+                userInfo.setLastLogin(resultSet.getTimestamp("LastLogin"));
+                userInfo.setCoin(resultSet.getInt("Coin"));
+            } else {
+                return false;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DataBaseHelper.getInstance().closeResource(resultSet, preparedStatement, connection);
+        }
+        return false;
+    }
+
+    @Override
     public boolean loginCheckByUID(int UID, String passwordEncrypt) {
         Connection connection = null;
         PreparedStatement preparedStatement = null;

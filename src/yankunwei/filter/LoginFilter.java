@@ -32,7 +32,7 @@ public class LoginFilter implements Filter {
         if (request.getSession().getAttribute(LoginCheck.SESSION_ATTR_USER_INFO) != null) {
             IUserInfoDAO userInfoDAO = new UserInfoDAO();
             UserInfo userInfo = (UserInfo) request.getSession().getAttribute(LoginCheck.SESSION_ATTR_USER_INFO);
-            userInfoDAO.updateUserInfo(userInfo);
+            userInfoDAO.freshUserInfo(userInfo);
             request.getSession().setAttribute(LoginCheck.SESSION_ATTR_USER_INFO, userInfo);
         }
         if (request.getSession().getAttribute(LoginCheck.SESSION_ATTR_USER_INFO) == null &&

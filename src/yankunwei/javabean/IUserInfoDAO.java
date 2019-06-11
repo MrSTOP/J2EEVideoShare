@@ -13,6 +13,8 @@ public interface IUserInfoDAO {
 
     boolean updateUserInfo(UserInfo userInfo);
 
+    boolean freshUserInfo(UserInfo userInfo);
+
     boolean loginCheckByUID(int UID, String passwordEncrypt);
 
     boolean loginCheckByEmail(String email, String passwordEncrypt);
