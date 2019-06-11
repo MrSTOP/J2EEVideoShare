@@ -73,6 +73,7 @@
             <i class="material-icons">view_headline</i>个人信息
         </span>
     </div>
+    <div style="height: 30px"></div>
     <div style="    padding: 20px 20px 0; position: relative;">
         <div>
             <form action="ToPersonalInfo" method="post" style="text-align: center">

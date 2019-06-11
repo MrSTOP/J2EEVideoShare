@@ -79,13 +79,13 @@
       <div class="mdc-layout-grid">
           <div class="mdc-layout-grid__inner">
               <c:if test="${requestScope.VideoList.size() != 0}">
-                  <c:forEach var="i" begin="0" end="${requestScope.VideoList.size()}" step="1">
+                  <c:forEach var="i" begin="0" end="${requestScope.VideoList.size()-1}" step="1">
                       <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4">
                           <div class="mdc-card demo-card">
                               <div class="mdc-card__primary-action demo-card__primary-action" tabindex="0">
-                                  <div class="mdc-card__media mdc-card__media--16-9 demo-card__media" style="background-image: url('${requestScope.url.get(i)}');"></div>
+                                  <div class="mdc-card__media mdc-card__media--16-9 demo-card__media" style="background-image: url('${requestScope.URLS.get(i)}');"></div>
                                   <div class="demo-card__primary">
-                                      <h2 class="demo-card__title mdc-typography mdc-typography--headline6">${requestScope.Lisvideo.get(i).getVideoName()}</h2>
+                                      <h2 class="demo-card__title mdc-typography mdc-typography--headline6">${requestScope.VideoList.get(i).getVideoName()}</h2>
                                   </div>
                               </div>
                           </div>
