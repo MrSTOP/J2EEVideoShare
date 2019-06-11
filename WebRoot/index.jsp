@@ -54,11 +54,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               <span class="mdc-button__label">上一页</span></button>
       第${requestScope.PageNo}页,共有${requestScope.PageCount}页
           <button onclick="window.location.href='ServletIndex?page=${requestScope.PageNo + 1}'"
-                  class="demo-button mdc-button mdc-button--dense mdc-button--outlined mdc-ripple-upgraded"${requestScope.PageNo != requestScope.PageCount?null:"disabled"}>
+                  class="demo-button mdc-button mdc-button--dense mdc-button--outlined mdc-ripple-upgraded"${requestScope.PageNo < requestScope.PageCount?null:"disabled"}>
               <span class="mdc-button__label">下一页</span></button>
           <button onclick="window.location.href='ServletIndex?page=${requestScope.PageCount}'"
                   class="demo-button mdc-button mdc-button--dense mdc-button--outlined mdc-ripple-upgraded"
-          ${requestScope.PageNo != requestScope.PageCount?null:"disabled"}>
+          ${requestScope.PageNo < requestScope.PageCount?null:"disabled"}>
               <span class="mdc-button__label">最后一页</span></button>
   </div>
   <article>

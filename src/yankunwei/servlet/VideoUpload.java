@@ -3,6 +3,7 @@ package yankunwei.servlet;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import com.oreilly.servlet.multipart.FileRenamePolicy;
+import yankunwei.utils.FFMPEGTool;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,7 +19,7 @@ import java.util.Enumeration;
 public class VideoUpload extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String IP = request.getRemoteAddr();
-        String saveDir = this.getServletContext().getRealPath("") + "\\UploadFile";
+        String saveDir = this.getServletContext().getRealPath("") + "\\resources\\videos";
         File saveDirectory = new File(saveDir);
         if (!saveDirectory.exists()) {
             saveDirectory.mkdir();
@@ -38,7 +39,9 @@ public class VideoUpload extends HttpServlet {
             }
             file.renameTo(serverFile);
             String info = "文件上传成功！文件名为" + IP + "-" + fileName;
-            request.setAttribute("Info", info);
+            FFMPEGTool.getInstance().screenImageRandom(serverFile.getPath(),)
+           // request.setAttribute("Info", info);
+            System.out.println("FILE NOT NULL");
         }
 
     }

@@ -41,6 +41,7 @@ public class Collectvideo extends HttpServlet {
             int PageSize = 12;
             int pageCount = userCollectVide.size()/PageSize;
             pageCount += userCollectVide.size() % PageSize == 0 ? 0 : 1;
+            if(pageCount == 0) pageCount=1;
             Integer pageNo = reqPageStr == null ? 1 : Integer.valueOf(reqPageStr);
             Listvideo = PageVideo.getpages(pageNo, PageSize, userCollectVide);
             request.setAttribute("PageCount",pageCount);

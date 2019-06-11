@@ -42,7 +42,7 @@
 <LINK REL="stylesheet" type="text/css" href="./css/MDCHelperCSS.css">
 <script src="js/material-components-web.js"></script>
 <script src="js/jquery-3.4.1.js"></script>
-<script src="js/MDCHelperJavaScript.js"></script>x
+<script src="js/MDCHelperJavaScript.js"></script>
 <script>
     $(function () {
         $(document).ready(function () {
@@ -51,32 +51,32 @@
         })
     })
 </script>
-<script src="./js/jquery-3.4.1.js"></script>
 <body>
 <div style=" height: 45px; padding-left: 30px;border-bottom: 1px solid #ddd; position: relative;">
-    <div style="margin-top: 15px">
-          <span class="mdc-typography--body1" style="display: flex;margin-top: 10px;font-size: 20px">
+    <button class="demo-button mdc-button mdc-button--unelevated demo-button-shaped mdc-ripple-upgraded" style="float:right;font-size: 20px" onclick="window.location.href='DeleteAllCollection'">
+        <i class="material-icons mdc-button__icon">delete</i><span class="mdc-button__label">清空</span></button>
+    <div style="margin-top: 10px">
+          <span class="mdc-typography--body1" style="display: flex;font-size: 20px">
             <i class="material-icons">view_headline</i>收藏夹
         </span>
-        <button class="demo-button mdc-button mdc-button--unelevated demo-button-shaped mdc-ripple-upgraded" style="float: right">
-            <i class="material-icons mdc-button__icon">delete</i><span class="mdc-button__label">清空</span></button>
+
     </div>
 </div>
 <div style="text-align: center;">
-    <button onclick="window.location.href='ServletIndex?page=1'"
+    <button onclick="window.location.href='Collectvideo?page=1'"
             class="demo-button mdc-button mdc-button--dense mdc-button--outlined mdc-ripple-upgraded"${requestScope.PageNo>1?null:"disabled"}>
         <span class="mdc-button__label">第一页</span></button>
-    <button onclick="window.location.href='ServletIndex?page=${requestScope.PageNo - 1}'"
+    <button onclick="window.location.href='Collectvideo?page=${requestScope.PageNo - 1}'"
             class="demo-button mdc-button mdc-button--dense mdc-button--outlined mdc-ripple-upgraded"
     ${requestScope.PageNo>1?null:"disabled"}>
         <span class="mdc-button__label">上一页</span></button>
     第${requestScope.PageNo}页,共有${requestScope.PageCount}页
-    <button onclick="window.location.href='ServletIndex?page=${requestScope.PageNo + 1}'"
-            class="demo-button mdc-button mdc-button--dense mdc-button--outlined mdc-ripple-upgraded"${requestScope.PageNo != requestScope.PageCount?null:"disabled"}>
+    <button onclick="window.location.href='Collectvideo?page=${requestScope.PageNo + 1}'"
+            class="demo-button mdc-button mdc-button--dense mdc-button--outlined mdc-ripple-upgraded"${requestScope.PageNo < requestScope.PageCount?null:"disabled"}>
         <span class="mdc-button__label">下一页</span></button>
-    <button onclick="window.location.href='ServletIndex?page=${requestScope.PageCount}'"
+    <button onclick="window.location.href='Collectvideo?page=${requestScope.PageCount}'"
             class="demo-button mdc-button mdc-button--dense mdc-button--outlined mdc-ripple-upgraded"
-    ${requestScope.PageNo != requestScope.PageCount?null:"disabled"}>
+    ${requestScope.PageNo < requestScope.PageCount?null:"disabled"}>
         <span class="mdc-button__label">最后一页</span></button>
 </div>
 <div class="mdc-layout-grid">

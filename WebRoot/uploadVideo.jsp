@@ -86,7 +86,6 @@
                 type: "POST",
                 data: formData,
                 xhr: function () { //获取ajaxSettings中的xhr对象，为它的upload属性绑定progress事件的处理函数
-
                     myXhr = $.ajaxSettings.xhr();
                     if (myXhr.upload) { //检查upload属性是否存在
                         //绑定progress事件的回调函数
@@ -121,8 +120,8 @@
 
 <body style="text-align: center">
 <div style=" height: 50px; padding-left: 30px;border-bottom: 1px solid #ddd;">
-        <span class="mdc-typography--body1" style="display: flex;margin-top: 10px">
-        <i class="material-icons">view_headline</i>个人信息
+        <span class="mdc-typography--body1" style="display: flex;margin-top: 10px;font-size: 20px">
+        <i class="material-icons">view_headline</i>上传视频
         </span>
 </div>
 <form action="VideoUpload" method="post" enctype="multipart/form-data">
@@ -147,7 +146,6 @@
             </div>
         </div>
     </div>
-    <button>asdfasdfasdrf</button>
 </form>
 <div style="width: 60%;margin: 30px auto">
     <div class="hero-linear-progress-indicator">

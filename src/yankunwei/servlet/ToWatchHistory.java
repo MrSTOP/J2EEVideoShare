@@ -38,6 +38,7 @@ public class ToWatchHistory extends HttpServlet {
             int PageSize = 9;
             int pageCount = userHistoryinfoList.size()/PageSize;
             pageCount += userHistoryinfoList.size() % PageSize == 0 ? 0 : 1;
+            if(pageCount == 0) pageCount=1;
             for(int i =0;i < userHistoryinfoList.size();i++)
             {
                 String videoName = userHistoryinfoList.get(i).getVideoname().substring(0,userHistoryinfoList.get(i).getVideoname().lastIndexOf('.'));
