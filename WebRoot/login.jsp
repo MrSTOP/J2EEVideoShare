@@ -140,115 +140,123 @@
         </header>
         <div style="height: 60px"></div>
         <form>
-            <div class="MDCDivContainer">
+            <div>
+                <img src="./resources/img/titleIcon.png" style="width: 100px;height: 100px"></img>
+            </div>
+            <div class="mdc-card demo-card" style="width: 500px;margin: auto">
                 <div>
-                    <div style="width: 400px;"
-                         class="mdc-text-field mdc-text-field--outlined mdc-text-field--with-leading-icon">
-                        <i class="material-icons mdc-text-field__icon">perm_identity</i>
-                        <input id="EmailOrUID" name="emailOrUID" type="text" onkeyup="$.func.spaceReplace(this)"
-                               class="mdc-text-field__input" required>
-                        <div class="mdc-notched-outline">
-                            <div class="mdc-notched-outline__leading"></div>
-                            <div class="mdc-notched-outline__notch">
-                                <label for="EmailOrUID" class="mdc-floating-label">用户名/UID</label>
-                            </div>
-                            <div class="mdc-notched-outline__trailing"></div>
-                        </div>
-                    </div>
-                    <div class="mdc-text-field-helper-line">
-                        <p class="mdc-text-field-helper-text mdc-text-field-helper-text--persistent mdc-text-field-helper-text--validation-msg">
-                            请输入UID或电子邮件地址
-                        </p>
-                    </div>
+                    <h1>登录</h1>
                 </div>
-            </div>
-            <div class="MDCDivContainer">
-                <div>
-                    <div style="width: 400px;"
-                         class="mdc-text-field mdc-text-field--outlined">
-                        <input id="Password" name="password" type="text" onkeyup="$.func.spaceReplace(this)"
-                               class="mdc-text-field__input" required>
-                        <div class="mdc-notched-outline">
-                            <div class="mdc-notched-outline__leading"></div>
-                            <div class="mdc-notched-outline__notch">
-                                <label for="Password" class="mdc-floating-label">密码</label>
-                            </div>
-                            <div class="mdc-notched-outline__trailing"></div>
-                        </div>
-                    </div>
-                    <div class="mdc-text-field-helper-line">
-                        <p class="mdc-text-field-helper-text mdc-text-field-helper-text--persistent mdc-text-field-helper-text--validation-msg">
-                            请输入密码
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <button id="CAPTCHAButton" type="button" class="mdc-button mdc-button--unelevated">点我验证</button>
-            <div id="CAPTCHADialog" class="mdc-dialog" role="alertdialog" aria-modal="true" aria-labelledby="my-dialog-title" aria-describedby="my-dialog-content">
-                <div class="mdc-dialog__container">
-                    <div class="mdc-dialog__surface">
-                        <h2 class="mdc-dialog__title" id="my-dialog-title">拖动滑块拼合图片</h2>
-                        <div class="mdc-dialog__content" id="DialogInfo">
-                            <div id="CAPTCHADiv">
-                                <div id="CAPTCHABorder">
-                                    <div id="CAPTCHAImgDiv" style="">
-                                        <div id="CAPTCHAResult">
-                                            <img id="CAPTCHAResultRight" src="./resources/img/CAPTCHA/Info/CAPTCHA_Right.png" alt="CAPTCHA_Wrong">
-                                            <img id="CAPTCHAResultWrong" src="./resources/img/CAPTCHA/Info/CAPTCHA_Wrong.png" alt="CAPTCHA_Right">
-                                        </div>
-                                        <img id="CAPTCHAImgBackground" class="CAPTCHAImg" src="" alt="CAPTCHA_Background">
-                                        <img id="CAPTCHAImgForeground" class="CAPTCHAImg" src="" alt="CAPTCHA_Foreground">
-                                        <div id="RangeDiv" style="z-index: 50; position: absolute; left: -20px; top: -20px">
-                                            <p id="testInfo" style="z-index: 5;background-color: white; border: solid 1px;border-color: aqua; display: inline;">0</p>
-                                            <p id="test_Info" style="z-index: 5;background-color: white; border: solid 1px;border-color: chocolate;color:#66CCFF; display: inline;">0</p>
-                                        </div>
-                                    </div>
+                <div class="MDCDivContainer">
+                    <div>
+                        <div style="width: 400px;"
+                             class="mdc-text-field mdc-text-field--outlined mdc-text-field--with-leading-icon">
+                            <i class="material-icons mdc-text-field__icon">perm_identity</i>
+                            <input id="EmailOrUID" name="emailOrUID" type="text" onkeyup="$.func.spaceReplace(this)"
+                                   class="mdc-text-field__input" required>
+                            <div class="mdc-notched-outline">
+                                <div class="mdc-notched-outline__leading"></div>
+                                <div class="mdc-notched-outline__notch">
+                                    <label for="EmailOrUID" class="mdc-floating-label">用户名/UID</label>
                                 </div>
-                                <div id="CAPTCHASlider">
-                                    <div class="mdc-slider" tabindex="0" role="slider"
-                                         aria-valuemin="0" aria-valuemax="1024" aria-valuenow="0"
-                                         aria-label="Select Value" aria-disabled="false">
-                                        <div class="mdc-slider__track-container">
-                                            <div class="mdc-slider__track"></div>
-                                        </div>
-                                        <div class="mdc-slider__thumb-container">
-                                            <svg class="mdc-slider__thumb" width="21" height="21">
-                                                <circle cx="10.5" cy="10.5" r="7.875"></circle>
-                                            </svg>
-                                            <div class="mdc-slider__focus-ring"></div>
-                                        </div>
-                                    </div>
-                                </div>
+                                <div class="mdc-notched-outline__trailing"></div>
                             </div>
                         </div>
-                        <footer class="mdc-dialog__actions">
-                            <button type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="cancel">
-                                <span class="mdc-button__label">取消</span>
-                            </button>
-                        </footer>
+                        <div class="mdc-text-field-helper-line">
+                            <p class="mdc-text-field-helper-text mdc-text-field-helper-text--persistent mdc-text-field-helper-text--validation-msg">
+                                请输入UID或电子邮件地址
+                            </p>
+                        </div>
                     </div>
                 </div>
-                <div class="mdc-dialog__scrim"></div>
-            </div>
-            <div style="margin: 20px auto 90px;width: 250px">
-                <div class="mdc-dialog" role="alertdialog" aria-modal="true" aria-labelledby="my-dialog-title" aria-describedby="my-dialog-content">
+                <div class="MDCDivContainer">
+                    <div>
+                        <div style="width: 400px;"
+                             class="mdc-text-field mdc-text-field--outlined">
+                            <input id="Password" name="password" type="password" onkeyup="$.func.spaceReplace(this)"
+                                   class="mdc-text-field__input" required>
+                            <div class="mdc-notched-outline">
+                                <div class="mdc-notched-outline__leading"></div>
+                                <div class="mdc-notched-outline__notch">
+                                    <label for="Password" class="mdc-floating-label">密码</label>
+                                </div>
+                                <div class="mdc-notched-outline__trailing"></div>
+                            </div>
+                        </div>
+                        <div class="mdc-text-field-helper-line">
+                            <p class="mdc-text-field-helper-text mdc-text-field-helper-text--persistent mdc-text-field-helper-text--validation-msg">
+                                请输入密码
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div id="CAPTCHADialog" class="mdc-dialog" role="alertdialog" aria-modal="true" aria-labelledby="my-dialog-title" aria-describedby="my-dialog-content">
                     <div class="mdc-dialog__container">
                         <div class="mdc-dialog__surface">
-                            <h2 class="mdc-dialog__title" id="ErrorInfoTitle"></h2>
-                            <div class="mdc-dialog__content" id="ErrorInfo">
+                            <h2 class="mdc-dialog__title" id="my-dialog-title">拖动滑块拼合图片</h2>
+                            <div class="mdc-dialog__content" id="DialogInfo">
+                                <div id="CAPTCHADiv">
+                                    <div id="CAPTCHABorder">
+                                        <div id="CAPTCHAImgDiv" style="">
+                                            <div id="CAPTCHAResult">
+                                                <img id="CAPTCHAResultRight" src="./resources/img/CAPTCHA/Info/CAPTCHA_Right.png" alt="CAPTCHA_Wrong">
+                                                <img id="CAPTCHAResultWrong" src="./resources/img/CAPTCHA/Info/CAPTCHA_Wrong.png" alt="CAPTCHA_Right">
+                                            </div>
+                                            <img id="CAPTCHAImgBackground" class="CAPTCHAImg" src="" alt="CAPTCHA_Background">
+                                            <img id="CAPTCHAImgForeground" class="CAPTCHAImg" src="" alt="CAPTCHA_Foreground">
+                                            <div id="RangeDiv" style="z-index: 50; position: absolute; left: -20px; top: -20px">
+                                                <p id="testInfo" style="z-index: 5;background-color: white; border: solid 1px;border-color: aqua; display: inline;">0</p>
+                                                <p id="test_Info" style="z-index: 5;background-color: white; border: solid 1px;border-color: chocolate;color:#66CCFF; display: inline;">0</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="CAPTCHASlider">
+                                        <div class="mdc-slider" tabindex="0" role="slider"
+                                             aria-valuemin="0" aria-valuemax="1024" aria-valuenow="0"
+                                             aria-label="Select Value" aria-disabled="false">
+                                            <div class="mdc-slider__track-container">
+                                                <div class="mdc-slider__track"></div>
+                                            </div>
+                                            <div class="mdc-slider__thumb-container">
+                                                <svg class="mdc-slider__thumb" width="21" height="21">
+                                                    <circle cx="10.5" cy="10.5" r="7.875"></circle>
+                                                </svg>
+                                                <div class="mdc-slider__focus-ring"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <footer class="mdc-dialog__actions">
-                                <button type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="ok">
-                                    <span class="mdc-button__label">确定</span>
+                                <button type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="cancel">
+                                    <span class="mdc-button__label">取消</span>
                                 </button>
                             </footer>
                         </div>
                     </div>
                     <div class="mdc-dialog__scrim"></div>
                 </div>
-                <button id="SubmitInfo"  type="button" class="mdc-button mdc-button--unelevated"
-                        style="float: left;display: inline;">登录</button>
-                <button type="button" onclick="window.location.href='./registry.jsp'" class="mdc-button mdc-button--outlined" style="float: right;display: inline;">注册</button>
+                <button id="CAPTCHAButton" type="button" class="mdc-button mdc-button--unelevated" style="width:400px;margin: auto">点我验证</button>
+                <div style="margin: 20px auto 90px;width: 250px">
+                            <div class="mdc-dialog" role="alertdialog" aria-modal="true" aria-labelledby="my-dialog-title" aria-describedby="my-dialog-content">
+                                <div class="mdc-dialog__container">
+                                    <div class="mdc-dialog__surface">
+                                        <h2 class="mdc-dialog__title" id="ErrorInfoTitle"></h2>
+                                        <div class="mdc-dialog__content" id="ErrorInfo">
+                                        </div>
+                                        <footer class="mdc-dialog__actions">
+                                            <button type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="ok">
+                                                <span class="mdc-button__label">确定</span>
+                                            </button>
+                                        </footer>
+                                    </div>
+                                </div>
+                                <div class="mdc-dialog__scrim"></div>
+                            </div>
+                            <button id="SubmitInfo"  type="button" class="mdc-button mdc-button--unelevated"
+                                    style="float: left;display: inline;">登录</button>
+                            <button type="button" onclick="window.location.href='./registry.jsp'" class="mdc-button mdc-button--outlined" style="float: right;display: inline;">注册</button>
+                        </div>
             </div>
         </form>
         <h1>Login JSP</h1>

@@ -78,16 +78,16 @@ public class FFMPEGTool {
         return second;
     }
 
-    public boolean screeImageRandom(String videoFilePath, String picturePath, String time) {
-        return screenImageRandom(ffmpegPath, videoFilePath, picturePath, time);
+    public boolean screeImageRandom(String videoFilePath, String picturePath) {
+        return screenImageRandom(ffmpegPath, videoFilePath, picturePath);
     }
 
-    public boolean screenImageRandom(String ffmpegPath, String videoFilePath, String picturePath, String time) {
+    public boolean screenImageRandom(String ffmpegPath, String videoFilePath, String picturePath) {
         Random random = new Random();
         int totalTime = ffmpegTimeToSecond(getVideoTotalTime(ffmpegPath, videoFilePath));
         int pictureTime = random.nextInt(totalTime) + 10;
         String pictureTimeStr = secondToHHmmss(pictureTime);
-        return screenImage(ffmpegPath, videoFilePath, picturePath, time);
+        return screenImage(ffmpegPath, videoFilePath, picturePath, pictureTimeStr);
     }
 
     public boolean screenImage(String videoFilePath, String picturePath, String time) {

@@ -39,7 +39,9 @@ public class VideoUpload extends HttpServlet {
             }
             file.renameTo(serverFile);
             String info = "文件上传成功！文件名为" + IP + "-" + fileName;
-            FFMPEGTool.getInstance().screenImageRandom(serverFile.getPath(),)
+            fileName = fileName.substring(0,fileName.lastIndexOf("."));
+            String photoDir = this.getServletContext().getRealPath("") + "\\resources\\img\\covers\\"+fileName+".jpg";
+            FFMPEGTool.getInstance().screenImageRandom(serverFile.getPath(),photoDir);
            // request.setAttribute("Info", info);
             System.out.println("FILE NOT NULL");
         }
