@@ -85,7 +85,7 @@ public class FFMPEGTool {
     public boolean screenImageRandom(String ffmpegPath, String videoFilePath, String picturePath) {
         Random random = new Random();
         int totalTime = ffmpegTimeToSecond(getVideoTotalTime(ffmpegPath, videoFilePath));
-        int pictureTime = random.nextInt(totalTime) + 10;
+        int pictureTime = random.nextInt(totalTime);
         String pictureTimeStr = secondToHHmmss(pictureTime);
         return screenImage(ffmpegPath, videoFilePath, picturePath, pictureTimeStr);
     }
