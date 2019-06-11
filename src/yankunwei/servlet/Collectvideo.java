@@ -23,12 +23,15 @@ public class Collectvideo extends HttpServlet {
         int uid = ((UserInfo)request.getSession().getAttribute("user")).getUID();
         CollectVideoDAO collectVideoDAO = new CollectVideoDAO();
         List<UserCollectVideo> userCollectVide = collectVideoDAO.SelectAllVideoCollect(uid);
+        List<UserCollectVideo> Listvideo = new ArrayList<>();
         if(userCollectVide == null)
         {
+            request.setAttribute("PageCount", 1);
+            request.setAttribute("PageNo", 1);
+            request.setAttribute("CollectList", Listvideo);
             request.getRequestDispatcher("Collection.jsp").forward(request,response);
         }
         else {
-            List<UserCollectVideo> Listvideo = new ArrayList<>();
             String reqPageStr = request.getParameter("page");
             Integer pageNo = reqPageStr == null ? 1 : Integer.valueOf(reqPageStr);
             Listvideo = PageVideo.getpages(pageNo, 12, userCollectVide);

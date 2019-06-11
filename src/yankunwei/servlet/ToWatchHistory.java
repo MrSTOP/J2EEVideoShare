@@ -25,14 +25,18 @@ public class ToWatchHistory extends HttpServlet {
         List<UserHistoryinfo> userHistoryinfoList = new ArrayList<>();
         HistoryvideoDAO  historyvideoDAO = new HistoryvideoDAO();
         userHistoryinfoList = historyvideoDAO.selectAllHistory(UID);
+        List<UserHistoryinfo> userHistoryinfoList1 = new ArrayList<>();
         if (userHistoryinfoList == null)
         {
+            request.setAttribute("PageCount",1);
+            request.setAttribute("PageNo",1);
+            request.setAttribute("FileList",userHistoryinfoList1);
             request.getRequestDispatcher("WatchHistory.jsp").forward(request,response);
         }
         else{
             String reqPageStr = request.getParameter("page");
             Integer pageNo = reqPageStr == null ? 1 : Integer.valueOf(reqPageStr);
-            List<UserHistoryinfo> userHistoryinfoList1 = PageVideo.getpages(pageNo, 12, userHistoryinfoList);
+            userHistoryinfoList1 = PageVideo.getpages(pageNo, 12, userHistoryinfoList);
             request.setAttribute("PageCount", PageVideo.getPage());
             request.setAttribute("PageNo",pageNo);
             request.setAttribute("FileList",userHistoryinfoList1);

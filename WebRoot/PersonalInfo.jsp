@@ -69,8 +69,10 @@
     <%session.setAttribute("MonthStr", Integer.valueOf(((UserInfo)request.getSession().getAttribute("user")).getStrBirth().split("-")[1]));%>
     <%session.setAttribute("DayStr", Integer.valueOf(((UserInfo)request.getSession().getAttribute("user")).getStrBirth().split("-")[2]));%>
     <div style=" height: 50px; padding-left: 30px;border-bottom: 1px solid #ddd;">
-        <i class="material-icons">view_headline</i>
-        <span>个人信息</span>
+        <span class="mdc-typography--body1" style="display: flex;margin-top: 10px">
+
+        <i class="material-icons">view_headline</i>个人信息
+        </span>
     </div>
     <div style="    padding: 20px 20px 0; position: relative;">
         <div>
