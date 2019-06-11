@@ -78,7 +78,7 @@ public class FFMPEGTool {
         return second;
     }
 
-    public boolean screeImageRandom(String videoFilePath, String picturePath) {
+    public boolean screenImageRandom(String videoFilePath, String picturePath) {
         return screenImageRandom(ffmpegPath, videoFilePath, picturePath);
     }
 
