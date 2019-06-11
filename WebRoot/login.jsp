@@ -173,7 +173,7 @@
                     <div>
                         <div style="width: 400px;"
                              class="mdc-text-field mdc-text-field--outlined">
-                            <input id="Password" name="password" type="text" onkeyup="$.func.spaceReplace(this)"
+                            <input id="Password" name="password" type="password" onkeyup="$.func.spaceReplace(this)"
                                    class="mdc-text-field__input" required>
                             <div class="mdc-notched-outline">
                                 <div class="mdc-notched-outline__leading"></div>
