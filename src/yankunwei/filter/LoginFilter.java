@@ -29,6 +29,12 @@ public class LoginFilter implements Filter {
         String URL = request.getRequestURL().toString();
         System.out.println(URL);
         System.out.println(request.getServletPath());
+        if (request.getSession().getAttribute(LoginCheck.SESSION_ATTR_USER_INFO) != null) {
+            IUserInfoDAO userInfoDAO = new UserInfoDAO();
+            UserInfo userInfo = (UserInfo) request.getSession().getAttribute(LoginCheck.SESSION_ATTR_USER_INFO);
+            userInfoDAO.updateUserInfo(userInfo);
+            request.getSession().setAttribute(LoginCheck.SESSION_ATTR_USER_INFO, userInfo);
+        }
         if (request.getSession().getAttribute(LoginCheck.SESSION_ATTR_USER_INFO) == null &&
                 request.getServletPath() != null &&
                 request.getServletPath().endsWith(".jsp") &&

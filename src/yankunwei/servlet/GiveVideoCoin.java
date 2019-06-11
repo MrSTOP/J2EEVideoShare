@@ -17,9 +17,10 @@ public class GiveVideoCoin extends HttpServlet {
         VideoDAO videoDAO = new VideoDAO();
         IUserInfoDAO userInfoDAO = new UserInfoDAO();
         UserInfo userInfo = ((UserInfo) request.getSession().getAttribute(LoginCheck.SESSION_ATTR_USER_INFO));
-        userInfoDAO.giveVideoCoin(userInfo, videoID);
         VideoInfo videoInfo = videoDAO.SelectVideo(videoID);
-        response.getWriter().write("{ \"coin\":" + videoInfo.getCoin() +"}");
+        UserInfo UPInfo = userInfoDAO.getUserInfoByUID(videoInfo.getUID());
+        userInfoDAO.giveVideoCoin(userInfo, videoID, UPInfo);
+        response.getWriter().write("{ \"coin\":" + videoDAO.SelectVideo(videoID).getCoin() +"}");
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
