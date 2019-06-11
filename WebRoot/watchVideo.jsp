@@ -71,7 +71,6 @@
                             </button>
                         </div>
                     </div>
-                    <a href="./Collection.jsp" class="material-icons mdc-top-app-bar__action-item" id="Favorite" title="收藏夹">star</a>
                     <a href="./PersonalMain.jsp" class="material-icons mdc-top-app-bar__action-item" id="UserSpace"
                        title="个人空间">perm_identity</a>
                     <span title="用户名">${sessionScope.user.userName}</span>
