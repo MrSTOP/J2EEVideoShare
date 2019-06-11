@@ -86,13 +86,10 @@
 </head>
 
 <body>
-<div style=" height: 45px; padding-left: 30px;border-bottom: 1px solid #ddd; position: relative; ">
-    <div style="margin-top: 20px">
-        <i class=“material-icons”>view_headline</i>
-        <span style="white-space: nowrap">修改密码</span>
-        <button class="demo-button mdc-button mdc-button--unelevated demo-button-shaped mdc-ripple-upgraded" style="float: right">
-            <i class="material-icons mdc-button__icon">delete</i><span class="mdc-button__label">清空</span></button>
-    </div>
+<div style=" height: 45px; padding-left: 30px;border-bottom: 1px solid #ddd;">
+        <span class="mdc-typography--body1" style="display: flex;margin-top: 10px;font-size: 20px">
+            <i class="material-icons">view_headline</i>修改密码
+        </span>
 </div>
 <form method="post" action="ChangePassword" style="text-align: center">
 <div class="MDCDivContainer">
@@ -152,7 +149,7 @@
         </div>
     </div>
 </div>
-    <input type="button"  class="demo-button mdc-button mdc-button--outlined mdc-ripple-upgraded" value="提交"style="width: 170px">
+    <input type="button"  class="demo-button mdc-button mdc-button--outlined mdc-ripple-upgraded" value="提交" style="width: 170px">
 </form>
 </body>
 </html>

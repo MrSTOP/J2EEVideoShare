@@ -30,9 +30,10 @@ public class ServletIndex extends HttpServlet {
         else {
             String reqPageStr = request.getParameter("page");
             Integer pageNo = reqPageStr == null ? 1 : Integer.valueOf(reqPageStr);
-            int PageSize = 12;
+            int PageSize = 9;
             int pageCount = videoList.size()/PageSize;
             pageCount += videoList.size() % PageSize == 0 ? 0 : 1;
+            if(pageCount == 0) pageCount=1;
             Listvideo = PageVideo.getpages(pageNo, PageSize, videoList);
             for(int i =0;i < Listvideo.size();i++)
             {

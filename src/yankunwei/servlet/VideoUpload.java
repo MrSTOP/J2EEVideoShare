@@ -3,6 +3,7 @@ package yankunwei.servlet;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import com.oreilly.servlet.multipart.FileRenamePolicy;
+import yankunwei.utils.FFMPEGTool;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,7 +19,7 @@ import java.util.Enumeration;
 public class VideoUpload extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String IP = request.getRemoteAddr();
-        String saveDir = this.getServletContext().getRealPath("") + "\\UploadFile";
+        String saveDir = this.getServletContext().getRealPath("") + "\\resources\\videos";
         File saveDirectory = new File(saveDir);
         if (!saveDirectory.exists()) {
             saveDirectory.mkdir();
@@ -32,17 +33,20 @@ public class VideoUpload extends HttpServlet {
         System.out.println(file.getName());
         if (file != null) {
             String fileName = file.getName();
-            File serverFile = new File(saveDir + "\\" + fileName + System.currentTimeMillis());
+            File serverFile = new File(saveDir + "\\" +System.currentTimeMillis() + "-" + fileName);
             if (serverFile.exists()) {
                 serverFile.delete();
             }
             file.renameTo(serverFile);
-            String info = "文件上传成功！文件名为" + IP + "-" + fileName;
-            request.setAttribute("Info", info);
+            fileName = fileName.substring(0,fileName.lastIndexOf("."));
+            String photoDir = this.getServletContext().getRealPath("") + "\\resources\\img\\covers\\"+fileName+".jpg";
+            FFMPEGTool.getInstance().screenImageRandom(serverFile.getPath(),photoDir);
+            request.setAttribute("Info", true);
+            System.out.println("FILE NOT NULL");
+            request.getRequestDispatcher("uploadVideo.jsp").forward(request,response);
         }
 
     }
-
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         this.doPost(request, response);
     }
