@@ -8,4 +8,6 @@ public interface IVideoDAO {
      boolean deleteVideo(String videoID);
      List<VideoInfo> SelectVideos();
      VideoInfo SelectVideo(String videoID);
+     boolean deleteAllVideo(int UID);
+     List<VideoInfo> SelectSelfVideos(int UID);
 }

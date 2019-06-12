@@ -140,6 +140,55 @@ public class VideoDAO implements IVideoDAO{
         return null;
     }
 
+    @Override
+    public boolean deleteAllVideo(int UID) {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        try{
+            connection = DataBaseHelper.getInstance().getConnection();
+            String sql = "DELETE from video where UID = ?";
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1,UID);
+            return preparedStatement.executeUpdate() != 0;
+        }catch (SQLException e){
+            System.out.println(e);
+        }finally {
+            DataBaseHelper.getInstance().closeResource(resultSet,preparedStatement,connection);
+        }
+        return false;
+    }
+
+    @Override
+    public List<VideoInfo> SelectSelfVideos(int UID) {
+        List<VideoInfo> videoInfoList = new ArrayList<>();
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        try{
+            connection = DataBaseHelper.getInstance().getConnection();
+            String sql = "SELECT *from video where UID = ?";
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1,UID);
+            resultSet = preparedStatement.executeQuery();
+            while (resultSet.next())
+            {
+                VideoInfo videoInfo = new VideoInfo();
+                videoInfo.setVideoID(resultSet.getString("VideoID"));
+                videoInfo.setVideoName(resultSet.getString("VideoName"));
+                videoInfo.setUID(resultSet.getInt("UID"));
+                videoInfo.setCoin(resultSet.getInt("Coin"));
+                videoInfoList.add(videoInfo);
+            }
+            return videoInfoList;
+        }catch (SQLException e){
+            System.out.println(e);
+        }finally {
+            DataBaseHelper.getInstance().closeResource(resultSet,preparedStatement,connection);
+        }
+        return null;
+    }
+
     public boolean updateVideoInfo(VideoInfo videoInfo) {
         Connection connection = null;
         PreparedStatement preparedStatement = null;

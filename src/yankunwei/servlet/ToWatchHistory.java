@@ -25,6 +25,7 @@ public class ToWatchHistory extends HttpServlet {
         HistoryvideoDAO  historyvideoDAO = new HistoryvideoDAO();
         userHistoryinfoList = historyvideoDAO.selectAllHistory(UID);
         List<UserHistoryinfo> userHistoryinfoList1 = new ArrayList<>();
+        List<String> url = new ArrayList<>();
         if (userHistoryinfoList == null)
         {
             request.setAttribute("PageCount",1);
@@ -42,11 +43,14 @@ public class ToWatchHistory extends HttpServlet {
             {
                 String videoName = userHistoryinfoList.get(i).getVideoname().substring(0,userHistoryinfoList.get(i).getVideoname().lastIndexOf('.'));
                 userHistoryinfoList.get(i).setVideoname(videoName);
+                url.add("./resources/img/covers/"+ videoName+".jpg");
             }
             Integer pageNo = reqPageStr == null ? 1 : Integer.valueOf(reqPageStr);
             userHistoryinfoList1 = PageVideo.getpages(pageNo, PageSize, userHistoryinfoList);
             request.setAttribute("PageCount", pageCount);
             request.setAttribute("PageNo",pageNo);
+            request.setAttribute("URLS",url);
+            request.setAttribute("info", request.getAttribute("info"));
             request.setAttribute("FileList",userHistoryinfoList1);
             request.getRequestDispatcher("WatchHistory.jsp").forward(request, response);
         }

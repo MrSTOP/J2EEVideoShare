@@ -125,6 +125,7 @@
             <div class="mdc-top-app-bar__row">
                 <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
                     <a href="index.jsp" class="material-icons mdc-top-app-bar__navigation-icon">home</a>
+                    <span class="mdc-top-app-bar__title">视频分享</span>
                 </section>
                 <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end">
                     <a href="./Collection.jsp" class="material-icons mdc-top-app-bar__action-item" id="Favorite" title="收藏夹">star</a>
@@ -153,7 +154,7 @@
                             <div class="mdc-notched-outline">
                                 <div class="mdc-notched-outline__leading"></div>
                                 <div class="mdc-notched-outline__notch">
-                                    <label for="EmailOrUID" class="mdc-floating-label">用户名/UID</label>
+                                    <label for="EmailOrUID" class="mdc-floating-label">邮箱/UID</label>
                                 </div>
                                 <div class="mdc-notched-outline__trailing"></div>
                             </div>
@@ -255,9 +256,5 @@
                         </div>
             </div>
         </form>
-        <h1>Login JSP</h1>
-        <a href="./registry.jsp">REG</a>
-        <input type="text" id="TEST">
-        <button id="HELP">TEST</button>
     </body>
 </html>

@@ -73,19 +73,25 @@
             <i class="material-icons">view_headline</i>个人信息
         </span>
     </div>
-    <div style="height: 30px"></div>
+    <div style="height: 10px"></div>
     <div style="    padding: 20px 20px 0; position: relative;">
         <div>
             <form action="ToPersonalInfo" method="post" style="text-align: center">
                 <div class="MDCDivContainer">
                     <div style="width: 210px">
                         <div class="mdc-text-field">
+                            <input type="text" readonly id="UID" class="mdc-text-field__input" name="username" value="${sessionScope.user.UID}">
+                            <label class="mdc-floating-label" for="UID">UID</label>
+                            <div class="mdc-line-ripple"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="MDCDivContainer">
+                    <div style="width: 210px">
+                        <div class="mdc-text-field">
                             <input type="text" id="username" class="mdc-text-field__input" name="username" value="${sessionScope.user.userName}">
                             <label class="mdc-floating-label" for="username">用户名</label>
                             <div class="mdc-line-ripple"></div>
-                        </div>
-                        <div class="mdc-text-field-helper-line">
-                            <div class="mdc-text-field-helper-text mdc-text-field-helper-text--persistent">用户名</div>
                         </div>
                     </div>
                 </div>
@@ -111,10 +117,10 @@
                             <label class="mdc-floating-label" for="email">电子邮件</label>
                             <div class="mdc-line-ripple"></div>
                         </div>
-                        <div class="mdc-text-field-helper-line">
-                            <div class="mdc-text-field-helper-text mdc-text-field-helper-text--persistent">电子邮件</div>
-                        </div>
                     </div>
+                </div>
+                <div>
+                    <span class="mdc-typography--body1">生日</span>
                 </div>
                 <div class="mdc-select mdc-ripple-upgraded" style="--mdc-ripple-fg-size:60px;width: 110px; --mdc-ripple-fg-scale:2.08852; --mdc-ripple-fg-translate-start:24.8px, -22.2px; --mdc-ripple-fg-translate-end:20.4px, -2px;">
                     <i class="mdc-select__dropdown-icon"></i>
@@ -173,27 +179,19 @@
                             style="vertical-align: inherit;"><font style="vertical-align: inherit;">日</font></font></label>
                     <div class="mdc-line-ripple" style="transform-origin: 54.2px center;"></div>
                 </div>
-                <div class="MDCDivContainer">
-                    <div style="width: 210px">
+                <div class="MDCDivContainer" style="position: relative;height: 80px;width: 310px;margin: 20px auto">
+                    <div style="width: 160px;position: absolute; left: 0px">
                         <div class="mdc-text-field">
                             <input type="text" id="regday" class="mdc-text-field__input" name="regday" value="${sessionScope.user.getStrRegDay()}" readonly>
                             <label class="mdc-floating-label" for="email">注册日期</label>
                             <div class="mdc-line-ripple"></div>
                         </div>
-                        <div class="mdc-text-field-helper-line">
-                            <div class="mdc-text-field-helper-text mdc-text-field-helper-text--persistent">注册日期</div>
-                        </div>
                     </div>
-                </div>
-                <div class="MDCDivContainer">
-                    <div style="width: 210px">
+                    <div style="width: 140px;position: absolute; right: 0px">
                         <div class="mdc-text-field">
                             <input type="text" id="coinCount" class="mdc-text-field__input" name="coinCount" value="${sessionScope.user.coin}" readonly>
                             <label class="mdc-floating-label" for="email">硬币数量</label>
                             <div class="mdc-line-ripple"></div>
-                        </div>
-                        <div class="mdc-text-field-helper-line">
-                            <div class="mdc-text-field-helper-text mdc-text-field-helper-text--persistent">硬币数量</div>
                         </div>
                     </div>
                 </div>

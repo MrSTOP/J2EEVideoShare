@@ -105,8 +105,7 @@
             </div>
         </div>
     </div>
-
-    <button type="submit" class="mdc-button mdc-button--unelevated">UP</button>
+    <button type="submit" class="mdc-button mdc-button--unelevated">上传视频</button>
 </form>
 <div style="width: 60%;margin: 30px auto">
     <div class="hero-linear-progress-indicator">
@@ -121,9 +120,6 @@
     </div>
 </div>
 
-<button id="Upload" class="mdc-button mdc-button--unelevated">上传</button>
-<button id="Up" class="mdc-button mdc-button--unelevated">UP</button>
-<button id="Down" class="mdc-button mdc-button--unelevated">DO</button>
 <div id="PreLook" style="width: 70%;margin: 30px auto">
 
 </div>

@@ -95,25 +95,27 @@
     <div class="mdc-layout-grid">
         <div class="mdc-layout-grid__inner">
 
-            <c:forEach items="${requestScope.FileList}" var="fileName">
+            <c:forEach var="i" begin="0" end="${requestScope.FileList.size() - 1}" step="1">
                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3">
-                    <div class="mdc-card demo-card" style="margin: 20px">
-                        <div class="mdc-card__primary-action demo-card__primary-action" tabindex="0">
-                            <div class="mdc-card__media mdc-card__media--16-9 demo-card__media"
-                                 style="background-image: url('https://material-components.github.io/material-components-web-catalog/static/media/photos/3x2/2.jpg');"></div>
-                            <div class="demo-card__primary">
-                                <h2 class="demo-card__title mdc-typography mdc-typography--headline6">${fileName.getVideoname()}</h2>
+                    <div class="mdc-card demo-card">
+                        <a href="VideoWatch?VideoID=${requestScope.FileList.get(i).getVideoID()}">
+                            <div class="mdc-card__primary-action demo-card__primary-action" tabindex="0">
+                                <div class="mdc-card__media mdc-card__media--16-9 demo-card__media" style="background-image: url('${requestScope.URLS.get(i)}');">
+                                </div>
+                                <div class="demo-card__primary">
+                                    <h2 class="demo-card__title mdc-typography mdc-typography--headline6" style="margin-left: 10px">${requestScope.FileList.get(i).getVideoname()}</h2>
+                                </div>
                             </div>
-                        </div>
+                        </a>
                         <div class="mdc-card__actions">
-                            <div class="mdc-card__action-icons">
-                                <button class="mdc-icon-button material-icons mdc-card__action mdc-card__action--icon--unbounded"
-                                        title="Delete" data-mdc-ripple-is-unbounded="true"
-                                        onclick="window.location.href='DeleteHistory?VideoID=${fileName.getVideoID()}'">
-                                    delete
-                                </button>
+                                <div class="mdc-card__action-icons">
+                                    <button class="mdc-icon-button material-icons mdc-card__action mdc-card__action--icon--unbounded"
+                                            title="Delete" data-mdc-ripple-is-unbounded="true"
+                                            onclick="document.location.href='DeleteHistory?VideoID=${FileList.get(i).getVideoID()}'">
+                                        delete
+                                    </button>
+                                </div>
                             </div>
-                        </div>
                     </div>
                 </div>
             </c:forEach>

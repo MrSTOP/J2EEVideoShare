@@ -46,6 +46,7 @@
             <div class="mdc-top-app-bar__row">
                 <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
                     <a href="index.jsp" class="material-icons mdc-top-app-bar__navigation-icon">home</a>
+                    <span class="mdc-top-app-bar__title">视频分享</span>
                 </section>
                 <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end">
                     <div style="position: relative">

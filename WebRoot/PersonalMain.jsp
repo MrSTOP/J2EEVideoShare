@@ -58,6 +58,11 @@
                         $("#PUpload").addClass("mdc-list-item--activated");
                         Rightsrc.src = "uploadVideo.jsp";
                         break;
+                    case "MyVideo":
+                        $("a").removeClass("mdc-list-item--activated");
+                        $("#MyVideo").addClass("mdc-list-item--activated");
+                        Rightsrc.src = "ShowSelfVideo";
+                        break;
                     default:
                         $("a").removeClass("mdc-list-item--activated");
                         $("#PCPwd").addClass("mdc-list-item--activated");
@@ -74,6 +79,7 @@
     <div class="mdc-top-app-bar__row">
         <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
             <a href="index.jsp" class="material-icons mdc-top-app-bar__navigation-icon">home</a>
+            <span class="mdc-top-app-bar__title">视频分享</span>
         </section>
         <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end">
             <div style="position: relative">
@@ -130,6 +136,10 @@
                 <a class="mdc-list-item"  id="PCPwd">
                     <i class="material-icons mdc-list-item__graphic" aria-hidden="true">create</i>
                     <span class="mdc-list-item__text">修改密码</span>
+                </a>
+                <a class="mdc-list-item"  id="MyVideo">
+                    <i class="material-icons mdc-list-item__graphic" aria-hidden="true">create</i>
+                    <span class="mdc-list-item__text">已上传视频</span>
                 </a>
             </nav>
         </div>

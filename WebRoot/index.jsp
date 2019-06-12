@@ -28,6 +28,7 @@
     <div class="mdc-top-app-bar__row">
         <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
             <a href="index.jsp" class="material-icons mdc-top-app-bar__navigation-icon">home</a>
+            <span class="mdc-top-app-bar__title">视频分享</span>
         </section>
         <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end">
             <div style="position: relative">
@@ -57,49 +58,53 @@
     </div>
 </header>
 <div style="height: 80px"></div>
-<c:if test="${requestScope.FileList.size() ==0||requestScope.FileList == null}">
+<span class="mdc-typography--headline2">视频观看</span>
+<c:if test="${requestScope.VideoList.size() == 0||requestScope.VideoList == null}">
     <h2 style="margin: 100px">无视频</h2>
 </c:if>
-<c:if test="${requestScope.VideoList.size() != 0}">
-<div style="text-align: center;">
-    <button onclick="window.location.href='ServletIndex?page=1'"
-            class="demo-button mdc-button mdc-button--dense mdc-button--outlined mdc-ripple-upgraded"${requestScope.PageNo>1?null:"disabled"}>
-        <span class="mdc-button__label">第一页</span></button>
-    <button onclick="window.location.href='ServletIndex?page=${requestScope.PageNo - 1}'"
-            class="demo-button mdc-button mdc-button--dense mdc-button--outlined mdc-ripple-upgraded"
-    ${requestScope.PageNo>1?null:"disabled"}>
-        <span class="mdc-button__label">上一页</span></button>
-    第${requestScope.PageNo}页,共有${requestScope.PageCount}页
-    <button onclick="window.location.href='ServletIndex?page=${requestScope.PageNo + 1}'"
-            class="demo-button mdc-button mdc-button--dense mdc-button--outlined mdc-ripple-upgraded"${requestScope.PageNo < requestScope.PageCount?null:"disabled"}>
-        <span class="mdc-button__label">下一页</span></button>
-    <button onclick="window.location.href='ServletIndex?page=${requestScope.PageCount}'"
-            class="demo-button mdc-button mdc-button--dense mdc-button--outlined mdc-ripple-upgraded"
-    ${requestScope.PageNo < requestScope.PageCount?null:"disabled"}>
-        <span class="mdc-button__label">最后一页</span></button>
-</div>
+<c:if test="${requestScope.VideoList.size() > 0}">
 <article>
     <div class="mdc-layout-grid">
         <div class="mdc-layout-grid__inner">
 
-                <c:forEach var="i" begin="0" end="${requestScope.VideoList.size()-1}" step="1">
+
+                <c:forEach var="i" begin="0" end="${requestScope.VideoList.size() - 1}" step="1">
                     <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4">
                         <div class="mdc-card demo-card">
-                            <div class="mdc-card__primary-action demo-card__primary-action" tabindex="0">
-                                <a href="VideoWatch?VideoID=${VideoList.get(i).getVideoID()}">
-                                    <div class="mdc-card__media mdc-card__media--16-9 demo-card__media"
-                                         style="background-image: url('${requestScope.URLS.get(i)}');"></div>
-                                </a>
-                                <div class="demo-card__primary">
-                                    <h2 class="demo-card__title mdc-typography mdc-typography--headline6">${requestScope.VideoList.get(i).getVideoName()}</h2>
+                            <a href="VideoWatch?VideoID=${requestScope.VideoList.get(i).getVideoID()}">
+                                <div class="mdc-card__primary-action demo-card__primary-action" tabindex="0">
+                                    <div class="mdc-card__media mdc-card__media--16-9 demo-card__media" style="background-image: url('${requestScope.URLS.get(i)}');">
+                                    </div>
+                                    <div class="demo-card__primary">
+                                        <h2 class="demo-card__title mdc-typography mdc-typography--headline6" style="margin-left: 10px">${requestScope.VideoList.get(i).getVideoName()}</h2>
+                                    </div>
                                 </div>
-                            </div>
+                            </a>
                         </div>
                     </div>
                 </c:forEach>
-            </c:if>
+
+
         </div>
     </div>
 </article>
+    <div style="text-align: center;margin-bottom: 30px">
+        <button onclick="window.location.href='ServletIndex?page=1'"
+                class="demo-button mdc-button mdc-button--dense mdc-button--outlined mdc-ripple-upgraded"${requestScope.PageNo>1?null:"disabled"}>
+            <span class="mdc-button__label">第一页</span></button>
+        <button onclick="window.location.href='ServletIndex?page=${requestScope.PageNo - 1}'"
+                class="demo-button mdc-button mdc-button--dense mdc-button--outlined mdc-ripple-upgraded"
+            ${requestScope.PageNo>1?null:"disabled"}>
+            <span class="mdc-button__label">上一页</span></button>
+        第${requestScope.PageNo}页,共有${requestScope.PageCount}页
+        <button onclick="window.location.href='ServletIndex?page=${requestScope.PageNo + 1}'"
+                class="demo-button mdc-button mdc-button--dense mdc-button--outlined mdc-ripple-upgraded"${requestScope.PageNo < requestScope.PageCount?null:"disabled"}>
+            <span class="mdc-button__label">下一页</span></button>
+        <button onclick="window.location.href='ServletIndex?page=${requestScope.PageCount}'"
+                class="demo-button mdc-button mdc-button--dense mdc-button--outlined mdc-ripple-upgraded"
+            ${requestScope.PageNo < requestScope.PageCount?null:"disabled"}>
+            <span class="mdc-button__label">最后一页</span></button>
+    </div>
+</c:if>
 </body>
 </html>
