@@ -11,6 +11,7 @@
  Target Server Version : 80015
  File Encoding         : 65001
 
+ Date: 11/06/2019 15:52:28
 */
 
 SET NAMES utf8mb4;
@@ -50,7 +51,7 @@ CREATE TABLE `user`  (
   INDEX `UID_2`(`UID`) USING BTREE,
   INDEX `UID_3`(`UID`) USING BTREE,
   INDEX `UID_4`(`UID`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 16 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for video
@@ -59,7 +60,8 @@ DROP TABLE IF EXISTS `video`;
 CREATE TABLE `video`  (
   `VideoID` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `VideoName` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `Photoname` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `UID` int(255) NULL DEFAULT NULL,
+  `Coin` int(255) NOT NULL DEFAULT 0,
   PRIMARY KEY (`VideoID`) USING BTREE,
   INDEX `VideoID`(`VideoID`) USING BTREE,
   INDEX `VideoID_2`(`VideoID`) USING BTREE,
@@ -74,8 +76,10 @@ DROP TABLE IF EXISTS `videocomment`;
 CREATE TABLE `videocomment`  (
   `VideoID` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `UID` int(11) NOT NULL,
-  `Comment` longtext CHARACTER SET utf8 COLLATE utf8_general_ci NULL,
-  PRIMARY KEY (`VideoID`, `UID`) USING BTREE,
+  `VideoComment` longtext CHARACTER SET utf8 COLLATE utf8_general_ci NULL,
+  `UUID` varchar(36) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  PRIMARY KEY (`VideoID`, `UID`, `UUID`) USING BTREE,
+  UNIQUE INDEX `UUID`(`UUID`) USING BTREE,
   INDEX `UID`(`UID`) USING BTREE,
   CONSTRAINT `videocomment_ibfk_1` FOREIGN KEY (`VideoID`) REFERENCES `video` (`VideoID`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `videocomment_ibfk_2` FOREIGN KEY (`UID`) REFERENCES `user` (`UID`) ON DELETE RESTRICT ON UPDATE RESTRICT
