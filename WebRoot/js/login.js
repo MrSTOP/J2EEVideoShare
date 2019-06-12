@@ -109,7 +109,7 @@ $(document).ready(function () {
                             $("#ErrorInfoTitle").html("验证码错误");
                             dialogs[1].open();
                         } else {
-                            $("#ErrorInfoTitle").html("用户名或密码错误");
+                            $("#ErrorInfoTitle").html("UID/邮箱或密码错误");
                             sliders[0].value = 0;
                             dialogs[1].open();
                         }
