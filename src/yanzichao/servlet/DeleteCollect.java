@@ -1,7 +1,6 @@
-package yankunwei.servlet;
+package yanzichao.servlet;
 
-import yankunwei.dao.HistoryvideoDAO;
-import yankunwei.javabean.UserHistoryinfo;
+import yanzichao.dao.CollectVideoDAO;
 import yankunwei.javabean.UserInfo;
 
 import javax.servlet.ServletException;
@@ -11,18 +10,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(name = "DeleteHistory",urlPatterns = "/DeleteHistory")
-public class DeleteHistory extends HttpServlet {
+@WebServlet(name = "DeleteCollect",urlPatterns = "/DeleteCollect")
+public class DeleteCollect extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int UID = ((UserInfo)request.getSession().getAttribute("user")).getUID();
+         int UID = ((UserInfo)request.getSession().getAttribute("user")).getUID();
         String videoID = request.getParameter("VideoID");
-        UserHistoryinfo userHistoryinfo = new UserHistoryinfo();
-        userHistoryinfo.setUID(UID);
-        userHistoryinfo.setVideoID(videoID);
-        HistoryvideoDAO historyvideoDAO = new HistoryvideoDAO();
-        if(historyvideoDAO.deleteHistory(userHistoryinfo))
+        CollectVideoDAO collectVideoDAO = new CollectVideoDAO();
+        if(collectVideoDAO.deleteVideoCollect(UID,videoID))
         request.setAttribute("info",true);
-        request.getRequestDispatcher("ToWatchHistory").forward(request,response);
+        request.getRequestDispatcher("Collectvideo").forward(request,response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

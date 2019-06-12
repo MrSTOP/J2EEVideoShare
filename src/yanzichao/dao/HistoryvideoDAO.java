@@ -1,6 +1,6 @@
-package yankunwei.dao;
+package yanzichao.dao;
 
-import yankunwei.javabean.UserHistoryinfo;
+import yanzichao.javabean.UserHistoryinfo;
 import yankunwei.utils.DataBaseHelper;
 
 import java.sql.Connection;

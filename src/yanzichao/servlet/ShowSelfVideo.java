@@ -1,9 +1,9 @@
-package yankunwei.servlet;
+package yanzichao.servlet;
 
-import yankunwei.dao.CollectVideoDAO;
-import yankunwei.javabean.PageVideo;
-import yankunwei.javabean.UserCollectVideo;
-import yankunwei.javabean.UserInfo;
+import yanzichao.dao.VideoDAO;
+import yankunwei.javabean.*;
+import yanzichao.javabean.PageVideo;
+import yanzichao.javabean.VideoInfo;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,15 +14,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-@WebServlet(name = "Collectvideo",urlPatterns = "/Collectvideo")
-public class Collectvideo extends HttpServlet {
+@WebServlet(name = "ShowSelfVideo",urlPatterns = "/ShowSelfVideo")
+public class ShowSelfVideo extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int uid = ((UserInfo)request.getSession().getAttribute("user")).getUID();
-        CollectVideoDAO collectVideoDAO = new CollectVideoDAO();
-        List<UserCollectVideo> userCollectVide = collectVideoDAO.SelectAllVideoCollect(uid);
-        List<UserCollectVideo> Listvideo = new ArrayList<>();
-        List<String> url = new ArrayList<>();
-        if(userCollectVide == null)
+        VideoDAO videoDAO = new VideoDAO();
+        List<VideoInfo> videoInfoList = videoDAO.SelectSelfVideos(uid);
+        List<VideoInfo> Listvideo = new ArrayList<>();
+        if(videoInfoList == null)
         {
             request.setAttribute("PageCount", 1);
             request.setAttribute("PageNo", 1);
@@ -31,23 +30,21 @@ public class Collectvideo extends HttpServlet {
         }
         else {
             String reqPageStr = request.getParameter("page");
-            for(int i =0;i < userCollectVide.size();i++)
+            for(int i =0;i < videoInfoList.size();i++)
             {
-                String videoName = userCollectVide.get(i).getVideoName().substring(0,userCollectVide.get(i).getVideoName().lastIndexOf('.'));
-                userCollectVide.get(i).setVideoName(videoName);
-                url.add("./resources/img/covers/"+ videoName+".jpg");
+                String videoName = videoInfoList.get(i).getVideoName().substring(0,videoInfoList.get(i).getVideoName().lastIndexOf('.'));
+                videoInfoList.get(i).setVideoName(videoName);
             }
             int PageSize = 12;
-            int pageCount = userCollectVide.size()/PageSize;
-            pageCount += userCollectVide.size() % PageSize == 0 ? 0 : 1;
+            int pageCount = videoInfoList.size()/PageSize;
+            pageCount += videoInfoList.size() % PageSize == 0 ? 0 : 1;
             if(pageCount == 0) pageCount=1;
             Integer pageNo = reqPageStr == null ? 1 : Integer.valueOf(reqPageStr);
-            Listvideo = PageVideo.getpages(pageNo, PageSize, userCollectVide);
+            Listvideo = PageVideo.getpages(pageNo, PageSize, videoInfoList);
             request.setAttribute("PageCount",pageCount);
             request.setAttribute("PageNo", pageNo);
-            request.setAttribute("URLS", url);
             request.setAttribute("CollectList", Listvideo);
-            request.getRequestDispatcher("Collection.jsp").forward(request, response);
+            request.getRequestDispatcher("DeleteSelfVideo.jsp").forward(request, response);
         }
     }
 

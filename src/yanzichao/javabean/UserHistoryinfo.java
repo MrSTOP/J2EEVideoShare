@@ -1,4 +1,4 @@
-package yankunwei.javabean;
+package yanzichao.javabean;
 
 import java.sql.Timestamp;
 

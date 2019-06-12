@@ -1,4 +1,4 @@
-package yankunwei.javabean;
+package yanzichao.javabean;
 
 import java.io.File;
 import java.nio.file.Files;

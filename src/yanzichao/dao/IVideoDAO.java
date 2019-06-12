@@ -1,6 +1,6 @@
-package yankunwei.dao;
+package yanzichao.dao;
 
-import yankunwei.javabean.VideoInfo;
+import yanzichao.javabean.VideoInfo;
 
 import java.util.List;
 

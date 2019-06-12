@@ -1,23 +1,31 @@
-package yankunwei.javabean;
+package yanzichao.javabean;
 
-public class VideoInfo {
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+public class UserCollectVideo {
+    private int UID;
     private String VideoID;
     private String VideoName;
-    private int UID;
-    private int coin;
-    public VideoInfo(){}
+    public UserCollectVideo(){}
     public String getVideoID() {
         return VideoID;
     }
+
     public void setVideoID(String videoID) {
         VideoID = videoID;
     }
+
     public String getVideoName() {
         return VideoName;
     }
+
     public void setVideoName(String videoName) {
         VideoName = videoName;
     }
+
 
     public int getUID() {
         return UID;
@@ -27,11 +35,5 @@ public class VideoInfo {
         this.UID = UID;
     }
 
-    public int getCoin() {
-        return coin;
-    }
 
-    public void setCoin(int coin) {
-        this.coin = coin;
-    }
 }

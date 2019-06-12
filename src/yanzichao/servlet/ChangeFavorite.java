@@ -1,9 +1,10 @@
-package yankunwei.servlet;
+package yanzichao.servlet;
 
-import yankunwei.dao.CollectVideoDAO;
-import yankunwei.dao.ICollectVideoDAO;
-import yankunwei.dao.IVideoDAO;
-import yankunwei.dao.VideoDAO;
+import yankunwei.servlet.LoginCheck;
+import yanzichao.dao.CollectVideoDAO;
+import yanzichao.dao.ICollectVideoDAO;
+import yanzichao.dao.IVideoDAO;
+import yanzichao.dao.VideoDAO;
 import yankunwei.javabean.*;
 
 import javax.servlet.ServletException;

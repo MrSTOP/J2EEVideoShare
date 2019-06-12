@@ -2,6 +2,11 @@ package yankunwei.servlet;
 
 import yankunwei.dao.*;
 import yankunwei.javabean.*;
+import yanzichao.dao.HistoryvideoDAO;
+import yanzichao.dao.IHistoryvideoDAO;
+import yanzichao.dao.VideoDAO;
+import yanzichao.javabean.UserHistoryinfo;
+import yanzichao.javabean.VideoInfo;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

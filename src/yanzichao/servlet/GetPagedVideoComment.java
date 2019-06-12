@@ -1,4 +1,4 @@
-package yankunwei.servlet;
+package yanzichao.servlet;
 
 import yankunwei.javabean.VideoCommentInfo;
 import yankunwei.dao.VideoCommentInfoDAO;

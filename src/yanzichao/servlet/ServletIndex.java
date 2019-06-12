@@ -1,7 +1,8 @@
-package yankunwei.servlet;
+package yanzichao.servlet;
 
-import yankunwei.dao.VideoDAO;
-import yankunwei.javabean.*;
+import yanzichao.dao.VideoDAO;
+import yanzichao.javabean.PageVideo;
+import yanzichao.javabean.VideoInfo;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

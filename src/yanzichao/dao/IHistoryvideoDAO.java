@@ -1,6 +1,6 @@
-package yankunwei.dao;
+package yanzichao.dao;
 
-import yankunwei.javabean.UserHistoryinfo;
+import yanzichao.javabean.UserHistoryinfo;
 
 import java.util.List;
 

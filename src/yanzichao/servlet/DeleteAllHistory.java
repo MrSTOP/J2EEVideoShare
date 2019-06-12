@@ -1,6 +1,6 @@
-package yankunwei.servlet;
+package yanzichao.servlet;
 
-import yankunwei.dao.CollectVideoDAO;
+import yanzichao.dao.HistoryvideoDAO;
 import yankunwei.javabean.UserInfo;
 
 import javax.servlet.ServletException;
@@ -10,15 +10,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(name = "DeleteCollect",urlPatterns = "/DeleteCollect")
-public class DeleteCollect extends HttpServlet {
+@WebServlet(name = "DeleteAllHistory",urlPatterns = "/DeleteAllHistory")
+public class DeleteAllHistory extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-         int UID = ((UserInfo)request.getSession().getAttribute("user")).getUID();
-        String videoID = request.getParameter("VideoID");
-        CollectVideoDAO collectVideoDAO = new CollectVideoDAO();
-        if(collectVideoDAO.deleteVideoCollect(UID,videoID))
-        request.setAttribute("info",true);
-        request.getRequestDispatcher("Collectvideo").forward(request,response);
+        int uid = ((UserInfo)request.getSession().getAttribute("user")).getUID();
+        HistoryvideoDAO historyvideoDAO = new HistoryvideoDAO();
+        if(historyvideoDAO.deleteAll(uid))
+        {
+           request.setAttribute("info",true);
+        }
+        request.getRequestDispatcher("ToWatchHistory").forward(request,response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

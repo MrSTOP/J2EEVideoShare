@@ -1,7 +1,6 @@
-package yankunwei.dao;
+package yanzichao.dao;
 
-import yankunwei.dao.IVideoDAO;
-import yankunwei.javabean.VideoInfo;
+import yanzichao.javabean.VideoInfo;
 import yankunwei.utils.DataBaseHelper;
 
 import java.sql.Connection;

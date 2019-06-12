@@ -1,11 +1,11 @@
-package yankunwei.servlet;
+package yanzichao.servlet;
 
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import com.oreilly.servlet.multipart.FileRenamePolicy;
 import yankunwei.javabean.UserInfo;
-import yankunwei.dao.VideoDAO;
-import yankunwei.javabean.VideoInfo;
+import yanzichao.dao.VideoDAO;
+import yanzichao.javabean.VideoInfo;
 import yankunwei.utils.FFMPEGTool;
 
 import javax.servlet.ServletException;
