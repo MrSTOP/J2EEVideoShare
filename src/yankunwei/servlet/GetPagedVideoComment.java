@@ -1,7 +1,7 @@
 package yankunwei.servlet;
 
 import yankunwei.javabean.VideoCommentInfo;
-import yankunwei.javabean.VideoCommentInfoDAO;
+import yankunwei.dao.VideoCommentInfoDAO;
 import yankunwei.utils.CommentListToJSON;
 
 import javax.servlet.ServletException;

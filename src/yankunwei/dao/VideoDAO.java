@@ -1,5 +1,7 @@
-package yankunwei.javabean;
+package yankunwei.dao;
 
+import yankunwei.dao.IVideoDAO;
+import yankunwei.javabean.VideoInfo;
 import yankunwei.utils.DataBaseHelper;
 
 import java.sql.Connection;
@@ -9,7 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class VideoDAO implements IVideoDAO{
+public class VideoDAO implements IVideoDAO {
 
     @Override
     public String addVideo(VideoInfo vInfo) {

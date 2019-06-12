@@ -1,5 +1,8 @@
 package yankunwei.servlet;
 
+import yankunwei.dao.IUserInfoDAO;
+import yankunwei.dao.UserInfoDAO;
+import yankunwei.dao.VideoDAO;
 import yankunwei.javabean.*;
 
 import javax.servlet.ServletException;
@@ -7,7 +10,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.swing.*;
 import java.io.IOException;
 
 @WebServlet(name = "GiveVideoCoin", urlPatterns = "/GiveVideoCoin")

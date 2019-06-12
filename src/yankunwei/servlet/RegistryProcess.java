@@ -1,8 +1,8 @@
 package yankunwei.servlet;
 
-import yankunwei.javabean.IUserInfoDAO;
+import yankunwei.dao.IUserInfoDAO;
 import yankunwei.javabean.UserInfo;
-import yankunwei.javabean.UserInfoDAO;
+import yankunwei.dao.UserInfoDAO;
 import yankunwei.utils.MD5Tool;
 
 import javax.servlet.ServletException;
@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.Calendar;
-import java.util.Map;
 
 @WebServlet(name = "RegistryProcess", urlPatterns = "/RegistryProcess")
 public class RegistryProcess extends HttpServlet {

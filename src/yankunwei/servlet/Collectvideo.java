@@ -1,6 +1,6 @@
 package yankunwei.servlet;
 
-import yankunwei.javabean.CollectVideoDAO;
+import yankunwei.dao.CollectVideoDAO;
 import yankunwei.javabean.PageVideo;
 import yankunwei.javabean.UserCollectVideo;
 import yankunwei.javabean.UserInfo;
@@ -10,12 +10,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 @WebServlet(name = "Collectvideo",urlPatterns = "/Collectvideo")
 public class Collectvideo extends HttpServlet {

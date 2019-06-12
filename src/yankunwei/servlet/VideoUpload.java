@@ -4,7 +4,7 @@ import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import com.oreilly.servlet.multipart.FileRenamePolicy;
 import yankunwei.javabean.UserInfo;
-import yankunwei.javabean.VideoDAO;
+import yankunwei.dao.VideoDAO;
 import yankunwei.javabean.VideoInfo;
 import yankunwei.utils.FFMPEGTool;
 
@@ -15,7 +15,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
-import java.sql.Timestamp;
 import java.util.Enumeration;
 import java.util.UUID;
 

@@ -1,5 +1,7 @@
-package yankunwei.javabean;
+package yankunwei.dao;
 
+import yankunwei.dao.IUserInfoDAO;
+import yankunwei.javabean.UserInfo;
 import yankunwei.utils.DataBaseHelper;
 
 import java.sql.Connection;

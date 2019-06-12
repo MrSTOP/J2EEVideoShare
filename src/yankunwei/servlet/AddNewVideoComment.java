@@ -2,7 +2,7 @@ package yankunwei.servlet;
 
 import yankunwei.javabean.UserInfo;
 import yankunwei.javabean.VideoCommentInfo;
-import yankunwei.javabean.VideoCommentInfoDAO;
+import yankunwei.dao.VideoCommentInfoDAO;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

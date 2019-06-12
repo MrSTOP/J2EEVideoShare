@@ -1,5 +1,9 @@
 package yankunwei.servlet;
 
+import yankunwei.dao.CollectVideoDAO;
+import yankunwei.dao.ICollectVideoDAO;
+import yankunwei.dao.IVideoDAO;
+import yankunwei.dao.VideoDAO;
 import yankunwei.javabean.*;
 
 import javax.servlet.ServletException;

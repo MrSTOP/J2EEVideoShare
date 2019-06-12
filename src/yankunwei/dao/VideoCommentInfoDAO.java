@@ -1,5 +1,7 @@
-package yankunwei.javabean;
+package yankunwei.dao;
 
+import yankunwei.javabean.UserInfo;
+import yankunwei.javabean.VideoCommentInfo;
 import yankunwei.utils.DataBaseHelper;
 
 import java.sql.Connection;

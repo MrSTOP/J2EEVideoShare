@@ -1,6 +1,6 @@
 package yankunwei.servlet;
 
-import yankunwei.javabean.HistoryvideoDAO;
+import yankunwei.dao.HistoryvideoDAO;
 import yankunwei.javabean.PageVideo;
 import yankunwei.javabean.UserHistoryinfo;
 import yankunwei.javabean.UserInfo;
@@ -10,12 +10,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 @WebServlet(name = "ToWatchHistory", urlPatterns = "/ToWatchHistory")
 public class ToWatchHistory extends HttpServlet {

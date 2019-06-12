@@ -1,5 +1,6 @@
 package yankunwei.servlet;
 
+import yankunwei.dao.*;
 import yankunwei.javabean.*;
 
 import javax.servlet.ServletException;

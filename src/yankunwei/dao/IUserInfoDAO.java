@@ -1,4 +1,6 @@
-package yankunwei.javabean;
+package yankunwei.dao;
+
+import yankunwei.javabean.UserInfo;
 
 import java.util.List;
 

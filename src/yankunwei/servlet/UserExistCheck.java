@@ -1,7 +1,7 @@
 package yankunwei.servlet;
 
-import yankunwei.javabean.IUserInfoDAO;
-import yankunwei.javabean.UserInfoDAO;
+import yankunwei.dao.IUserInfoDAO;
+import yankunwei.dao.UserInfoDAO;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

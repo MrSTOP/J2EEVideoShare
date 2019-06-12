@@ -1,6 +1,6 @@
 package yankunwei.servlet;
 
-import yankunwei.javabean.HistoryvideoDAO;
+import yankunwei.dao.HistoryvideoDAO;
 import yankunwei.javabean.UserInfo;
 
 import javax.servlet.ServletException;

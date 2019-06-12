@@ -1,15 +1,14 @@
 package yankunwei.filter;
 
-import yankunwei.javabean.IUserInfoDAO;
+import yankunwei.dao.IUserInfoDAO;
 import yankunwei.javabean.UserInfo;
-import yankunwei.javabean.UserInfoDAO;
+import yankunwei.dao.UserInfoDAO;
 import yankunwei.servlet.LoginCheck;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
-import java.util.logging.SimpleFormatter;
 
 @WebFilter(filterName = "LoginFilter", urlPatterns = "/*")
 public class LoginFilter implements Filter {

@@ -1,7 +1,7 @@
 package yankunwei.servlet;
 
 import yankunwei.javabean.UserInfo;
-import yankunwei.javabean.UserInfoDAO;
+import yankunwei.dao.UserInfoDAO;
 import yankunwei.utils.MD5Tool;
 
 import javax.servlet.ServletException;
